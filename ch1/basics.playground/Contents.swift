@@ -3,13 +3,13 @@
 print("Hello, World !")
 
 
-// 宣告常數 使用 let
+// 使用 let 宣告常數 name
 let name = "Joe"
 
-// 宣告變數 使用 var
+// 使用 var 宣告變數 price
 var price = 300
 
-// 印出名字
+// 接著就可以使用這個宣告過的常數 用來印出名字
 print(name)
 
 
