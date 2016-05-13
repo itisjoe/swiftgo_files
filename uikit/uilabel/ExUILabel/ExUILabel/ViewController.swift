@@ -43,20 +43,22 @@ class ViewController: UIViewController {
         // 文字過多時 過濾的方式
         myLabel.lineBreakMode = NSLineBreakMode.ByTruncatingTail
         
-        // 陰影的顏色
+        // 陰影的顏色 如不設定則預設為沒有陰影
         myLabel.shadowColor = UIColor.blackColor()
 
-        // 陰影的偏移量
+        // 陰影的偏移量 需先設定陰影的顏色
         myLabel.shadowOffset = CGSize(width: 2, height: 2)
 
-        // 重新設置 UILabel 新的原點
+        // 可以單獨設置新的 x 或 y
         myLabel.bounds.origin.x = 50
         myLabel.bounds.origin.y = 100
+        // 或是使用 CGPoint(x:,y:) 設置新的原點
         myLabel.bounds.origin = CGPoint(x: 60, y: 120)
         
-        // 重新設置 UILabel 新的尺寸
+        // 可以單獨設置新的 width 或 height
         myLabel.bounds.size.width = 200
         myLabel.bounds.size.height = 100
+        // 或是使用 CGSize(width:,height:) 設置新的尺寸
         myLabel.bounds.size = CGSize(width: 250, height: 80)
 
         // 取得螢幕的尺寸
