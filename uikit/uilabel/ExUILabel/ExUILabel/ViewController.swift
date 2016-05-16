@@ -60,6 +60,9 @@ class ViewController: UIViewController {
         myLabel.bounds.size.height = 100
         // 或是使用 CGSize(width:,height:) 設置新的尺寸
         myLabel.bounds.size = CGSize(width: 250, height: 80)
+        
+        // 或是也可以一起設置新的原點及尺寸
+        myLabel.bounds = CGRect(x: 60, y: 120, width: 250, height: 80)
 
         // 取得螢幕的尺寸
         let fullScreenSize = UIScreen.mainScreen().bounds.size
