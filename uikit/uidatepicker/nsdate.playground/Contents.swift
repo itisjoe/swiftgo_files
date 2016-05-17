@@ -19,7 +19,8 @@ let formatter = NSDateFormatter()
 // 先設置日期時間顯示的格式
 formatter.dateFormat = "yyyy-MM-dd HH:mm"
 
-// 再將 oneDayAfter 轉換成字串
+// 再利用 NSDateFormatter 的 stringFromDate 方法
+// 將 oneDayAfter 轉換成字串
 let oneDayAfterToString = formatter.stringFromDate(oneDayAfter)
 
 // 印出：明天這一刻的日期時間
