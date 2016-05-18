@@ -20,7 +20,7 @@ class MyViewController: UIViewController, UIPickerViewDelegate, UIPickerViewData
         return 2
     }
     
-    // UIPickerViewDataSource 必須實作的方法：UIPickerView 有多少行資料
+    // UIPickerViewDataSource 必須實作的方法：UIPickerView 各列有多少行資料
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         // 設置第一列時
         if component == 0 {
@@ -58,6 +58,7 @@ class MyViewController: UIViewController, UIPickerViewDelegate, UIPickerViewData
             whatMeal = meals[row]
         }
         
+        // 將改變的結果印出來
         print("選擇的是 \(whatDay) ， \(whatMeal)")
     }
     
