@@ -84,7 +84,7 @@ class ViewController: UIViewController {
         btn = UIButton(frame: CGRect(x: 0, y: 0, width: fullSize.width * 0.5, height: btnHeight))
         btn.setTitle("transform", forState: .Normal)
         btn.setTitleColor(UIColor.blueColor(), forState: .Normal)
-        btn.addTarget(nil, action: #selector(ViewController.AnimateTransForm), forControlEvents: .TouchUpInside)
+        btn.addTarget(nil, action: #selector(ViewController.AnimateTransform), forControlEvents: .TouchUpInside)
         btn.center = CGPoint(x: fullSize.width * 0.25, y: fullSize.height - 0.5 * btnHeight)
         self.view.addSubview(btn)
         
@@ -135,7 +135,7 @@ class ViewController: UIViewController {
         self.updateIndex("center")
     }
     
-    func AnimateTransForm() {
+    func AnimateTransform() {
         UIView.animateWithDuration(0.5, animations: {
             self.myLabel.transform = self.arrTransform[self.indexTransform]
         })
