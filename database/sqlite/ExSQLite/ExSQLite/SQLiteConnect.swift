@@ -71,7 +71,7 @@ class SQLiteConnect {
             sql += " where \(condition)"
         }
 
-        sqlite3_prepare_v2(self.db, sql, -1, &statement, nil)
+        sqlite3_prepare_v2(self.db, (sql as NSString).UTF8String, -1, &statement, nil)
 
         return statement
     }
@@ -93,7 +93,7 @@ class SQLiteConnect {
             sql += " where \(condition)"
         }
 
-        if sqlite3_prepare_v2(self.db, (sql as NSString).UTF8String, -1, &statement, nil) == SQLITE_OK{
+        if sqlite3_prepare_v2(self.db, (sql as NSString).UTF8String, -1, &statement, nil) == SQLITE_OK {
             if sqlite3_step(statement) == SQLITE_DONE {
                 return true
             }
@@ -114,7 +114,7 @@ class SQLiteConnect {
             sql += " where \(condition)"
         }
         
-        if sqlite3_prepare_v2(self.db, (sql as NSString).UTF8String, -1, &statement, nil) == SQLITE_OK{
+        if sqlite3_prepare_v2(self.db, (sql as NSString).UTF8String, -1, &statement, nil) == SQLITE_OK {
             if sqlite3_step(statement) == SQLITE_DONE {
                 return true
             }
