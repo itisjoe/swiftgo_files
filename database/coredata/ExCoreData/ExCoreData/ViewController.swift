@@ -30,7 +30,7 @@ class ViewController: UIViewController {
         let insertResult = coreDataConnect.insert(
             myEntityName, attributeInfo: [
                 "id" : "\(seq)",
-                "name" : "'小強'",
+                "name" : "小強",
                 "height" : "176.1"
             ])
         if insertResult {
