@@ -16,7 +16,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         // 資料庫檔案的路徑
-        let sqlitePath = NSHomeDirectory() + "/Documents/sqlite3.db"
+        let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+        let sqlitePath = urls[urls.count-1].absoluteString + "sqlite3.db"
         
         // 印出儲存檔案的位置
         print(sqlitePath)
