@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreData
 
 class ViewController: UIViewController {
 
@@ -18,7 +17,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         let myEntityName = "Student"
+        let coreDataConnect = CoreDataConnect(moc: self.moc)
 
+        // auto increment
         let myUserDefaults = NSUserDefaults.standardUserDefaults()
         var seq = 1
         if let idSeq = myUserDefaults.objectForKey("idSeq") as? Int {
@@ -26,67 +27,41 @@ class ViewController: UIViewController {
         }
         
         // insert
-        let student = NSEntityDescription.insertNewObjectForEntityForName(myEntityName, inManagedObjectContext: self.moc) as! Student
-        student.id = seq
-        student.name = "小強"
-        student.height = 173.2
-        do {
-            try self.moc.save()
+        let insertResult = coreDataConnect.insert(
+            myEntityName, attributeInfo: [
+                "id" : "\(seq)",
+                "name" : "'小強'",
+                "height" : "176.1"
+            ])
+        if insertResult {
+            print("新增資料成功")
             
             myUserDefaults.setObject(seq, forKey: "idSeq")
             myUserDefaults.synchronize()
-        } catch {
-            fatalError("\(error)")
         }
         
         // select
-        let request = NSFetchRequest(entityName: myEntityName)
-        
-        // 依 id 由小到大排序
-        request.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
-
-        do {
-            let results = try moc.executeFetchRequest(request) as! [Student]
-            
+        let selectResult = coreDataConnect.fetch(myEntityName, predicate: nil, sort: ["id":true])
+        if let results = selectResult {
             for result in results {
                 print("\(result.id). \(result.name!) 身高： \(result.height)")
             }
-        } catch {
-            fatalError("\(error)")
         }
         
         // update
-        request.predicate = nil
-        let updateID = "小強"
-        request.predicate = NSPredicate(format: "name = '\(updateID)'")
-
-        do {
-            let results = try moc.executeFetchRequest(request) as! [Student]
-            
-            if results.count > 0 {
-                results[0].height = 155
-                try self.moc.save()
-            }
-        } catch {
-            fatalError("\(error)")
+        let updateName = "二強"
+        var predicate = "name = '\(updateName)'"
+        let updateResult = coreDataConnect.update(myEntityName, predicate: predicate, attributeInfo: ["height":"162.2"])
+        if updateResult {
+            print("更新資料成功")
         }
         
         // delete
-        request.predicate = nil
-        let deleteID = 3
-        request.predicate = NSPredicate(format: "id = \(deleteID)")
-        
-        do {
-            let results = try moc.executeFetchRequest(request) as! [Student]
-            
-            for result in results {
-                print("\(result.id). \(result.name!) 身高： \(result.height)")
-                self.moc.deleteObject(result)
-            }
-            try self.moc.save()
-            
-        } catch {
-            fatalError("\(error)")
+        let deleteID = 2
+        predicate = "id = \(deleteID)"
+        let deleteResult = coreDataConnect.delete(myEntityName, predicate: predicate)
+        if deleteResult {
+            print("刪除資料成功")
         }
         
     }
