@@ -50,7 +50,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         }
         
         
-        
         // 建立一個 UIWindow
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
@@ -82,18 +81,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         // 將 UIWindow 設置為可見的
         self.window!.makeKeyAndVisible()
         
-        
-        
-//        let auth = myUserDefaults.objectForKey("locationAuth") as? Bool ?? true
-//        if !auth {
-//            // 提示可至[設定]中開啟權限
-//            let alertController = UIAlertController( title: "定位權限已關閉", message: "如要變更權限，請至 設定 > 隱私權 > 定位服務 開啟", preferredStyle: .Alert)
-//            let okAction = UIAlertAction(title: "確認", style: .Default, handler:nil)
-//            alertController.addAction(okAction)
-//            self.window?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)
-//        }
-        
-        
         return true
     }
 
@@ -103,7 +90,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         if (status == CLAuthorizationStatus.Denied) {
             // 提示可至[設定]中開啟權限
-            let alertController = UIAlertController( title: "定位權限已關閉", message: "如要變更權限，請至 設定 > 隱私權 > 定位服務 開啟", preferredStyle: .Alert)
+            let alertController = UIAlertController( title: "定位服務已關閉", message: "如要變更權限，請至 設定 > 隱私權 > 定位服務 開啟", preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "確認", style: .Default, handler:nil)
             alertController.addAction(okAction)
             self.window?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)

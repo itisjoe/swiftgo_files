@@ -53,12 +53,7 @@ class HotelMainViewController: UIViewController, CLLocationManagerDelegate, UITa
         self.strTargetID = "6f4e0b9b-8cb1-4b1d-a5c4-febd90f62469" //&limit=3&offset=0"
         
         self.targetUrl = self.documentsPath + "hotel.json"
-        
-        // 導覽列
-        self.addNav()
-        
-        // 取得 API 資料
-        self.addData()
+
 
         // 載入中 環狀進度條
         myActivityIndicator.center = CGPoint(x: self.fullSize.width * 0.5, y: self.fullSize.height * 0.4)
@@ -66,6 +61,11 @@ class HotelMainViewController: UIViewController, CLLocationManagerDelegate, UITa
         myActivityIndicator.hidesWhenStopped = true
         self.view.addSubview(myActivityIndicator)
 
+        // 導覽列
+        self.addNav()
+        
+        // 取得 API 資料
+        self.addData()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -118,7 +118,6 @@ class HotelMainViewController: UIViewController, CLLocationManagerDelegate, UITa
         // 便向遠端 API 取得資料
         let date = hotelFetchDate ?? 0
         if self.todayDateInt - date > 1 {
-            //self.simpleGet(self.taipeiDataUrl + self.strTargetID, targetPath: self.documentsPath + "hotel.json")
             self.normalGet(self.taipeiDataUrl + self.strTargetID)
         } else {
             // 如果資料已在兩天內取得過 便直接建立 table
@@ -188,6 +187,7 @@ class HotelMainViewController: UIViewController, CLLocationManagerDelegate, UITa
             myLocationManager.startUpdatingLocation()
         } 
     }
+
 
 // MARK: UITableViewDelegate methods
     
@@ -280,18 +280,15 @@ class HotelMainViewController: UIViewController, CLLocationManagerDelegate, UITa
     }
 
     
-    // MARK: NSURLSessionDownloadDelegate Methods
+// MARK: NSURLSessionDownloadDelegate Methods
     
     // 下載完成
     func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didFinishDownloadingToURL location: NSURL) {
-        print("下載完成")
-        
         let targetUrl = NSURL(string: self.targetUrl)!
         let data = NSData(contentsOfURL: location)
         if ((data?.writeToURL(targetUrl, atomically: true)) != nil) {
             print("普通獲取遠端資訊的方式：儲存資訊成功")
 
-            
             // 更新獲取資料的日期
             self.myUserDefaults.setObject(self.todayDateInt, forKey: "hotelFetchDate")
             self.myUserDefaults.synchronize()
@@ -305,8 +302,6 @@ class HotelMainViewController: UIViewController, CLLocationManagerDelegate, UITa
             
         }
     }
-
-    
     
     
 // MARK: functional methods
@@ -325,50 +320,6 @@ class HotelMainViewController: UIViewController, CLLocationManagerDelegate, UITa
             
             // 執行動作
             dataTask.resume()
-        }
-    }
-    
-    
-    // 基本獲取遠端資訊的方式
-    func simpleGet(myUrl :String, targetPath :String) {
-
-        
-        if let url = NSURL(string: myUrl) {
-
-            
-            
-            
-            NSURLSession.sharedSession().dataTaskWithURL(url) { data, response, error in
-                
-                // 建立檔案
-                let fileurl = NSURL(string: targetPath)
-
-                
-                if let result = data?.writeToURL(fileurl!, atomically: true) {
-                
-                    
-                    if result {
-                        // 更新獲取資料的日期
-                        self.myUserDefaults.setObject(self.todayDateInt, forKey: "hotelFetchDate")
-                        self.myUserDefaults.synchronize()
-                        
-                        print("基本獲取遠端資訊的方式：儲存資訊成功")
-                        dispatch_async(dispatch_get_main_queue(), {
-                            self.addTable(targetPath)
-                        })
-                    } else {
-                        print("基本獲取遠端資訊的方式：儲存資訊失敗")
-                    }
-
-                
-                }
- 
-
-                
-            }.resume()
-
-        
-        
         }
     }
 
