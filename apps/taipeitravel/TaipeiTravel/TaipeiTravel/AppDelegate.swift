@@ -68,12 +68,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         let parkViewController = UINavigationController(rootViewController: ParkMainViewController())
         parkViewController.tabBarItem = UITabBarItem(title: "公園", image: UIImage(named: "park"), tag: 300)
      
-        // 建立 設定 頁面
-        let settingsViewController = UINavigationController(rootViewController: SettingsMainViewController())
-        settingsViewController.tabBarItem = UITabBarItem(title: "設定", image: UIImage(named: "settings"), tag: 400)
+        // 建立 資訊 頁面
+        let infoViewController = UINavigationController(rootViewController: InfoMainViewController())
+        infoViewController.tabBarItem = UITabBarItem(title: "說明", image: UIImage(named: "info"), tag: 400)
         
         // 加入到 UITabBarController
-        myTabBar.viewControllers = [hotelViewController, landmarkViewController, parkViewController, settingsViewController]
+        myTabBar.viewControllers = [hotelViewController, landmarkViewController, parkViewController, infoViewController]
         
         // 設置根視圖控制器
         self.window!.rootViewController = myTabBar

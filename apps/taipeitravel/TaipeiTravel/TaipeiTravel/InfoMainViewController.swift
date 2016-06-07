@@ -1,5 +1,5 @@
 //
-//  SettingsMainViewController.swift
+//  InfoMainViewController.swift
 //  TaipeiTravel
 //
 //  Created by joe feng on 2016/6/6.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingsMainViewController: UIViewController {
+class InfoMainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

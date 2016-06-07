@@ -8,14 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		81A8A4401D054795005FA15C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A8A43F1D054795005FA15C /* AppDelegate.swift */; };
-		81A8A4421D054795005FA15C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A8A4411D054795005FA15C /* ViewController.swift */; };
+		81A8A4421D054795005FA15C /* BaseMainViewController.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A8A4411D054795005FA15C /* BaseMainViewController.swift.swift */; };
 		81A8A4451D054795005FA15C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81A8A4431D054795005FA15C /* Main.storyboard */; };
 		81A8A4471D054795005FA15C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81A8A4461D054795005FA15C /* Assets.xcassets */; };
 		81A8A44A1D054795005FA15C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81A8A4481D054795005FA15C /* LaunchScreen.storyboard */; };
 		81A8A4521D054CE8005FA15C /* HotelMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A8A4511D054CE8005FA15C /* HotelMainViewController.swift */; };
 		81A8A4541D054D10005FA15C /* LandmarkMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A8A4531D054D10005FA15C /* LandmarkMainViewController.swift */; };
 		81A8A4561D054D20005FA15C /* ParkMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A8A4551D054D20005FA15C /* ParkMainViewController.swift */; };
-		81A8A4581D054D2E005FA15C /* SettingsMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A8A4571D054D2E005FA15C /* SettingsMainViewController.swift */; };
+		81A8A4581D054D2E005FA15C /* InfoMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A8A4571D054D2E005FA15C /* InfoMainViewController.swift */; };
 		81A8A4661D054E19005FA15C /* hotel.png in Resources */ = {isa = PBXBuildFile; fileRef = 81A8A45A1D054E19005FA15C /* hotel.png */; };
 		81A8A4671D054E19005FA15C /* hotel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81A8A45B1D054E19005FA15C /* hotel@2x.png */; };
 		81A8A4681D054E19005FA15C /* hotel@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81A8A45C1D054E19005FA15C /* hotel@3x.png */; };
@@ -25,16 +25,21 @@
 		81A8A46C1D054E19005FA15C /* park.png in Resources */ = {isa = PBXBuildFile; fileRef = 81A8A4601D054E19005FA15C /* park.png */; };
 		81A8A46D1D054E19005FA15C /* park@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81A8A4611D054E19005FA15C /* park@2x.png */; };
 		81A8A46E1D054E19005FA15C /* park@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81A8A4621D054E19005FA15C /* park@3x.png */; };
-		81A8A46F1D054E19005FA15C /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 81A8A4631D054E19005FA15C /* settings.png */; };
-		81A8A4701D054E19005FA15C /* settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81A8A4641D054E19005FA15C /* settings@2x.png */; };
-		81A8A4711D054E19005FA15C /* settings@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81A8A4651D054E19005FA15C /* settings@3x.png */; };
 		81A8A4731D056472005FA15C /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A8A4721D056472005FA15C /* Coordinate.swift */; };
+		81C05ACC1D06898900426344 /* HotelDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C05ACB1D06898900426344 /* HotelDetailViewController.swift */; };
+		81C05AD01D06B2F400426344 /* info.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C05ACD1D06B2F400426344 /* info.png */; };
+		81C05AD11D06B2F400426344 /* info@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C05ACE1D06B2F400426344 /* info@2x.png */; };
+		81C05AD21D06B2F400426344 /* info@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C05ACF1D06B2F400426344 /* info@3x.png */; };
+		81C05AD41D06B4E400426344 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C05AD31D06B4E400426344 /* MapViewController.swift */; };
+		81C05AD61D06C07D00426344 /* LandmarkDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C05AD51D06C07D00426344 /* LandmarkDetailViewController.swift */; };
+		81C05AD81D06CFCA00426344 /* HotelMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C05AD71D06CFCA00426344 /* HotelMapViewController.swift */; };
+		81C05ADA1D06D06700426344 /* LandmarkMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C05AD91D06D06700426344 /* LandmarkMapViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		81A8A43C1D054795005FA15C /* TaipeiTravel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaipeiTravel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81A8A43F1D054795005FA15C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		81A8A4411D054795005FA15C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		81A8A4411D054795005FA15C /* BaseMainViewController.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseMainViewController.swift.swift; sourceTree = "<group>"; };
 		81A8A4441D054795005FA15C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		81A8A4461D054795005FA15C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		81A8A4491D054795005FA15C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -42,7 +47,7 @@
 		81A8A4511D054CE8005FA15C /* HotelMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotelMainViewController.swift; sourceTree = "<group>"; };
 		81A8A4531D054D10005FA15C /* LandmarkMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandmarkMainViewController.swift; sourceTree = "<group>"; };
 		81A8A4551D054D20005FA15C /* ParkMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParkMainViewController.swift; sourceTree = "<group>"; };
-		81A8A4571D054D2E005FA15C /* SettingsMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsMainViewController.swift; sourceTree = "<group>"; };
+		81A8A4571D054D2E005FA15C /* InfoMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoMainViewController.swift; sourceTree = "<group>"; };
 		81A8A45A1D054E19005FA15C /* hotel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hotel.png; sourceTree = "<group>"; };
 		81A8A45B1D054E19005FA15C /* hotel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hotel@2x.png"; sourceTree = "<group>"; };
 		81A8A45C1D054E19005FA15C /* hotel@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hotel@3x.png"; sourceTree = "<group>"; };
@@ -52,10 +57,15 @@
 		81A8A4601D054E19005FA15C /* park.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = park.png; sourceTree = "<group>"; };
 		81A8A4611D054E19005FA15C /* park@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "park@2x.png"; sourceTree = "<group>"; };
 		81A8A4621D054E19005FA15C /* park@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "park@3x.png"; sourceTree = "<group>"; };
-		81A8A4631D054E19005FA15C /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
-		81A8A4641D054E19005FA15C /* settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings@2x.png"; sourceTree = "<group>"; };
-		81A8A4651D054E19005FA15C /* settings@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings@3x.png"; sourceTree = "<group>"; };
 		81A8A4721D056472005FA15C /* Coordinate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
+		81C05ACB1D06898900426344 /* HotelDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotelDetailViewController.swift; sourceTree = "<group>"; };
+		81C05ACD1D06B2F400426344 /* info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info.png; sourceTree = "<group>"; };
+		81C05ACE1D06B2F400426344 /* info@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "info@2x.png"; sourceTree = "<group>"; };
+		81C05ACF1D06B2F400426344 /* info@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "info@3x.png"; sourceTree = "<group>"; };
+		81C05AD31D06B4E400426344 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		81C05AD51D06C07D00426344 /* LandmarkDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandmarkDetailViewController.swift; sourceTree = "<group>"; };
+		81C05AD71D06CFCA00426344 /* HotelMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotelMapViewController.swift; sourceTree = "<group>"; };
+		81C05AD91D06D06700426344 /* LandmarkMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandmarkMapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,11 +99,16 @@
 			isa = PBXGroup;
 			children = (
 				81A8A43F1D054795005FA15C /* AppDelegate.swift */,
-				81A8A4411D054795005FA15C /* ViewController.swift */,
+				81A8A4411D054795005FA15C /* BaseMainViewController.swift.swift */,
+				81C05AD31D06B4E400426344 /* MapViewController.swift */,
 				81A8A4511D054CE8005FA15C /* HotelMainViewController.swift */,
+				81C05ACB1D06898900426344 /* HotelDetailViewController.swift */,
+				81C05AD71D06CFCA00426344 /* HotelMapViewController.swift */,
 				81A8A4531D054D10005FA15C /* LandmarkMainViewController.swift */,
+				81C05AD51D06C07D00426344 /* LandmarkDetailViewController.swift */,
+				81C05AD91D06D06700426344 /* LandmarkMapViewController.swift */,
 				81A8A4551D054D20005FA15C /* ParkMainViewController.swift */,
-				81A8A4571D054D2E005FA15C /* SettingsMainViewController.swift */,
+				81A8A4571D054D2E005FA15C /* InfoMainViewController.swift */,
 				81A8A4721D056472005FA15C /* Coordinate.swift */,
 				81A8A4431D054795005FA15C /* Main.storyboard */,
 				81A8A4461D054795005FA15C /* Assets.xcassets */,
@@ -113,12 +128,12 @@
 				81A8A45D1D054E19005FA15C /* landmark.png */,
 				81A8A45E1D054E19005FA15C /* landmark@2x.png */,
 				81A8A45F1D054E19005FA15C /* landmark@3x.png */,
+				81C05ACD1D06B2F400426344 /* info.png */,
+				81C05ACE1D06B2F400426344 /* info@2x.png */,
+				81C05ACF1D06B2F400426344 /* info@3x.png */,
 				81A8A4601D054E19005FA15C /* park.png */,
 				81A8A4611D054E19005FA15C /* park@2x.png */,
 				81A8A4621D054E19005FA15C /* park@3x.png */,
-				81A8A4631D054E19005FA15C /* settings.png */,
-				81A8A4641D054E19005FA15C /* settings@2x.png */,
-				81A8A4651D054E19005FA15C /* settings@3x.png */,
 			);
 			path = icons;
 			sourceTree = "<group>";
@@ -181,6 +196,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81C05AD21D06B2F400426344 /* info@3x.png in Resources */,
 				81A8A4661D054E19005FA15C /* hotel.png in Resources */,
 				81A8A46C1D054E19005FA15C /* park.png in Resources */,
 				81A8A46D1D054E19005FA15C /* park@2x.png in Resources */,
@@ -190,11 +206,10 @@
 				81A8A4681D054E19005FA15C /* hotel@3x.png in Resources */,
 				81A8A46E1D054E19005FA15C /* park@3x.png in Resources */,
 				81A8A4471D054795005FA15C /* Assets.xcassets in Resources */,
-				81A8A4701D054E19005FA15C /* settings@2x.png in Resources */,
 				81A8A4451D054795005FA15C /* Main.storyboard in Resources */,
-				81A8A46F1D054E19005FA15C /* settings.png in Resources */,
 				81A8A46A1D054E19005FA15C /* landmark@2x.png in Resources */,
-				81A8A4711D054E19005FA15C /* settings@3x.png in Resources */,
+				81C05AD01D06B2F400426344 /* info.png in Resources */,
+				81C05AD11D06B2F400426344 /* info@2x.png in Resources */,
 				81A8A4671D054E19005FA15C /* hotel@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -206,11 +221,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81C05ACC1D06898900426344 /* HotelDetailViewController.swift in Sources */,
 				81A8A4731D056472005FA15C /* Coordinate.swift in Sources */,
-				81A8A4581D054D2E005FA15C /* SettingsMainViewController.swift in Sources */,
-				81A8A4421D054795005FA15C /* ViewController.swift in Sources */,
+				81A8A4581D054D2E005FA15C /* InfoMainViewController.swift in Sources */,
+				81A8A4421D054795005FA15C /* BaseMainViewController.swift.swift in Sources */,
+				81C05AD81D06CFCA00426344 /* HotelMapViewController.swift in Sources */,
+				81C05AD41D06B4E400426344 /* MapViewController.swift in Sources */,
+				81C05AD61D06C07D00426344 /* LandmarkDetailViewController.swift in Sources */,
 				81A8A4561D054D20005FA15C /* ParkMainViewController.swift in Sources */,
 				81A8A4521D054CE8005FA15C /* HotelMainViewController.swift in Sources */,
+				81C05ADA1D06D06700426344 /* LandmarkMapViewController.swift in Sources */,
 				81A8A4541D054D10005FA15C /* LandmarkMainViewController.swift in Sources */,
 				81A8A4401D054795005FA15C /* AppDelegate.swift in Sources */,
 			);
@@ -364,6 +384,7 @@
 				81A8A4501D054795005FA15C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

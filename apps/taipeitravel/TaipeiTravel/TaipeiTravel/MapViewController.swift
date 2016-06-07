@@ -1,0 +1,72 @@
+//
+//  MapViewController.swift
+//  TaipeiTravel
+//
+//  Created by joe feng on 2016/6/7.
+//  Copyright © 2016年 hsin. All rights reserved.
+//
+
+import UIKit
+import MapKit
+
+class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate  {
+    
+    let fullSize :CGSize = UIScreen.mainScreen().bounds.size
+    let myUserDefaults :NSUserDefaults = NSUserDefaults.standardUserDefaults()
+    var fetchType :String = ""
+    var latitude :Double = 0.0
+    var longitude :Double = 0.0
+    var myMapView :MKMapView!
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // 樣式
+        self.view.backgroundColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.translucent = false
+        
+        // 取得地圖資訊
+        let info :[String:AnyObject] = myUserDefaults.objectForKey("\(self.fetchType)Detail") as? [String:AnyObject] ?? [:]
+        
+        latitude = info["latitude"] as? Double ?? 0.0
+        longitude = info["longitude"] as? Double ?? 0.0
+        
+        self.title = info["title"] as? String ?? "標題"
+        
+        // 建立一個 MKMapView
+        myMapView = MKMapView(frame: CGRect(x: 0, y: 0, width: fullSize.width, height: fullSize.height - 113))
+        
+        // 設置委任對象
+        myMapView.delegate = self
+        
+        // 地圖樣式
+        myMapView.mapType = .Standard
+        
+        // 顯示自身定位位置
+        myMapView.showsUserLocation = true
+        
+        // 允許縮放地圖
+        myMapView.zoomEnabled = true
+        
+        // 地圖預設顯示的範圍大小 (數字越小越精確)
+        let latDelta = 0.05
+        let longDelta = 0.05
+        let currentLocationSpan:MKCoordinateSpan = MKCoordinateSpanMake(latDelta, longDelta)
+        
+        // 設置地圖顯示的範圍與中心點座標
+        let center:CLLocation = CLLocation(latitude: latitude, longitude: longitude)
+        let currentRegion:MKCoordinateRegion = MKCoordinateRegion(center: center.coordinate, span: currentLocationSpan)
+        myMapView.setRegion(currentRegion, animated: true)
+        
+        // 加入到畫面中
+        self.view.addSubview(myMapView)
+        
+        // 建立一個地點圖示 (圖示預設為紅色大頭針)
+        let objectAnnotation = MKPointAnnotation()
+        objectAnnotation.coordinate = CLLocation(latitude: latitude, longitude: longitude).coordinate
+        objectAnnotation.title = self.title
+        myMapView.addAnnotation(objectAnnotation)
+        
+    }
+
+}
