@@ -33,7 +33,7 @@ class HotelMainViewController: BaseMainViewController {
         let title = thisData["stitle"] as? String ?? ""
         let intro = thisData["xbody"] as? String ?? ""
         let type = thisData["CAT2"] as? String ?? ""
-        let address = thisData["address"] as? String ?? ""
+        let address = thisData["address"] as? String ?? "無地址資訊"
         
         var latitude = 0.0
         if let num = thisData["latitude"] as? NSString {

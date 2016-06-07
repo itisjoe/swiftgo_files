@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		810E95F11D0701AA00E80E64 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810E95F01D0701AA00E80E64 /* DetailViewController.swift */; };
+		810E95F31D0704A000E80E64 /* ParkDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810E95F21D0704A000E80E64 /* ParkDetailViewController.swift */; };
+		810E95F71D0715E400E80E64 /* toilet.png in Resources */ = {isa = PBXBuildFile; fileRef = 810E95F41D0715E400E80E64 /* toilet.png */; };
+		810E95F81D0715E400E80E64 /* toilet@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 810E95F51D0715E400E80E64 /* toilet@2x.png */; };
+		810E95F91D0715E400E80E64 /* toilet@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 810E95F61D0715E400E80E64 /* toilet@3x.png */; };
+		810E95FB1D0715F300E80E64 /* ToiletMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810E95FA1D0715F300E80E64 /* ToiletMainViewController.swift */; };
+		810E95FD1D0717EE00E80E64 /* ToiletDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810E95FC1D0717EE00E80E64 /* ToiletDetailViewController.swift */; };
 		81A8A4401D054795005FA15C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A8A43F1D054795005FA15C /* AppDelegate.swift */; };
 		81A8A4421D054795005FA15C /* BaseMainViewController.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A8A4411D054795005FA15C /* BaseMainViewController.swift.swift */; };
 		81A8A4451D054795005FA15C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81A8A4431D054795005FA15C /* Main.storyboard */; };
@@ -32,11 +39,16 @@
 		81C05AD21D06B2F400426344 /* info@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81C05ACF1D06B2F400426344 /* info@3x.png */; };
 		81C05AD41D06B4E400426344 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C05AD31D06B4E400426344 /* MapViewController.swift */; };
 		81C05AD61D06C07D00426344 /* LandmarkDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C05AD51D06C07D00426344 /* LandmarkDetailViewController.swift */; };
-		81C05AD81D06CFCA00426344 /* HotelMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C05AD71D06CFCA00426344 /* HotelMapViewController.swift */; };
-		81C05ADA1D06D06700426344 /* LandmarkMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C05AD91D06D06700426344 /* LandmarkMapViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		810E95F01D0701AA00E80E64 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		810E95F21D0704A000E80E64 /* ParkDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParkDetailViewController.swift; sourceTree = "<group>"; };
+		810E95F41D0715E400E80E64 /* toilet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toilet.png; sourceTree = "<group>"; };
+		810E95F51D0715E400E80E64 /* toilet@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toilet@2x.png"; sourceTree = "<group>"; };
+		810E95F61D0715E400E80E64 /* toilet@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toilet@3x.png"; sourceTree = "<group>"; };
+		810E95FA1D0715F300E80E64 /* ToiletMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToiletMainViewController.swift; sourceTree = "<group>"; };
+		810E95FC1D0717EE00E80E64 /* ToiletDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToiletDetailViewController.swift; sourceTree = "<group>"; };
 		81A8A43C1D054795005FA15C /* TaipeiTravel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaipeiTravel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81A8A43F1D054795005FA15C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		81A8A4411D054795005FA15C /* BaseMainViewController.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseMainViewController.swift.swift; sourceTree = "<group>"; };
@@ -64,8 +76,6 @@
 		81C05ACF1D06B2F400426344 /* info@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "info@3x.png"; sourceTree = "<group>"; };
 		81C05AD31D06B4E400426344 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		81C05AD51D06C07D00426344 /* LandmarkDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandmarkDetailViewController.swift; sourceTree = "<group>"; };
-		81C05AD71D06CFCA00426344 /* HotelMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotelMapViewController.swift; sourceTree = "<group>"; };
-		81C05AD91D06D06700426344 /* LandmarkMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandmarkMapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,14 +110,16 @@
 			children = (
 				81A8A43F1D054795005FA15C /* AppDelegate.swift */,
 				81A8A4411D054795005FA15C /* BaseMainViewController.swift.swift */,
+				810E95F01D0701AA00E80E64 /* DetailViewController.swift */,
 				81C05AD31D06B4E400426344 /* MapViewController.swift */,
 				81A8A4511D054CE8005FA15C /* HotelMainViewController.swift */,
 				81C05ACB1D06898900426344 /* HotelDetailViewController.swift */,
-				81C05AD71D06CFCA00426344 /* HotelMapViewController.swift */,
 				81A8A4531D054D10005FA15C /* LandmarkMainViewController.swift */,
 				81C05AD51D06C07D00426344 /* LandmarkDetailViewController.swift */,
-				81C05AD91D06D06700426344 /* LandmarkMapViewController.swift */,
 				81A8A4551D054D20005FA15C /* ParkMainViewController.swift */,
+				810E95F21D0704A000E80E64 /* ParkDetailViewController.swift */,
+				810E95FA1D0715F300E80E64 /* ToiletMainViewController.swift */,
+				810E95FC1D0717EE00E80E64 /* ToiletDetailViewController.swift */,
 				81A8A4571D054D2E005FA15C /* InfoMainViewController.swift */,
 				81A8A4721D056472005FA15C /* Coordinate.swift */,
 				81A8A4431D054795005FA15C /* Main.storyboard */,
@@ -131,6 +143,9 @@
 				81C05ACD1D06B2F400426344 /* info.png */,
 				81C05ACE1D06B2F400426344 /* info@2x.png */,
 				81C05ACF1D06B2F400426344 /* info@3x.png */,
+				810E95F41D0715E400E80E64 /* toilet.png */,
+				810E95F51D0715E400E80E64 /* toilet@2x.png */,
+				810E95F61D0715E400E80E64 /* toilet@3x.png */,
 				81A8A4601D054E19005FA15C /* park.png */,
 				81A8A4611D054E19005FA15C /* park@2x.png */,
 				81A8A4621D054E19005FA15C /* park@3x.png */,
@@ -206,11 +221,14 @@
 				81A8A4681D054E19005FA15C /* hotel@3x.png in Resources */,
 				81A8A46E1D054E19005FA15C /* park@3x.png in Resources */,
 				81A8A4471D054795005FA15C /* Assets.xcassets in Resources */,
+				810E95F91D0715E400E80E64 /* toilet@3x.png in Resources */,
 				81A8A4451D054795005FA15C /* Main.storyboard in Resources */,
 				81A8A46A1D054E19005FA15C /* landmark@2x.png in Resources */,
 				81C05AD01D06B2F400426344 /* info.png in Resources */,
 				81C05AD11D06B2F400426344 /* info@2x.png in Resources */,
+				810E95F71D0715E400E80E64 /* toilet.png in Resources */,
 				81A8A4671D054E19005FA15C /* hotel@2x.png in Resources */,
+				810E95F81D0715E400E80E64 /* toilet@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,16 +239,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				810E95FD1D0717EE00E80E64 /* ToiletDetailViewController.swift in Sources */,
+				810E95F11D0701AA00E80E64 /* DetailViewController.swift in Sources */,
+				810E95F31D0704A000E80E64 /* ParkDetailViewController.swift in Sources */,
 				81C05ACC1D06898900426344 /* HotelDetailViewController.swift in Sources */,
 				81A8A4731D056472005FA15C /* Coordinate.swift in Sources */,
 				81A8A4581D054D2E005FA15C /* InfoMainViewController.swift in Sources */,
 				81A8A4421D054795005FA15C /* BaseMainViewController.swift.swift in Sources */,
-				81C05AD81D06CFCA00426344 /* HotelMapViewController.swift in Sources */,
 				81C05AD41D06B4E400426344 /* MapViewController.swift in Sources */,
 				81C05AD61D06C07D00426344 /* LandmarkDetailViewController.swift in Sources */,
 				81A8A4561D054D20005FA15C /* ParkMainViewController.swift in Sources */,
+				810E95FB1D0715F300E80E64 /* ToiletMainViewController.swift in Sources */,
 				81A8A4521D054CE8005FA15C /* HotelMainViewController.swift in Sources */,
-				81C05ADA1D06D06700426344 /* LandmarkMapViewController.swift in Sources */,
 				81A8A4541D054D10005FA15C /* LandmarkMainViewController.swift in Sources */,
 				81A8A4401D054795005FA15C /* AppDelegate.swift in Sources */,
 			);

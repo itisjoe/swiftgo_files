@@ -81,8 +81,13 @@ class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITab
         
         // 更新 table
         if let table = self.myTableView {
+            myActivityIndicator.startAnimating()
+
             self.refreshAPIData()
             table.reloadData()
+
+            myActivityIndicator.stopAnimating()
+
         }
     }
     
@@ -153,8 +158,12 @@ class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITab
         
         // 更新 table
         if let table = self.myTableView {
+            self.myActivityIndicator.startAnimating()
+            
             self.refreshAPIData()
             table.reloadData()
+            
+            self.myActivityIndicator.stopAnimating()
         }
     }
     
@@ -200,8 +209,12 @@ class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITab
         
         // 顯示的內容
         if let myLabel = cell!.textLabel {
-            if let title = thisData["stitle"] {
-                myLabel.text = title as? String
+            if let title = thisData["stitle"] as? NSString {
+                myLabel.text = title as String
+            } else if let title = thisData["ParkName"] as? NSString {
+                myLabel.text = title as String
+            } else if let title = thisData["單位名稱"] as? NSString {
+                myLabel.text = title as String
             }
         }
         
@@ -220,10 +233,18 @@ class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITab
             var thisDataLatitude = 0.0
             if let num = thisData["latitude"] as? NSString {
                 thisDataLatitude = num.doubleValue
+            } else if let num = thisData["Latitude"] as? NSString {
+                thisDataLatitude = num.doubleValue
+            } else if let num = thisData["緯度"] as? NSString {
+                thisDataLatitude = num.doubleValue
             }
             
             var thisDataLongitude = 0.0
             if let num = thisData["longitude"] as? NSString {
+                thisDataLongitude = num.doubleValue
+            } else if let num = thisData["Longitude"] as? NSString {
+                thisDataLongitude = num.doubleValue
+            } else if let num = thisData["經度"] as? NSString {
                 thisDataLongitude = num.doubleValue
             }
             if thisDataLatitude == 0.0 && thisDataLongitude == 0.0 {
@@ -330,10 +351,18 @@ class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITab
                 var latitude = 0.0
                 if let num = data["latitude"] as? NSString {
                     latitude = num.doubleValue
+                } else if let num = data["Latitude"] as? NSString {
+                    latitude = num.doubleValue
+                } else if let num = data["緯度"] as? NSString {
+                    latitude = num.doubleValue
                 }
                 
                 var longitude = 0.0
                 if let num = data["longitude"] as? NSString {
+                    longitude = num.doubleValue
+                } else if let num = data["Longitude"] as? NSString {
+                    longitude = num.doubleValue
+                } else if let num = data["經度"] as? NSString {
                     longitude = num.doubleValue
                 }
                 

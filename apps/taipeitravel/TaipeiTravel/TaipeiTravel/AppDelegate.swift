@@ -68,12 +68,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         let parkViewController = UINavigationController(rootViewController: ParkMainViewController())
         parkViewController.tabBarItem = UITabBarItem(title: "公園", image: UIImage(named: "park"), tag: 300)
      
-        // 建立 資訊 頁面
+        // 建立 公廁 頁面
+        let toiletViewController = UINavigationController(rootViewController: ToiletMainViewController())
+        toiletViewController.tabBarItem = UITabBarItem(title: "公廁", image: UIImage(named: "toilet"), tag: 400)
+        
+        // 建立 關於 頁面
         let infoViewController = UINavigationController(rootViewController: InfoMainViewController())
-        infoViewController.tabBarItem = UITabBarItem(title: "說明", image: UIImage(named: "info"), tag: 400)
+        infoViewController.tabBarItem = UITabBarItem(title: "關於", image: UIImage(named: "info"), tag: 500)
         
         // 加入到 UITabBarController
-        myTabBar.viewControllers = [hotelViewController, landmarkViewController, parkViewController, infoViewController]
+        myTabBar.viewControllers = [hotelViewController, landmarkViewController, parkViewController, toiletViewController, infoViewController]
         
         // 設置根視圖控制器
         self.window!.rootViewController = myTabBar
