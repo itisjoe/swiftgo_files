@@ -16,9 +16,7 @@
 		810E95FD1D0717EE00E80E64 /* ToiletDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810E95FC1D0717EE00E80E64 /* ToiletDetailViewController.swift */; };
 		81A8A4401D054795005FA15C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A8A43F1D054795005FA15C /* AppDelegate.swift */; };
 		81A8A4421D054795005FA15C /* BaseMainViewController.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A8A4411D054795005FA15C /* BaseMainViewController.swift.swift */; };
-		81A8A4451D054795005FA15C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81A8A4431D054795005FA15C /* Main.storyboard */; };
 		81A8A4471D054795005FA15C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81A8A4461D054795005FA15C /* Assets.xcassets */; };
-		81A8A44A1D054795005FA15C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81A8A4481D054795005FA15C /* LaunchScreen.storyboard */; };
 		81A8A4521D054CE8005FA15C /* HotelMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A8A4511D054CE8005FA15C /* HotelMainViewController.swift */; };
 		81A8A4541D054D10005FA15C /* LandmarkMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A8A4531D054D10005FA15C /* LandmarkMainViewController.swift */; };
 		81A8A4561D054D20005FA15C /* ParkMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A8A4551D054D20005FA15C /* ParkMainViewController.swift */; };
@@ -52,9 +50,7 @@
 		81A8A43C1D054795005FA15C /* TaipeiTravel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaipeiTravel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81A8A43F1D054795005FA15C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		81A8A4411D054795005FA15C /* BaseMainViewController.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseMainViewController.swift.swift; sourceTree = "<group>"; };
-		81A8A4441D054795005FA15C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		81A8A4461D054795005FA15C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		81A8A4491D054795005FA15C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		81A8A44B1D054795005FA15C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81A8A4511D054CE8005FA15C /* HotelMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotelMainViewController.swift; sourceTree = "<group>"; };
 		81A8A4531D054D10005FA15C /* LandmarkMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandmarkMainViewController.swift; sourceTree = "<group>"; };
@@ -122,10 +118,8 @@
 				810E95FC1D0717EE00E80E64 /* ToiletDetailViewController.swift */,
 				81A8A4571D054D2E005FA15C /* InfoMainViewController.swift */,
 				81A8A4721D056472005FA15C /* Coordinate.swift */,
-				81A8A4431D054795005FA15C /* Main.storyboard */,
 				81A8A4461D054795005FA15C /* Assets.xcassets */,
 				81A8A4591D054E19005FA15C /* icons */,
-				81A8A4481D054795005FA15C /* LaunchScreen.storyboard */,
 				81A8A44B1D054795005FA15C /* Info.plist */,
 			);
 			path = TaipeiTravel;
@@ -216,13 +210,11 @@
 				81A8A46C1D054E19005FA15C /* park.png in Resources */,
 				81A8A46D1D054E19005FA15C /* park@2x.png in Resources */,
 				81A8A4691D054E19005FA15C /* landmark.png in Resources */,
-				81A8A44A1D054795005FA15C /* LaunchScreen.storyboard in Resources */,
 				81A8A46B1D054E19005FA15C /* landmark@3x.png in Resources */,
 				81A8A4681D054E19005FA15C /* hotel@3x.png in Resources */,
 				81A8A46E1D054E19005FA15C /* park@3x.png in Resources */,
 				81A8A4471D054795005FA15C /* Assets.xcassets in Resources */,
 				810E95F91D0715E400E80E64 /* toilet@3x.png in Resources */,
-				81A8A4451D054795005FA15C /* Main.storyboard in Resources */,
 				81A8A46A1D054E19005FA15C /* landmark@2x.png in Resources */,
 				81C05AD01D06B2F400426344 /* info.png in Resources */,
 				81C05AD11D06B2F400426344 /* info@2x.png in Resources */,
@@ -257,25 +249,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		81A8A4431D054795005FA15C /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				81A8A4441D054795005FA15C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		81A8A4481D054795005FA15C /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				81A8A4491D054795005FA15C /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		81A8A44C1D054795005FA15C /* Debug */ = {
@@ -315,7 +288,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -354,7 +327,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -365,6 +338,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = TaipeiTravel/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -377,6 +351,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = TaipeiTravel/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
