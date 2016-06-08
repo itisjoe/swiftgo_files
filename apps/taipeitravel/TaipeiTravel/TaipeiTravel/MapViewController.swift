@@ -49,8 +49,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         myMapView.zoomEnabled = true
         
         // 地圖預設顯示的範圍大小 (數字越小越精確)
-        let latDelta = 0.05
-        let longDelta = 0.05
+        let latDelta = 0.005
+        let longDelta = 0.005
         let currentLocationSpan:MKCoordinateSpan = MKCoordinateSpanMake(latDelta, longDelta)
         
         // 設置地圖顯示的範圍與中心點座標

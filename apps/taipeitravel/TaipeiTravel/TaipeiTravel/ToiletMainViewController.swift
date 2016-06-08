@@ -14,7 +14,7 @@ class ToiletMainViewController: BaseMainViewController {
         super.viewDidLoad()
         
         // 導覽列標題
-        self.title = "公廁"
+        self.title = "廁所"
         
         // 獲取類型
         self.fetchType = "toilet"

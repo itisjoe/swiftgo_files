@@ -14,6 +14,7 @@ class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITab
     var myUserDefaults :NSUserDefaults!
     var myLocationManager :CLLocationManager!
     var fetchType :String!
+    let refreshDays :Int = 5
     var myActivityIndicator :UIActivityIndicatorView!
     var myTableView :UITableView!
     var todayDateInt :Int!
@@ -21,8 +22,15 @@ class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITab
     var documentsPath :String!
     var targetUrl :String!
     var strTargetID :String!
+    var apiDataAll :[AnyObject]!
     var apiData :[AnyObject]!
     var apiDataForDistance :[Coordinate]!
+
+    // 超過多少距離才重新取得有限數量資料 (公尺)
+    let limitDistance = 500.0
+    
+    // 有限數量資料的個數
+    let limitNumber = 100
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,13 +110,13 @@ class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITab
         // 取得前一次取得資料的日期
         let fetchDate = myUserDefaults.objectForKey("\(self.fetchType)FetchDate") as? Int
         
-        // 如果尚未取得資料 或 前一次取得資料已經超過一天(兩天以上)
+        // 如果尚未取得資料 或 前一次取得資料已經超過設定天數
         // 便向遠端 API 取得資料
         let date = fetchDate ?? 0
-        if self.todayDateInt - date > 1 {
+        if self.todayDateInt - date > self.refreshDays {
             self.normalGet(self.taipeiDataUrl + self.strTargetID)
         } else {
-            // 如果資料已在兩天內取得過 便直接建立 table
+            // 如果資料已在設定天數內取得過 便直接建立 table
             self.addTable(self.targetUrl)
         }
         
@@ -176,8 +184,15 @@ class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITab
         } else if (status == CLAuthorizationStatus.AuthorizedWhenInUse) {
             // 設置定位權限的紀錄
             self.myUserDefaults.setObject(true, forKey: "locationAuth")
-            self.myUserDefaults.synchronize()
             
+            // 更新記錄的座標 for 取得有限數量的資料
+            for type in ["hotel", "landmark", "park", "toilet"] {
+                self.myUserDefaults.setObject(0.0, forKey: "\(type)RecordLatitude")
+                self.myUserDefaults.setObject(0.0, forKey: "\(type)RecordLongitude")
+            }
+
+            self.myUserDefaults.synchronize()
+
             // 開始定位自身位置
             myLocationManager.startUpdatingLocation()
         }
@@ -257,9 +272,9 @@ class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITab
                 if distance > 20000 {
                     detail = "超過 20 KM"
                 } else if distance > 1000 {
-                    detail = "\(Int(distance / 1000)) KM"
+                    detail = "\(Double(Int(distance / 100)) / 10.0) KM"
                 } else if distance > 100 {
-                    detail = "\(Int(distance / 100))00 M"
+                    detail = "\(Int(distance / 10))0 M"
                 } else {
                     detail = "\(distance) M"
                 }
@@ -280,7 +295,7 @@ class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITab
     }
 
     
-    // MARK: NSURLSessionDownloadDelegate Methods
+// MARK: NSURLSessionDownloadDelegate Methods
     
     // 下載完成
     func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didFinishDownloadingToURL location: NSURL) {
@@ -330,7 +345,7 @@ class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITab
             
             let dataArr = dict["result"]!["results"] as! [AnyObject]
             
-            self.apiData = dataArr
+            self.apiDataAll = dataArr
             
             self.refreshAPIData()
             
@@ -340,43 +355,118 @@ class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITab
         
     }
     
-    func refreshAPIData() {
-        if let allData = self.apiData {
-            var index = 0
-            
-            self.apiDataForDistance = []
-            
-            for data in allData {
-                
-                var latitude = 0.0
-                if let num = data["latitude"] as? NSString {
-                    latitude = num.doubleValue
-                } else if let num = data["Latitude"] as? NSString {
-                    latitude = num.doubleValue
-                } else if let num = data["緯度"] as? NSString {
-                    latitude = num.doubleValue
-                }
-                
-                var longitude = 0.0
-                if let num = data["longitude"] as? NSString {
-                    longitude = num.doubleValue
-                } else if let num = data["Longitude"] as? NSString {
-                    longitude = num.doubleValue
-                } else if let num = data["經度"] as? NSString {
-                    longitude = num.doubleValue
-                }
-                
-                let coordinate = Coordinate(
-                    index: index ,
-                    latitude: latitude ,
-                    longitude: longitude )
-                self.apiDataForDistance.append(coordinate)
-                
-                index += 1
-            }
-            
-            self.apiDataForDistance.sortInPlace(<)
+    // 自資料取得緯度與經度
+    func fetchLatitudeAndLongitudeFromData(data :AnyObject) -> (latitude:Double, longitude:Double) {
+        var latitude = 0.0
+        if let num = data["latitude"] as? NSString {
+            latitude = num.doubleValue
+        } else if let num = data["Latitude"] as? NSString {
+            latitude = num.doubleValue
+        } else if let num = data["緯度"] as? NSString {
+            latitude = num.doubleValue
         }
+        
+        var longitude = 0.0
+        if let num = data["longitude"] as? NSString {
+            longitude = num.doubleValue
+        } else if let num = data["Longitude"] as? NSString {
+            longitude = num.doubleValue
+        } else if let num = data["經度"] as? NSString {
+            longitude = num.doubleValue
+        }
+        
+        return (latitude, longitude)
+    }
+    
+    // 將資料填入 apiDataForDistance
+    func fillIntoAPIDataForDistanceAndSort(allData :[AnyObject]) {
+        self.apiDataForDistance = []
+        
+        var index = 0
+        for data in allData {
+            
+            let (latitude, longitude) = self.fetchLatitudeAndLongitudeFromData(data)
+
+            self.apiDataForDistance.append(Coordinate(
+                index: index ,
+                latitude: latitude ,
+                longitude: longitude ))
+            
+            index += 1
+        }
+
+        self.apiDataForDistance.sortInPlace(<)
+        
+    }
+    
+    // 依據所有資料與使用者定位的距離 取得有限數量資料
+    func reloadAPIData() {
+        guard self.apiDataAll != nil else {
+            return
+        }
+
+        // 有定位權限
+        let locationAuth = myUserDefaults.objectForKey("locationAuth") as? Bool
+        if locationAuth != nil && locationAuth! {
+            
+            // 取得目前使用者座標
+            let userLatitude = myUserDefaults.objectForKey("userLatitude") as? Double
+            let userLongitude = myUserDefaults.objectForKey("userLongitude") as? Double
+            let userLocation = CLLocation(latitude: userLatitude!, longitude: userLongitude!)
+            
+            // 記錄的座標
+            let recordLatitude = myUserDefaults.objectForKey("\(self.fetchType)RecordLatitude") as? Double ?? 0.0
+            let recordLongitude = myUserDefaults.objectForKey("\(self.fetchType)RecordLongitude") as? Double ?? 0.0
+            let recordLocation = CLLocation(latitude: recordLatitude, longitude: recordLongitude)
+            
+            // 超過限定距離才重新取得有限數量資料
+            if userLocation.distanceFromLocation(recordLocation) > self.limitDistance {
+
+                // 將所有資料依照與使用者距離重新排序
+                self.fillIntoAPIDataForDistanceAndSort(self.apiDataAll)
+                
+                var tempAPIData :[AnyObject] = []
+                var tempAPIDataForDistance :[Coordinate] = []
+                for index in 0...self.limitNumber {
+                    let tempCoordinate = self.apiDataForDistance[index]
+                    let tempData = self.apiDataAll[tempCoordinate.index]
+                    
+                    tempAPIData.append(tempData)
+                    
+                    let (latitude, longitude) = self.fetchLatitudeAndLongitudeFromData(tempData)
+                    
+                    tempAPIDataForDistance.append(
+                        Coordinate(
+                            index: index,
+                            latitude: latitude,
+                            longitude: longitude))
+                }
+                
+                self.apiData = tempAPIData
+                self.apiDataForDistance = tempAPIDataForDistance
+                
+                // 更新記錄的座標
+                myUserDefaults.setObject(userLatitude, forKey: "\(self.fetchType)RecordLatitude")
+                myUserDefaults.setObject(userLongitude, forKey: "\(self.fetchType)RecordLongitude")
+                myUserDefaults.synchronize()
+            }
+        } else {
+            // 無定位權限 取得所有資料
+            self.apiData = self.apiDataAll
+        }
+    }
+    
+    func refreshAPIData() {
+        guard self.apiDataAll != nil else {
+            return
+        }
+
+        // 依據所有資料與使用者定位的距離 取得有限數量資料
+        self.reloadAPIData()
+        
+        // 將有限數量資料依照與使用者距離重新排序
+        self.fillIntoAPIDataForDistanceAndSort(self.apiData)
+
     }
     
 }
