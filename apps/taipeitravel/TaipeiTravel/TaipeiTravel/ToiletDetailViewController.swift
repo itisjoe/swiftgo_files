@@ -49,14 +49,10 @@ class ToiletDetailViewController: DetailViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         // 取得 tableView 目前使用的 cell
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
+
+        cell.accessoryType = .None
         
         if self.hasMap {
-            if indexPath.row == 0 {
-                cell.accessoryType = .DisclosureIndicator
-            } else {
-                cell.accessoryType = .None
-            }
-            
             var content = ""
             if indexPath.row == 4 {
                 content = "場所提供行動不便者使用廁所："
@@ -88,8 +84,19 @@ class ToiletDetailViewController: DetailViewController {
             } else {
                 cell.textLabel?.text = self.detail[indexPath.row] ?? ""
             }
+
+            if indexPath.row == 0 {
+                cell.accessoryType = .DisclosureIndicator
+            } else if indexPath.row == 1 {
+                cell.textLabel?.text = "類型：" + (cell.textLabel?.text)!
+            }
+        
         } else {
             cell.textLabel?.text = self.detail[indexPath.row + 1] ?? ""
+            
+            if indexPath.row == 0 {
+                cell.textLabel?.text = "類型：" + (cell.textLabel?.text)!
+            }
         }
         
         if indexPath.row > (self.hasMap ? 1 : 0) {

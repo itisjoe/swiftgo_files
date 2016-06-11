@@ -57,13 +57,20 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // 取得 tableView 目前使用的 cell
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
         
+        cell.accessoryType = .None
+        
         if self.hasMap {
+            cell.textLabel?.text = self.detail[indexPath.row] ?? ""
             if indexPath.row == 0 {
                 cell.accessoryType = .DisclosureIndicator
+            } else if indexPath.row == 1 {
+                cell.textLabel?.text = "類型：" + (cell.textLabel?.text)!
             }
-            cell.textLabel?.text = self.detail[indexPath.row] ?? ""
         } else {
             cell.textLabel?.text = self.detail[indexPath.row + 1] ?? ""
+            if indexPath.row == 0 {
+                cell.textLabel?.text = "類型：" + (cell.textLabel?.text)!
+            }
         }
         
         if indexPath.row > (self.hasMap ? 1 : 0) {

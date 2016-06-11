@@ -55,6 +55,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             
             self.myUserDefaults.synchronize()
         }
+        
+        // 設定導覽列預設底色
+        UINavigationBar.appearance().barTintColor = UIColor.init(red: 0.24, green: 0.79, blue: 0.83, alpha: 1)
+        
+        // 設定導覽列預設按鈕顏色
+        UINavigationBar.appearance().tintColor = UIColor.blackColor()
 
         
         // 建立一個 UIWindow
