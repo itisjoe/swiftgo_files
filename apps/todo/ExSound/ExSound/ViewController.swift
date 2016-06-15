@@ -16,7 +16,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         // 建立播放器
-        let soundPath = NSBundle.mainBundle().pathForResource("sound0132", ofType: "wav")
+        let soundPath = NSBundle.mainBundle().pathForResource("woohoo", ofType: "wav")
         do {
             myPlayer = try AVAudioPlayer(contentsOfURL: NSURL.fileURLWithPath(soundPath!))
 

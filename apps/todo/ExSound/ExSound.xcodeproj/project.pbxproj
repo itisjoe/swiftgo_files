@@ -7,15 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		814FB1921D11AB200049BE13 /* woohoo.wav in Resources */ = {isa = PBXBuildFile; fileRef = 814FB1911D11AB200049BE13 /* woohoo.wav */; };
 		8196BF3E1D1007F6003F76D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8196BF3D1D1007F6003F76D9 /* AppDelegate.swift */; };
 		8196BF401D1007F6003F76D9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8196BF3F1D1007F6003F76D9 /* ViewController.swift */; };
 		8196BF431D1007F6003F76D9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8196BF411D1007F6003F76D9 /* Main.storyboard */; };
 		8196BF451D1007F6003F76D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8196BF441D1007F6003F76D9 /* Assets.xcassets */; };
 		8196BF481D1007F6003F76D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8196BF461D1007F6003F76D9 /* LaunchScreen.storyboard */; };
-		8196BF501D1008F0003F76D9 /* sound0132.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8196BF4F1D1008F0003F76D9 /* sound0132.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		814FB1911D11AB200049BE13 /* woohoo.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = woohoo.wav; sourceTree = "<group>"; };
 		8196BF3A1D1007F6003F76D9 /* ExSound.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExSound.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8196BF3D1D1007F6003F76D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8196BF3F1D1007F6003F76D9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -23,7 +24,6 @@
 		8196BF441D1007F6003F76D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8196BF471D1007F6003F76D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8196BF491D1007F6003F76D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8196BF4F1D1008F0003F76D9 /* sound0132.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sound0132.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,8 +60,8 @@
 				8196BF3F1D1007F6003F76D9 /* ViewController.swift */,
 				8196BF411D1007F6003F76D9 /* Main.storyboard */,
 				8196BF441D1007F6003F76D9 /* Assets.xcassets */,
+				814FB1911D11AB200049BE13 /* woohoo.wav */,
 				8196BF461D1007F6003F76D9 /* LaunchScreen.storyboard */,
-				8196BF4F1D1008F0003F76D9 /* sound0132.wav */,
 				8196BF491D1007F6003F76D9 /* Info.plist */,
 			);
 			path = ExSound;
@@ -125,8 +125,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8196BF501D1008F0003F76D9 /* sound0132.wav in Resources */,
 				8196BF481D1007F6003F76D9 /* LaunchScreen.storyboard in Resources */,
+				814FB1921D11AB200049BE13 /* woohoo.wav in Resources */,
 				8196BF451D1007F6003F76D9 /* Assets.xcassets in Resources */,
 				8196BF431D1007F6003F76D9 /* Main.storyboard in Resources */,
 			);
@@ -290,6 +290,7 @@
 				8196BF4E1D1007F6003F76D9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
