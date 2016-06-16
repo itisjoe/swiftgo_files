@@ -16,7 +16,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        // 設置是否開啟音效
+        let myUserDefaults = NSUserDefaults.standardUserDefaults()
+        var sound = 1
+        if let soundOpen = myUserDefaults.objectForKey("soundOpen") as? Int {
+            sound = soundOpen
+        }
+        myUserDefaults.setObject(sound, forKey: "soundOpen")
+        myUserDefaults.synchronize()
+
+        // 建立一個 UIWindow
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        
+        // 設置底色
+        self.window!.backgroundColor = UIColor.whiteColor()
+        
+        // 設置根視圖控制器
+        let nav = UINavigationController(rootViewController: ViewController())
+        self.window!.rootViewController = nav
+        
+        // 將 UIWindow 設置為可見的
+        self.window!.makeKeyAndVisible()
+        
         return true
     }
 

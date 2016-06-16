@@ -11,6 +11,20 @@
 		8196BEFE1D0FE7BF003F76D9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8196BEFD1D0FE7BF003F76D9 /* ViewController.swift */; };
 		8196BF041D0FE7BF003F76D9 /* ToDo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8196BF021D0FE7BF003F76D9 /* ToDo.xcdatamodeld */; };
 		8196BF061D0FE7BF003F76D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8196BF051D0FE7BF003F76D9 /* Assets.xcassets */; };
+		81FAB5EE1D1285DF00663237 /* Record+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FAB5EC1D1285DF00663237 /* Record+CoreDataProperties.swift */; };
+		81FAB5EF1D1285DF00663237 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FAB5ED1D1285DF00663237 /* Record.swift */; };
+		81FAB5F11D12861900663237 /* CoreDataConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FAB5F01D12861900663237 /* CoreDataConnect.swift */; };
+		81FAB5FC1D128E9500663237 /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = 81FAB5F31D128E9500663237 /* check.png */; };
+		81FAB5FD1D128E9500663237 /* check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81FAB5F41D128E9500663237 /* check@2x.png */; };
+		81FAB5FE1D128E9500663237 /* check@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81FAB5F51D128E9500663237 /* check@3x.png */; };
+		81FAB5FF1D128E9500663237 /* checkbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 81FAB5F61D128E9500663237 /* checkbox.png */; };
+		81FAB6001D128E9500663237 /* checkbox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81FAB5F71D128E9500663237 /* checkbox@2x.png */; };
+		81FAB6011D128E9500663237 /* checkbox@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81FAB5F81D128E9500663237 /* checkbox@3x.png */; };
+		81FAB6021D128E9500663237 /* more.png in Resources */ = {isa = PBXBuildFile; fileRef = 81FAB5F91D128E9500663237 /* more.png */; };
+		81FAB6031D128E9500663237 /* more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81FAB5FA1D128E9500663237 /* more@2x.png */; };
+		81FAB6041D128E9500663237 /* more@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81FAB5FB1D128E9500663237 /* more@3x.png */; };
+		81FAB6081D12A78700663237 /* bottle_pop_2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 81FAB6061D12A78700663237 /* bottle_pop_2.wav */; };
+		81FAB6091D12A78700663237 /* woohoo.wav in Resources */ = {isa = PBXBuildFile; fileRef = 81FAB6071D12A78700663237 /* woohoo.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +34,20 @@
 		8196BF031D0FE7BF003F76D9 /* ToDo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ToDo.xcdatamodel; sourceTree = "<group>"; };
 		8196BF051D0FE7BF003F76D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8196BF0A1D0FE7BF003F76D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		81FAB5EC1D1285DF00663237 /* Record+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Record+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		81FAB5ED1D1285DF00663237 /* Record.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
+		81FAB5F01D12861900663237 /* CoreDataConnect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataConnect.swift; sourceTree = "<group>"; };
+		81FAB5F31D128E9500663237 /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check.png; sourceTree = "<group>"; };
+		81FAB5F41D128E9500663237 /* check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "check@2x.png"; sourceTree = "<group>"; };
+		81FAB5F51D128E9500663237 /* check@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "check@3x.png"; sourceTree = "<group>"; };
+		81FAB5F61D128E9500663237 /* checkbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox.png; sourceTree = "<group>"; };
+		81FAB5F71D128E9500663237 /* checkbox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkbox@2x.png"; sourceTree = "<group>"; };
+		81FAB5F81D128E9500663237 /* checkbox@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkbox@3x.png"; sourceTree = "<group>"; };
+		81FAB5F91D128E9500663237 /* more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = more.png; sourceTree = "<group>"; };
+		81FAB5FA1D128E9500663237 /* more@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "more@2x.png"; sourceTree = "<group>"; };
+		81FAB5FB1D128E9500663237 /* more@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "more@3x.png"; sourceTree = "<group>"; };
+		81FAB6061D12A78700663237 /* bottle_pop_2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bottle_pop_2.wav; sourceTree = "<group>"; };
+		81FAB6071D12A78700663237 /* woohoo.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = woohoo.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +64,8 @@
 		8196BEEF1D0FE7BF003F76D9 = {
 			isa = PBXGroup;
 			children = (
+				81FAB5EC1D1285DF00663237 /* Record+CoreDataProperties.swift */,
+				81FAB5ED1D1285DF00663237 /* Record.swift */,
 				8196BEFA1D0FE7BF003F76D9 /* ToDo */,
 				8196BEF91D0FE7BF003F76D9 /* Products */,
 			);
@@ -55,10 +85,39 @@
 				8196BEFB1D0FE7BF003F76D9 /* AppDelegate.swift */,
 				8196BEFD1D0FE7BF003F76D9 /* ViewController.swift */,
 				8196BF051D0FE7BF003F76D9 /* Assets.xcassets */,
+				81FAB5F21D128E9500663237 /* icons */,
+				81FAB6051D12A78700663237 /* sounds */,
 				8196BF0A1D0FE7BF003F76D9 /* Info.plist */,
 				8196BF021D0FE7BF003F76D9 /* ToDo.xcdatamodeld */,
+				81FAB5F01D12861900663237 /* CoreDataConnect.swift */,
 			);
 			path = ToDo;
+			sourceTree = "<group>";
+		};
+		81FAB5F21D128E9500663237 /* icons */ = {
+			isa = PBXGroup;
+			children = (
+				81FAB5F31D128E9500663237 /* check.png */,
+				81FAB5F41D128E9500663237 /* check@2x.png */,
+				81FAB5F51D128E9500663237 /* check@3x.png */,
+				81FAB5F61D128E9500663237 /* checkbox.png */,
+				81FAB5F71D128E9500663237 /* checkbox@2x.png */,
+				81FAB5F81D128E9500663237 /* checkbox@3x.png */,
+				81FAB5F91D128E9500663237 /* more.png */,
+				81FAB5FA1D128E9500663237 /* more@2x.png */,
+				81FAB5FB1D128E9500663237 /* more@3x.png */,
+			);
+			path = icons;
+			sourceTree = "<group>";
+		};
+		81FAB6051D12A78700663237 /* sounds */ = {
+			isa = PBXGroup;
+			children = (
+				81FAB6061D12A78700663237 /* bottle_pop_2.wav */,
+				81FAB6071D12A78700663237 /* woohoo.wav */,
+			);
+			name = sounds;
+			path = icons/sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -119,7 +178,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81FAB6031D128E9500663237 /* more@2x.png in Resources */,
+				81FAB6091D12A78700663237 /* woohoo.wav in Resources */,
+				81FAB5FF1D128E9500663237 /* checkbox.png in Resources */,
+				81FAB6081D12A78700663237 /* bottle_pop_2.wav in Resources */,
+				81FAB6041D128E9500663237 /* more@3x.png in Resources */,
+				81FAB5FE1D128E9500663237 /* check@3x.png in Resources */,
+				81FAB5FC1D128E9500663237 /* check.png in Resources */,
 				8196BF061D0FE7BF003F76D9 /* Assets.xcassets in Resources */,
+				81FAB5FD1D128E9500663237 /* check@2x.png in Resources */,
+				81FAB6011D128E9500663237 /* checkbox@3x.png in Resources */,
+				81FAB6021D128E9500663237 /* more.png in Resources */,
+				81FAB6001D128E9500663237 /* checkbox@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,7 +200,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81FAB5EE1D1285DF00663237 /* Record+CoreDataProperties.swift in Sources */,
+				81FAB5F11D12861900663237 /* CoreDataConnect.swift in Sources */,
 				8196BEFE1D0FE7BF003F76D9 /* ViewController.swift in Sources */,
+				81FAB5EF1D1285DF00663237 /* Record.swift in Sources */,
 				8196BF041D0FE7BF003F76D9 /* ToDo.xcdatamodeld in Sources */,
 				8196BEFC1D0FE7BF003F76D9 /* AppDelegate.swift in Sources */,
 			);
@@ -267,6 +340,7 @@
 				8196BF0F1D0FE7BF003F76D9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
