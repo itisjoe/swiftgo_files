@@ -26,6 +26,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         myUserDefaults.setObject(sound, forKey: "soundOpen")
         myUserDefaults.synchronize()
 
+        // 設定導覽列預設底色
+        UINavigationBar.appearance().barTintColor = UIColor.init(red: 0.83, green: 0.36, blue: 0.64, alpha: 1)
+        
+        // 設定導覽列預設按鈕顏色
+        UINavigationBar.appearance().tintColor = UIColor.blackColor()
+        
         // 建立一個 UIWindow
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         

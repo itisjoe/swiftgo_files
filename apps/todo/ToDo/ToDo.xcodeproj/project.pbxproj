@@ -11,6 +11,12 @@
 		8196BEFE1D0FE7BF003F76D9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8196BEFD1D0FE7BF003F76D9 /* ViewController.swift */; };
 		8196BF041D0FE7BF003F76D9 /* ToDo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8196BF021D0FE7BF003F76D9 /* ToDo.xcdatamodeld */; };
 		8196BF061D0FE7BF003F76D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8196BF051D0FE7BF003F76D9 /* Assets.xcassets */; };
+		81C6E8461D13B2E100EA259C /* bottle_pop_3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 81C6E8451D13B2E100EA259C /* bottle_pop_3.wav */; };
+		81C6E8481D13B43900EA259C /* what-2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 81C6E8471D13B43900EA259C /* what-2.wav */; };
+		81C6E84A1D13BAB900EA259C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C6E8491D13BAB900EA259C /* BaseViewController.swift */; };
+		81C6E84E1D13CD2E00EA259C /* cutting-paper-2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 81C6E84D1D13CD2E00EA259C /* cutting-paper-2.mp3 */; };
+		81C6E8501D13D40300EA259C /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C6E84F1D13D40300EA259C /* MoreViewController.swift */; };
+		81C6E8521D13DC5400EA259C /* ChechedRecordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C6E8511D13DC5400EA259C /* ChechedRecordsViewController.swift */; };
 		81FAB5EE1D1285DF00663237 /* Record+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FAB5EC1D1285DF00663237 /* Record+CoreDataProperties.swift */; };
 		81FAB5EF1D1285DF00663237 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FAB5ED1D1285DF00663237 /* Record.swift */; };
 		81FAB5F11D12861900663237 /* CoreDataConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FAB5F01D12861900663237 /* CoreDataConnect.swift */; };
@@ -23,7 +29,6 @@
 		81FAB6021D128E9500663237 /* more.png in Resources */ = {isa = PBXBuildFile; fileRef = 81FAB5F91D128E9500663237 /* more.png */; };
 		81FAB6031D128E9500663237 /* more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81FAB5FA1D128E9500663237 /* more@2x.png */; };
 		81FAB6041D128E9500663237 /* more@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81FAB5FB1D128E9500663237 /* more@3x.png */; };
-		81FAB6081D12A78700663237 /* bottle_pop_2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 81FAB6061D12A78700663237 /* bottle_pop_2.wav */; };
 		81FAB6091D12A78700663237 /* woohoo.wav in Resources */ = {isa = PBXBuildFile; fileRef = 81FAB6071D12A78700663237 /* woohoo.wav */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +39,12 @@
 		8196BF031D0FE7BF003F76D9 /* ToDo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ToDo.xcdatamodel; sourceTree = "<group>"; };
 		8196BF051D0FE7BF003F76D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8196BF0A1D0FE7BF003F76D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		81C6E8451D13B2E100EA259C /* bottle_pop_3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bottle_pop_3.wav; sourceTree = "<group>"; };
+		81C6E8471D13B43900EA259C /* what-2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "what-2.wav"; sourceTree = "<group>"; };
+		81C6E8491D13BAB900EA259C /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		81C6E84D1D13CD2E00EA259C /* cutting-paper-2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "cutting-paper-2.mp3"; sourceTree = "<group>"; };
+		81C6E84F1D13D40300EA259C /* MoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
+		81C6E8511D13DC5400EA259C /* ChechedRecordsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChechedRecordsViewController.swift; sourceTree = "<group>"; };
 		81FAB5EC1D1285DF00663237 /* Record+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Record+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		81FAB5ED1D1285DF00663237 /* Record.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		81FAB5F01D12861900663237 /* CoreDataConnect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataConnect.swift; sourceTree = "<group>"; };
@@ -46,7 +57,6 @@
 		81FAB5F91D128E9500663237 /* more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = more.png; sourceTree = "<group>"; };
 		81FAB5FA1D128E9500663237 /* more@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "more@2x.png"; sourceTree = "<group>"; };
 		81FAB5FB1D128E9500663237 /* more@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "more@3x.png"; sourceTree = "<group>"; };
-		81FAB6061D12A78700663237 /* bottle_pop_2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bottle_pop_2.wav; sourceTree = "<group>"; };
 		81FAB6071D12A78700663237 /* woohoo.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = woohoo.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -83,7 +93,10 @@
 			isa = PBXGroup;
 			children = (
 				8196BEFB1D0FE7BF003F76D9 /* AppDelegate.swift */,
+				81C6E8491D13BAB900EA259C /* BaseViewController.swift */,
 				8196BEFD1D0FE7BF003F76D9 /* ViewController.swift */,
+				81C6E84F1D13D40300EA259C /* MoreViewController.swift */,
+				81C6E8511D13DC5400EA259C /* ChechedRecordsViewController.swift */,
 				8196BF051D0FE7BF003F76D9 /* Assets.xcassets */,
 				81FAB5F21D128E9500663237 /* icons */,
 				81FAB6051D12A78700663237 /* sounds */,
@@ -113,7 +126,9 @@
 		81FAB6051D12A78700663237 /* sounds */ = {
 			isa = PBXGroup;
 			children = (
-				81FAB6061D12A78700663237 /* bottle_pop_2.wav */,
+				81C6E84D1D13CD2E00EA259C /* cutting-paper-2.mp3 */,
+				81C6E8471D13B43900EA259C /* what-2.wav */,
+				81C6E8451D13B2E100EA259C /* bottle_pop_3.wav */,
 				81FAB6071D12A78700663237 /* woohoo.wav */,
 			);
 			name = sounds;
@@ -178,10 +193,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81C6E8461D13B2E100EA259C /* bottle_pop_3.wav in Resources */,
 				81FAB6031D128E9500663237 /* more@2x.png in Resources */,
+				81C6E8481D13B43900EA259C /* what-2.wav in Resources */,
 				81FAB6091D12A78700663237 /* woohoo.wav in Resources */,
 				81FAB5FF1D128E9500663237 /* checkbox.png in Resources */,
-				81FAB6081D12A78700663237 /* bottle_pop_2.wav in Resources */,
+				81C6E84E1D13CD2E00EA259C /* cutting-paper-2.mp3 in Resources */,
 				81FAB6041D128E9500663237 /* more@3x.png in Resources */,
 				81FAB5FE1D128E9500663237 /* check@3x.png in Resources */,
 				81FAB5FC1D128E9500663237 /* check.png in Resources */,
@@ -205,6 +222,9 @@
 				8196BEFE1D0FE7BF003F76D9 /* ViewController.swift in Sources */,
 				81FAB5EF1D1285DF00663237 /* Record.swift in Sources */,
 				8196BF041D0FE7BF003F76D9 /* ToDo.xcdatamodeld in Sources */,
+				81C6E8501D13D40300EA259C /* MoreViewController.swift in Sources */,
+				81C6E84A1D13BAB900EA259C /* BaseViewController.swift in Sources */,
+				81C6E8521D13DC5400EA259C /* ChechedRecordsViewController.swift in Sources */,
 				8196BEFC1D0FE7BF003F76D9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

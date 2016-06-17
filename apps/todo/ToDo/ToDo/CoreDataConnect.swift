@@ -94,6 +94,8 @@ class CoreDataConnect {
                         result.setValue(Int(value), forKey: key)
                     } else if t == .DoubleAttributeType || t == .FloatAttributeType {
                         result.setValue(Double(value), forKey: key)
+                    } else if t == .BooleanAttributeType {
+                        result.setValue((value == "true" ? true : false), forKey: key)
                     } else {
                         result.setValue(value, forKey: key)
                     }
