@@ -12,9 +12,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     let fullsize = UIScreen.mainScreen().bounds.size
     let myUserDefaults = NSUserDefaults.standardUserDefaults()
     
-    var days = ["2016-06-03","2016-06-02","2016-06-01"]
+    var days = ["2016-06-06","2016-06-05","2016-06-04","2016-06-03","2016-06-02","2016-06-01"]
     var myRecords = [
-        "2016-06-01":"早餐","2016-06-02":"草餐餐","2016-06-03":"吃吃吃"
+        "2016-06-01":"早餐","2016-06-02":"草餐餐","2016-06-03":"吃吃吃",
+        "2016-06-04":"早餐","2016-06-05":"草餐餐","2016-06-06":"吃吃吃"
     ]
     
     var myScrollView :UIScrollView!
@@ -30,78 +31,77 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
         // 基本設定
         self.title = "記帳"
-        self.view.backgroundColor = UIColor.blackColor()
+        self.view.backgroundColor = UIColor.init(red: 0.092, green: 0.092, blue: 0.092, alpha: 1)
         self.navigationController?.navigationBar.translucent = false
         
         // 導覽列右邊設定按鈕
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "settings")!, style: .Plain, target: self, action: #selector(ViewController.settingsBtnAction))
         
         // 基底的 UIScrollView
-        let myScrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: fullsize.width, height: fullsize.height - 64))
-        myScrollView.contentSize = CGSize(width: fullsize.width, height: fullsize.height * 2)
-        self.view.addSubview(myScrollView)
+//        let myScrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: fullsize.width, height: fullsize.height - 64))
+//        myScrollView.contentSize = CGSize(width: fullsize.width, height: fullsize.height * 2)
+//        self.view.addSubview(myScrollView)
         
         // 目前年月
-        currentMonthLabel = UILabel(frame: CGRect(x: 0, y: 0, width: fullsize.width * 0.6, height: 50))
+        currentMonthLabel = UILabel(frame: CGRect(x: 0, y: 0, width: fullsize.width * 0.7, height: 50))
         currentMonthLabel.center = CGPoint(x: fullsize.width * 0.5, y: 35)
         currentMonthLabel.textColor = UIColor.whiteColor()
-        currentMonthLabel.text = "2016 - 06"
+        currentMonthLabel.text = "2016 年 06 月"
         currentMonthLabel.textAlignment = .Center
-        currentMonthLabel.font = UIFont(name: "Helvetica Light", size: 40.0)
-        myScrollView.addSubview(currentMonthLabel)
+        currentMonthLabel.font = UIFont(name: "Helvetica Light", size: 32.0)
+        self.view.addSubview(currentMonthLabel)
         
         // 前一月份按鈕
         prevBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
         prevBtn.center = CGPoint(x: fullsize.width * 0.1, y: 35)
         prevBtn.setImage(UIImage(named: "prev"), forState: .Normal)
         prevBtn.addTarget(self, action: #selector(ViewController.prevBtnAction), forControlEvents: .TouchUpInside)
-        myScrollView.addSubview(prevBtn)
+        self.view.addSubview(prevBtn)
         
         // 後一月份按鈕
         nextBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
         nextBtn.center = CGPoint(x: fullsize.width * 0.9, y: 35)
         nextBtn.setImage(UIImage(named: "next"), forState: .Normal)
         nextBtn.addTarget(self, action: #selector(ViewController.nextBtnAction), forControlEvents: .TouchUpInside)
-        myScrollView.addSubview(nextBtn)
+        self.view.addSubview(nextBtn)
         
         // 總金額顯示文字
         var dollarSignLabel = UILabel(frame: CGRect(x: 15, y: 70, width: 80, height: 30))
-        dollarSignLabel.font = UIFont(name: "Helvetica Light", size: 20.0)
+        dollarSignLabel.font = UIFont(name: "Helvetica Light", size: 16.0)
         dollarSignLabel.textColor = UIColor.whiteColor()
         dollarSignLabel.text = "總計"
-        myScrollView.addSubview(dollarSignLabel)
+        self.view.addSubview(dollarSignLabel)
         dollarSignLabel = UILabel(frame: CGRect(x: fullsize.width - 35, y: 70, width: 30, height: 30))
-        dollarSignLabel.font = UIFont(name: "Helvetica Light", size: 20.0)
+        dollarSignLabel.font = UIFont(name: "Helvetica Light", size: 16.0)
         dollarSignLabel.textColor = UIColor.whiteColor()
         dollarSignLabel.text = "元"
-        myScrollView.addSubview(dollarSignLabel)
+        self.view.addSubview(dollarSignLabel)
 
         // 總金額
-        let amount = 12300
+        let amount = 1222312300
         let formatter = NSNumberFormatter()
         formatter.numberStyle = .DecimalStyle
         amountLabel = UILabel(frame: CGRect(x: 20, y: 70, width: fullsize.width - 65, height: 30))
-        amountLabel.font = UIFont(name: "Helvetica Light", size: 30.0)
+        amountLabel.font = UIFont(name: "Helvetica Light", size: 24.0)
         amountLabel.textAlignment = .Right
         amountLabel.textColor = UIColor.whiteColor()
         amountLabel.text = "\(formatter.stringFromNumber(amount)!)"
-        myScrollView.addSubview(amountLabel)
+        self.view.addSubview(amountLabel)
         
         // 花費記錄列表
-        myTableView = UITableView(frame: CGRect(x: 0, y: 105, width: fullsize.width, height: fullsize.height) , style: .Grouped)
+        myTableView = UITableView(frame: CGRect(x: 0, y: 105, width: fullsize.width, height: fullsize.height - 169) , style: .Grouped)
         //myTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         myTableView.delegate = self
         myTableView.dataSource = self
         myTableView.allowsSelection = true
         myTableView.backgroundColor = UIColor.blackColor()
         myTableView.separatorColor = UIColor.init(red: 0.05, green: 0.05, blue: 0.05, alpha: 1)
-        myScrollView.addSubview(myTableView)
+        self.view.addSubview(myTableView)
         
         // 點選 cell 後的 UIView
         selectedBackgroundView = UIView(frame: CGRect(x: 0, y: 0, width: fullsize.width, height: 44))
         selectedBackgroundView.backgroundColor = UIColor.init(red: 0.05, green: 0.05, blue: 0.05, alpha: 1)
-        
-        
+
         // 底部新增記錄按鈕
         let addBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
         addBtn.center = CGPoint(x: fullsize.width * 0.5, y: fullsize.height - 105)
@@ -196,7 +196,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     // section footer 高度
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 10
+        return (days.count - 1) == section ? 60 : 10
     }
     
     // section header 樣式
