@@ -1,0 +1,44 @@
+//
+//  AppDelegate.swift
+//  Money
+//
+//  Created by joe feng on 2016/6/20.
+//  Copyright © 2016年 hsin. All rights reserved.
+//
+
+import UIKit
+
+@UIApplicationMain
+class AppDelegate: UIResponder, UIApplicationDelegate {
+
+    var window: UIWindow?
+
+
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        // 設定導覽列預設底色
+        UINavigationBar.appearance().barTintColor = UIColor.init(red: 1.0, green: 0.87, blue: 0.0, alpha: 1)
+        
+        // 設定導覽列預設按鈕顏色
+        UINavigationBar.appearance().tintColor = UIColor.blackColor()
+        
+        // 設定 UITableViewCell 預設底色
+        UITableViewCell.appearance().backgroundColor = UIColor.init(red: 0.03, green: 0.03, blue: 0.03, alpha: 1)
+
+        // 建立一個 UIWindow
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        
+        // 設置底色
+        self.window!.backgroundColor = UIColor.blackColor()
+        
+        // 設置根視圖控制器
+        self.window!.rootViewController = UINavigationController(rootViewController: ViewController())
+        
+        // 將 UIWindow 設置為可見的
+        self.window!.makeKeyAndVisible()
+        
+        return true
+    }
+
+}
+
