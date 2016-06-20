@@ -12,7 +12,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     let fullsize = UIScreen.mainScreen().bounds.size
     let myUserDefaults = NSUserDefaults.standardUserDefaults()
     
-    var days = ["2016-06-01","2016-06-02","2016-06-01"]
+    var days = ["2016-06-03","2016-06-02","2016-06-01"]
     var myRecords = [
         "2016-06-01":"早餐","2016-06-02":"草餐餐","2016-06-03":"吃吃吃"
     ]
@@ -45,35 +45,42 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         currentMonthLabel = UILabel(frame: CGRect(x: 0, y: 0, width: fullsize.width * 0.6, height: 50))
         currentMonthLabel.center = CGPoint(x: fullsize.width * 0.5, y: 35)
         currentMonthLabel.textColor = UIColor.whiteColor()
-        currentMonthLabel.text = "2016-06"
+        currentMonthLabel.text = "2016 - 06"
         currentMonthLabel.textAlignment = .Center
         currentMonthLabel.font = UIFont(name: "Helvetica Light", size: 40.0)
         myScrollView.addSubview(currentMonthLabel)
         
         // 前一月份按鈕
         prevBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
-        prevBtn.center = CGPoint(x: fullsize.width * 0.15, y: 35)
+        prevBtn.center = CGPoint(x: fullsize.width * 0.1, y: 35)
         prevBtn.setImage(UIImage(named: "prev"), forState: .Normal)
         prevBtn.addTarget(self, action: #selector(ViewController.prevBtnAction), forControlEvents: .TouchUpInside)
         myScrollView.addSubview(prevBtn)
         
         // 後一月份按鈕
         nextBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
-        nextBtn.center = CGPoint(x: fullsize.width * 0.85, y: 35)
+        nextBtn.center = CGPoint(x: fullsize.width * 0.9, y: 35)
         nextBtn.setImage(UIImage(named: "next"), forState: .Normal)
         nextBtn.addTarget(self, action: #selector(ViewController.nextBtnAction), forControlEvents: .TouchUpInside)
         myScrollView.addSubview(nextBtn)
         
-        // 總金額
-        let dollarSignLabel = UILabel(frame: CGRect(x: 20, y: 70, width: 50, height: 30))
-        dollarSignLabel.font = UIFont(name: "Helvetica Light", size: 30.0)
+        // 總金額顯示文字
+        var dollarSignLabel = UILabel(frame: CGRect(x: 15, y: 70, width: 80, height: 30))
+        dollarSignLabel.font = UIFont(name: "Helvetica Light", size: 20.0)
         dollarSignLabel.textColor = UIColor.whiteColor()
-        dollarSignLabel.text = "$"
+        dollarSignLabel.text = "總計"
         myScrollView.addSubview(dollarSignLabel)
+        dollarSignLabel = UILabel(frame: CGRect(x: fullsize.width - 35, y: 70, width: 30, height: 30))
+        dollarSignLabel.font = UIFont(name: "Helvetica Light", size: 20.0)
+        dollarSignLabel.textColor = UIColor.whiteColor()
+        dollarSignLabel.text = "元"
+        myScrollView.addSubview(dollarSignLabel)
+
+        // 總金額
         let amount = 12300
         let formatter = NSNumberFormatter()
         formatter.numberStyle = .DecimalStyle
-        amountLabel = UILabel(frame: CGRect(x: 20, y: 70, width: fullsize.width - 40, height: 30))
+        amountLabel = UILabel(frame: CGRect(x: 20, y: 70, width: fullsize.width - 65, height: 30))
         amountLabel.font = UIFont(name: "Helvetica Light", size: 30.0)
         amountLabel.textAlignment = .Right
         amountLabel.textColor = UIColor.whiteColor()
@@ -116,8 +123,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func settingsBtnAction() {
-        print("settingsBtnAction")
-        //self.navigationController?.pushViewController(MoreViewController(), animated: true)
+        self.navigationController?.pushViewController(MoreViewController(), animated: true)
     }
     
     func addBtnAction() {
