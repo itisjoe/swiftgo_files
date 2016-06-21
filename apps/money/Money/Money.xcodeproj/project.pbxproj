@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		815B6B4A1D1911CB00D2B3A8 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815B6B491D1911CB00D2B3A8 /* PostViewController.swift */; };
+		815B6B4C1D1914B900D2B3A8 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 815B6B4B1D1914B900D2B3A8 /* libsqlite3.tbd */; };
+		815B6B4F1D19155900D2B3A8 /* SQLiteConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815B6B4E1D19155900D2B3A8 /* SQLiteConnect.swift */; };
 		817CAFBE1D183673007333B9 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817CAFBD1D183673007333B9 /* MoreViewController.swift */; };
 		81D5F7AD1D17DEC30028C755 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D5F7AC1D17DEC30028C755 /* AppDelegate.swift */; };
 		81D5F7AF1D17DEC30028C755 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D5F7AE1D17DEC30028C755 /* ViewController.swift */; };
@@ -26,6 +29,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		815B6B491D1911CB00D2B3A8 /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		815B6B4B1D1914B900D2B3A8 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		815B6B4D1D1914E400D2B3A8 /* BridgeHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgeHeader.h; sourceTree = "<group>"; };
+		815B6B4E1D19155900D2B3A8 /* SQLiteConnect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLiteConnect.swift; sourceTree = "<group>"; };
 		817CAFBD1D183673007333B9 /* MoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		81D5F7A91D17DEC30028C755 /* Money.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Money.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81D5F7AC1D17DEC30028C755 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				815B6B4C1D1914B900D2B3A8 /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,6 +68,8 @@
 		81D5F7A01D17DEC30028C755 = {
 			isa = PBXGroup;
 			children = (
+				815B6B4D1D1914E400D2B3A8 /* BridgeHeader.h */,
+				815B6B4B1D1914B900D2B3A8 /* libsqlite3.tbd */,
 				81D5F7AB1D17DEC30028C755 /* Money */,
 				81D5F7AA1D17DEC30028C755 /* Products */,
 			);
@@ -78,7 +88,9 @@
 			children = (
 				81D5F7AC1D17DEC30028C755 /* AppDelegate.swift */,
 				81D5F7AE1D17DEC30028C755 /* ViewController.swift */,
+				815B6B491D1911CB00D2B3A8 /* PostViewController.swift */,
 				817CAFBD1D183673007333B9 /* MoreViewController.swift */,
+				815B6B4E1D19155900D2B3A8 /* SQLiteConnect.swift */,
 				81D5F7B31D17DEC30028C755 /* Assets.xcassets */,
 				81D5F7BE1D17E9AF0028C755 /* icons */,
 				81D5F7B81D17DEC30028C755 /* Info.plist */,
@@ -186,6 +198,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				815B6B4F1D19155900D2B3A8 /* SQLiteConnect.swift in Sources */,
+				815B6B4A1D1911CB00D2B3A8 /* PostViewController.swift in Sources */,
 				817CAFBE1D183673007333B9 /* MoreViewController.swift in Sources */,
 				81D5F7AF1D17DEC30028C755 /* ViewController.swift in Sources */,
 				81D5F7AD1D17DEC30028C755 /* AppDelegate.swift in Sources */,
@@ -288,6 +302,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = tw.hsin.Money;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = BridgeHeader.h;
 			};
 			name = Debug;
 		};
@@ -301,6 +316,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = tw.hsin.Money;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = BridgeHeader.h;
 			};
 			name = Release;
 		};
