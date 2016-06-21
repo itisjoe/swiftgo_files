@@ -12,6 +12,7 @@ import CoreData
 
 class CoreDataConnect {
     var moc :NSManagedObjectContext!
+    typealias MyType = Record
     
     init(moc:NSManagedObjectContext) {
         self.moc = moc
@@ -19,7 +20,7 @@ class CoreDataConnect {
     
     // insert
     func insert(myEntityName:String, attributeInfo:[String:String]) -> Bool {
-        let insetData = NSEntityDescription.insertNewObjectForEntityForName(myEntityName, inManagedObjectContext: self.moc) as! Record
+        let insetData = NSEntityDescription.insertNewObjectForEntityForName(myEntityName, inManagedObjectContext: self.moc) as! MyType
         
         for (key,value) in attributeInfo {
             let t = insetData.entity.attributesByName[key]?.attributeType
@@ -47,7 +48,7 @@ class CoreDataConnect {
     }
     
     // select
-    func fetch(myEntityName:String, predicate:String?, sort:[[String:Bool]]?, limit:Int?) -> [Record]? {
+    func fetch(myEntityName:String, predicate:String?, sort:[[String:Bool]]?, limit:Int?) -> [MyType]? {
         let request = NSFetchRequest(entityName: myEntityName)
         
         // predicate
@@ -73,7 +74,7 @@ class CoreDataConnect {
         }
         
         do {
-            let results = try moc.executeFetchRequest(request) as! [Record]
+            let results = try moc.executeFetchRequest(request) as! [MyType]
             
             return results
         } catch {

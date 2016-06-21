@@ -41,7 +41,7 @@ class ViewController: UIViewController {
         }
         
         // select
-        let selectResult = coreDataConnect.fetch(myEntityName, predicate: nil, sort: ["id":true])
+        let selectResult = coreDataConnect.fetch(myEntityName, predicate: nil, sort: [["id":true]], limit: nil)
         if let results = selectResult {
             for result in results {
                 print("\(result.id). \(result.name!) 身高： \(result.height)")

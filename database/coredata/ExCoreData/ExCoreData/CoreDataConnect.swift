@@ -11,6 +11,7 @@ import CoreData
 
 class CoreDataConnect {
     var moc :NSManagedObjectContext!
+    typealias MyType = Student
     
     init(moc:NSManagedObjectContext) {
         self.moc = moc
@@ -18,23 +19,25 @@ class CoreDataConnect {
     
     // insert
     func insert(myEntityName:String, attributeInfo:[String:String]) -> Bool {
-        let student = NSEntityDescription.insertNewObjectForEntityForName(myEntityName, inManagedObjectContext: self.moc) as! Student
+        let insetData = NSEntityDescription.insertNewObjectForEntityForName(myEntityName, inManagedObjectContext: self.moc) as! MyType
         
         for (key,value) in attributeInfo {
-            let t = student.entity.attributesByName[key]?.attributeType
-
+            let t = insetData.entity.attributesByName[key]?.attributeType
+            
             if t == .Integer16AttributeType || t == .Integer32AttributeType || t == .Integer64AttributeType {
-                student.setValue(Int(value), forKey: key)
+                insetData.setValue(Int(value), forKey: key)
             } else if t == .DoubleAttributeType || t == .FloatAttributeType {
-                student.setValue(Double(value), forKey: key)
+                insetData.setValue(Double(value), forKey: key)
+            } else if t == .BooleanAttributeType {
+                insetData.setValue((value == "true" ? true : false), forKey: key)
             } else {
-                student.setValue(value, forKey: key)
+                insetData.setValue(value, forKey: key)
             }
         }
         
         do {
             try moc.save()
-
+            
             return true
         } catch {
             fatalError("\(error)")
@@ -42,11 +45,11 @@ class CoreDataConnect {
         
         return false
     }
-
+    
     // select
-    func fetch (myEntityName:String, predicate:String?, sort:[String:Bool]?) -> [Student]? {
+    func fetch(myEntityName:String, predicate:String?, sort:[[String:Bool]]?, limit:Int?) -> [MyType]? {
         let request = NSFetchRequest(entityName: myEntityName)
-       
+        
         // predicate
         if let myPredicate = predicate {
             request.predicate = NSPredicate(format: myPredicate)
@@ -55,15 +58,22 @@ class CoreDataConnect {
         // sort
         if let mySort = sort {
             var sortArr :[NSSortDescriptor] = []
-            for (k, asc) in mySort {
-                sortArr.append(NSSortDescriptor(key: k, ascending: asc))
+            for sortCond in mySort {
+                for (k, v) in sortCond {
+                    sortArr.append(NSSortDescriptor(key: k, ascending: v))
+                }
             }
             
             request.sortDescriptors = sortArr
         }
         
+        // limit
+        if let limitNumber = limit {
+            request.fetchLimit = limitNumber
+        }
+        
         do {
-            let results = try moc.executeFetchRequest(request) as! [Student]
+            let results = try moc.executeFetchRequest(request) as! [MyType]
             
             return results
         } catch {
@@ -72,39 +82,41 @@ class CoreDataConnect {
         
         return nil
     }
-
+    
     // update
     func update(myEntityName:String, predicate:String?, attributeInfo:[String:String]) -> Bool {
-        if let results = self.fetch(myEntityName, predicate: predicate, sort: nil) {
+        if let results = self.fetch(myEntityName, predicate: predicate, sort: nil, limit: nil) {
             for result in results {
                 for (key,value) in attributeInfo {
                     let t = result.entity.attributesByName[key]?.attributeType
-
+                    
                     if t == .Integer16AttributeType || t == .Integer32AttributeType || t == .Integer64AttributeType {
                         result.setValue(Int(value), forKey: key)
                     } else if t == .DoubleAttributeType || t == .FloatAttributeType {
                         result.setValue(Double(value), forKey: key)
+                    } else if t == .BooleanAttributeType {
+                        result.setValue((value == "true" ? true : false), forKey: key)
                     } else {
                         result.setValue(value, forKey: key)
                     }
                 }
             }
-
+            
             do {
                 try self.moc.save()
-
+                
                 return true
             } catch {
                 fatalError("\(error)")
             }
         }
-    
+        
         return false
     }
     
     // delete
     func delete(myEntityName:String, predicate:String?) -> Bool {
-        if let results = self.fetch(myEntityName, predicate: predicate, sort: nil) {
+        if let results = self.fetch(myEntityName, predicate: predicate, sort: nil, limit: nil) {
             for result in results {
                 self.moc.deleteObject(result)
             }
