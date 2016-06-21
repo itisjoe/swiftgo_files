@@ -64,11 +64,15 @@ class SQLiteConnect {
     }
     
     // 讀取資料
-    func fetch(tableName :String, cond :String?) -> COpaquePointer {
+    func fetch(tableName :String, cond :String?, order :String?) -> COpaquePointer {
         var statement :COpaquePointer = nil
         var sql = "select * from \(tableName)"
         if let condition = cond {
             sql += " where \(condition)"
+        }
+        
+        if let orderBy = order {
+            sql += " order by \(orderBy)"
         }
 
         sqlite3_prepare_v2(self.db, (sql as NSString).UTF8String, -1, &statement, nil)

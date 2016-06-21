@@ -37,7 +37,7 @@ class ViewController: UIViewController {
             mydb.insert("students", rowInfo: ["name":"'大強'","height":"178.2"])
         
             // select
-            let statement = mydb.fetch("students", cond: "1 == 1")
+            let statement = mydb.fetch("students", cond: "1 == 1", order: nil)
             while sqlite3_step(statement) == SQLITE_ROW{
                 let id = sqlite3_column_int(statement, 0)
                 let name = String.fromCString(UnsafePointer<CChar>(sqlite3_column_text(statement, 1)))
