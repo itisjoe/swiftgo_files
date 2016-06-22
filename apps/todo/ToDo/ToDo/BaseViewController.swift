@@ -74,45 +74,6 @@ class BaseViewController: UIViewController, UITableViewDelegate, UITableViewData
             deleteSound = nil
         }
     }
-    
-
-// MARK: Button actions
-    
-    // 按下完成事項按鈕執行動作的方法
-    func checkBtnAction(sender: UIButton) {
-        let id = sender.tag - cehckTagTemp
-        if id != 0 {
-            var index = -1
-            for (i, record) in myRecords.enumerate() {
-                if record.id == id {
-                    index = i
-                    break
-                }
-            }
-            
-            if index != -1 {
-                // 設置 Core Data
-                let result = coreDataConnect.update(myEntityName, predicate: "id = \(id)", attributeInfo: ["done":(checkStatus ? "false" : "true")])
-                if result {
-                    // 音效
-                    doneSound?.play()
-                    
-                    // 打勾
-                    sender.setImage(UIImage(named:(checkStatus ? "checkbox" : "check")), forState: .Normal)
-                    
-                    // 從陣列中移除
-                    myRecords.removeAtIndex(index)
-                    
-                    // 從 UITableView 中移除
-                    myTableView.beginUpdates()
-                    myTableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation: .Fade)
-                    myTableView.endUpdates()
-                } else {
-                    print("error")
-                }
-            }
-        }
-    }
 
     
 // MARK: UITableView Delegate methods
@@ -179,5 +140,43 @@ class BaseViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
 
+    
+// MARK: Button actions
+    
+    // 按下完成事項按鈕執行動作的方法
+    func checkBtnAction(sender: UIButton) {
+        let id = sender.tag - cehckTagTemp
+        if id != 0 {
+            var index = -1
+            for (i, record) in myRecords.enumerate() {
+                if record.id == id {
+                    index = i
+                    break
+                }
+            }
+            
+            if index != -1 {
+                // 設置 Core Data
+                let result = coreDataConnect.update(myEntityName, predicate: "id = \(id)", attributeInfo: ["done":(checkStatus ? "false" : "true")])
+                if result {
+                    // 音效
+                    doneSound?.play()
+                    
+                    // 打勾
+                    sender.setImage(UIImage(named:(checkStatus ? "checkbox" : "check")), forState: .Normal)
+                    
+                    // 從陣列中移除
+                    myRecords.removeAtIndex(index)
+                    
+                    // 從 UITableView 中移除
+                    myTableView.beginUpdates()
+                    myTableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation: .Fade)
+                    myTableView.endUpdates()
+                } else {
+                    print("error")
+                }
+            }
+        }
+    }
     
 }

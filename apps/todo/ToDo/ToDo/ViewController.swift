@@ -50,7 +50,7 @@ class ViewController: BaseViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         
-        // 導覽列左邊編輯按鈕
+        // 進入 非 編輯模式
         myTableView.setEditing(true, animated: false)
         self.editBtnAction()
 
