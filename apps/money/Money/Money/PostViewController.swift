@@ -59,7 +59,7 @@ class PostViewController: UIViewController, UITextFieldDelegate {
             }
             
             // 金額輸入框
-            var myTextField = UITextField(frame: CGRect(x: 0.0, y: height * 0.5, width: fullsize.width, height: height))
+            var myTextField = UITextField(frame: CGRect(x: 0.0, y: height * 0.3, width: fullsize.width, height: height))
             myTextField.keyboardType = .DecimalPad
             myTextField.backgroundColor = UIColor.init(red: 0.05, green: 0.05, blue: 0.05, alpha: 1)
             myTextField.textAlignment = .Right
@@ -79,14 +79,14 @@ class PostViewController: UIViewController, UITextFieldDelegate {
             }
             
             // 金額顯示文字
-            let dollarSignLabel = UILabel(frame: CGRect(x: padding, y: height * 0.5, width: 80, height: height))
+            let dollarSignLabel = UILabel(frame: CGRect(x: padding, y: height * 0.3, width: 80, height: height))
             dollarSignLabel.font = UIFont(name: "Helvetica Light", size: 24.0)
             dollarSignLabel.textColor = UIColor.whiteColor()
             dollarSignLabel.text = "$"
             self.view.addSubview(dollarSignLabel)
             
             // 事由輸入框
-            myTextField = UITextField(frame: CGRect(x: 0.0, y: height * 2, width: fullsize.width, height: height))
+            myTextField = UITextField(frame: CGRect(x: 0.0, y: height * 1.6, width: fullsize.width, height: height))
             myTextField.keyboardType = .Default
             myTextField.backgroundColor = UIColor.init(red: 0.05, green: 0.05, blue: 0.05, alpha: 1)
             myTextField.textAlignment = .Right
@@ -104,7 +104,7 @@ class PostViewController: UIViewController, UITextFieldDelegate {
             self.view.addSubview(myTextField)
             
             // 日期輸入框
-            myTextField = UITextField(frame: CGRect(x: 0.0, y: height * 3.5, width: fullsize.width, height: height))
+            myTextField = UITextField(frame: CGRect(x: 0.0, y: height * 2.9, width: fullsize.width, height: height))
             myTextField.backgroundColor = UIColor.init(red: 0.05, green: 0.05, blue: 0.05, alpha: 1)
             myTextField.textAlignment = .Center
             myTextField.textColor = UIColor.whiteColor()
@@ -133,17 +133,17 @@ class PostViewController: UIViewController, UITextFieldDelegate {
             myTextField.inputAccessoryView = toolBar
             
             // 儲存按鈕
-            let saveBtn = UIButton(frame: CGRect(x: 0.0, y: 0.0, width: fullsize.width, height: height * 1.5))
+            let saveBtn = UIButton(frame: CGRect(x: 0.0, y: height * 4.2, width: fullsize.width, height: height * 1.5))
             saveBtn.setTitle("儲存", forState: .Normal)
             saveBtn.setTitleColor(UIColor.blackColor(), forState: .Normal)
             saveBtn.backgroundColor = UIColor.init(red: 0.88, green: 0.83, blue: 0.73, alpha: 1)
-            saveBtn.center = CGPoint(x: fullsize.width * 0.5, y: fullsize.height - 64 - height)
+            //saveBtn.center = CGPoint(x: fullsize.width * 0.5, y: fullsize.height - 64 - height)
             saveBtn.addTarget(self, action: #selector(PostViewController.saveBtnAction), forControlEvents: .TouchUpInside)
             self.view.addSubview(saveBtn)
             
             // 刪除按鈕
             if record.id != 0 {
-                let deleteBtn = UIButton(frame: CGRect(x: 5.0, y: fullsize.height - 64 - height * 2.8, width: 50, height: height))
+                let deleteBtn = UIButton(frame: CGRect(x: 5.0, y: height * 5.8, width: 50, height: height))
                 deleteBtn.setTitle("刪除", forState: .Normal)
                 deleteBtn.setTitleColor(UIColor.redColor(), forState: .Normal)
                 deleteBtn.addTarget(self, action: #selector(PostViewController.deleteBtnAction), forControlEvents: .TouchUpInside)

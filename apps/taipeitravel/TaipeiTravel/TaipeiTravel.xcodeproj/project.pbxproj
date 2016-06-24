@@ -15,7 +15,7 @@
 		810E95FB1D0715F300E80E64 /* ToiletMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810E95FA1D0715F300E80E64 /* ToiletMainViewController.swift */; };
 		810E95FD1D0717EE00E80E64 /* ToiletDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810E95FC1D0717EE00E80E64 /* ToiletDetailViewController.swift */; };
 		81A8A4401D054795005FA15C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A8A43F1D054795005FA15C /* AppDelegate.swift */; };
-		81A8A4421D054795005FA15C /* BaseMainViewController.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A8A4411D054795005FA15C /* BaseMainViewController.swift.swift */; };
+		81A8A4421D054795005FA15C /* BaseMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A8A4411D054795005FA15C /* BaseMainViewController.swift */; };
 		81A8A4471D054795005FA15C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81A8A4461D054795005FA15C /* Assets.xcassets */; };
 		81A8A4521D054CE8005FA15C /* HotelMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A8A4511D054CE8005FA15C /* HotelMainViewController.swift */; };
 		81A8A4541D054D10005FA15C /* LandmarkMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A8A4531D054D10005FA15C /* LandmarkMainViewController.swift */; };
@@ -49,7 +49,7 @@
 		810E95FC1D0717EE00E80E64 /* ToiletDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToiletDetailViewController.swift; sourceTree = "<group>"; };
 		81A8A43C1D054795005FA15C /* TaipeiTravel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaipeiTravel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81A8A43F1D054795005FA15C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		81A8A4411D054795005FA15C /* BaseMainViewController.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseMainViewController.swift.swift; sourceTree = "<group>"; };
+		81A8A4411D054795005FA15C /* BaseMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseMainViewController.swift; sourceTree = "<group>"; };
 		81A8A4461D054795005FA15C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		81A8A44B1D054795005FA15C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81A8A4511D054CE8005FA15C /* HotelMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotelMainViewController.swift; sourceTree = "<group>"; };
@@ -105,7 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				81A8A43F1D054795005FA15C /* AppDelegate.swift */,
-				81A8A4411D054795005FA15C /* BaseMainViewController.swift.swift */,
+				81A8A4411D054795005FA15C /* BaseMainViewController.swift */,
 				810E95F01D0701AA00E80E64 /* DetailViewController.swift */,
 				81C05AD31D06B4E400426344 /* MapViewController.swift */,
 				81A8A4511D054CE8005FA15C /* HotelMainViewController.swift */,
@@ -237,7 +237,7 @@
 				81C05ACC1D06898900426344 /* HotelDetailViewController.swift in Sources */,
 				81A8A4731D056472005FA15C /* Coordinate.swift in Sources */,
 				81A8A4581D054D2E005FA15C /* InfoMainViewController.swift in Sources */,
-				81A8A4421D054795005FA15C /* BaseMainViewController.swift.swift in Sources */,
+				81A8A4421D054795005FA15C /* BaseMainViewController.swift in Sources */,
 				81C05AD41D06B4E400426344 /* MapViewController.swift in Sources */,
 				81C05AD61D06C07D00426344 /* LandmarkDetailViewController.swift in Sources */,
 				81A8A4561D054D20005FA15C /* ParkMainViewController.swift in Sources */,
