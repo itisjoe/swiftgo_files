@@ -137,7 +137,6 @@ class PostViewController: UIViewController, UITextFieldDelegate {
             saveBtn.setTitle("儲存", forState: .Normal)
             saveBtn.setTitleColor(UIColor.blackColor(), forState: .Normal)
             saveBtn.backgroundColor = UIColor.init(red: 0.88, green: 0.83, blue: 0.73, alpha: 1)
-            //saveBtn.center = CGPoint(x: fullsize.width * 0.5, y: fullsize.height - 64 - height)
             saveBtn.addTarget(self, action: #selector(PostViewController.saveBtnAction), forControlEvents: .TouchUpInside)
             self.view.addSubview(saveBtn)
             
@@ -183,14 +182,19 @@ class PostViewController: UIViewController, UITextFieldDelegate {
 
     // 儲存資訊
     func saveBtnAction() {
+        // 取得金額
         var textField = self.view.viewWithTag(501) as! UITextField
         record.amount = Double(textField.text!) ?? 0
 
+        // 取得事由
         textField = self.view.viewWithTag(502) as! UITextField
         record.title = textField.text ?? ""
         
         if record.title != "" {
+            // 取得年月格式的時間
             record.yearMonth = (record.createTime! as NSString).substringToIndex(7)
+            
+            // 取得年月日格式的時間
             record.createDate = (record.createTime! as NSString).substringToIndex(10)
             
             if let mydb = db {
@@ -202,15 +206,18 @@ class PostViewController: UIViewController, UITextFieldDelegate {
                     "createTime":"'\(record.createTime!)'"
                 ]
                 
+                // 新增或更新 記錄
                 if record.id > 0 {
                     mydb.update("records", cond: "id = \(record.id)", rowInfo:rowInfo)
                 } else {
                     mydb.insert("records", rowInfo:rowInfo )
                 }
                 
+                // 設定首頁要顯示這個記錄所屬的月份記錄列表
                 myUserDefaults.setObject(record.yearMonth!, forKey: "displayYearMonth")
                 myUserDefaults.synchronize()
                 
+                // 回到首頁
                 self.navigationController?.popViewControllerAnimated(true)
             }
         }
@@ -236,6 +243,7 @@ class PostViewController: UIViewController, UITextFieldDelegate {
     
     // 按下 return 鍵
     func textFieldShouldReturn(textField: UITextField) -> Bool {
+        // 事由欄位輸入時 點擊鍵盤[下一個]按鈕會跳往選取時間
         let title = self.view.viewWithTag(502) as! UITextField
         let date = self.view.viewWithTag(503) as! UITextField
         

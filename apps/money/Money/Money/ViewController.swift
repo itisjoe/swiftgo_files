@@ -17,7 +17,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var days :[String]! = []
     var myRecords :[String:[[String:String]]]! = [:]
-    var myScrollView :UIScrollView!
     var currentMonthLabel :UILabel!
     var prevBtn :UIButton!
     var nextBtn :UIButton!
