@@ -59,7 +59,7 @@ class ViewController: UIViewController {
         let facebook = UIMenuItem(title: "FB", action: #selector(ViewController.sendFB))
 
         // 建立選單
-        let menu = UIMenuController()
+        let menu = UIMenuController.sharedMenuController()
         
         // 將新的選項加入選單
         menu.menuItems = [mail,facebook]

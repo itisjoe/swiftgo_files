@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController, UIScrollViewDelegate {
-    var myScrollview: UIScrollView!
+    var myScrollView: UIScrollView!
     var pageControl: UIPageControl!
     var fullSize :CGSize!
     
@@ -20,29 +20,29 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         fullSize = UIScreen.mainScreen().bounds.size
         
         // 建立 UIScrollView
-        myScrollview = UIScrollView()
+        myScrollView = UIScrollView()
         
         // 設置尺寸 也就是可見視圖範圍
-        myScrollview.frame = CGRect(x: 0, y: 20, width: fullSize.width, height: fullSize.height - 20)
+        myScrollView.frame = CGRect(x: 0, y: 20, width: fullSize.width, height: fullSize.height - 20)
         
         // 實際視圖範圍
-        myScrollview.contentSize = CGSize(width: fullSize.width * 5, height: fullSize.height - 20)
+        myScrollView.contentSize = CGSize(width: fullSize.width * 5, height: fullSize.height - 20)
         
         // 是否顯示滑動條
-        myScrollview.showsHorizontalScrollIndicator = false
-        myScrollview.showsVerticalScrollIndicator = false
+        myScrollView.showsHorizontalScrollIndicator = false
+        myScrollView.showsVerticalScrollIndicator = false
         
         // 滑動超過範圍時是否使用彈回效果
-        myScrollview.bounces = true
+        myScrollView.bounces = true
         
         // 設置委任對象
-        myScrollview.delegate = self
+        myScrollView.delegate = self
 
         // 以一頁為單位滑動
-        myScrollview.pagingEnabled = true
+        myScrollView.pagingEnabled = true
         
         // 加入到畫面中
-        self.view.addSubview(myScrollview)
+        self.view.addSubview(myScrollView)
 
 
         // 建立 UIPageControl 設置位置及尺寸
@@ -77,7 +77,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
             myLabel.font = UIFont(name: "Helvetica-Light", size: 48.0)
             myLabel.textAlignment = .Center
             myLabel.text = "\(i + 1)"
-            myScrollview.addSubview(myLabel)
+            myScrollView.addSubview(myLabel)
         }
         
     }
@@ -92,12 +92,12 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     // 點擊點點換頁
     func pageChanged(sender: UIPageControl) {
         // 依照目前圓點在的頁數算出位置
-        var frame = myScrollview.frame
+        var frame = myScrollView.frame
         frame.origin.x = frame.size.width * CGFloat(sender.currentPage)
         frame.origin.y = 0
         
         // 再將 UIScrollView 滑動到該點
-        myScrollview.scrollRectToVisible(frame, animated:true)
+        myScrollView.scrollRectToVisible(frame, animated:true)
     }
 
     override func didReceiveMemoryWarning() {
