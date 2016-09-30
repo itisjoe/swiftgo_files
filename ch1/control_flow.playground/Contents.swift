@@ -273,11 +273,11 @@ func post(article: [String: String]) {
     print("內容為 \(insideContent)。")
 }
 
-post(["title": "Article_1"])
+post(article: ["title": "Article_1"])
 // 印出：標題是 Article_1 ，
 // 印出：但是沒有內容。
 
-post(["title": "Article_2", "content": "Article_2_full_content"])
+post(article: ["title": "Article_2", "content": "Article_2_full_content"])
 // 印出：標題是 Article_2 ，
 // 印出：內容為 Article_2_full_content。
 
@@ -286,9 +286,9 @@ var age = -25
 //assert(age > 0, "年齡必須大於零")
 
 
-if #available(iOS 9, OSX 10.10.3, *) {
-    // 在 iOS 使用 iOS 9 的 API
-    // 在 OSX 使用 OSX 10.10.3 的 API
+if #available(iOS 10, macOS 10.12, *) {
+    // 在 iOS 使用 iOS 10 的 API
+    // 在 OSX 使用 macOS 10.12 的 API
 } else {
-    // 使用先前版本的 iOS 和 OSX 的 API
+    // 使用先前版本的 iOS 和 macOS 的 API
 }
