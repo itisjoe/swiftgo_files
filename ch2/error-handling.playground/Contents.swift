@@ -1,12 +1,12 @@
 
-enum VendingMachineError: ErrorType {
-    case InvalidSelection
-    case InsufficientFunds(coinsNeeded: Int)
-    case OutOfStock
+enum VendingMachineError: Error {
+    case invalidSelection
+    case insufficientFunds(coinsNeeded: Int)
+    case outOfStock
 }
 
 
-throw VendingMachineError.InsufficientFunds(coinsNeeded: 3)
+throw VendingMachineError.insufficientFunds(coinsNeeded: 3)
 
 
 // 先定義一個結構來表示一個商品的內容 分別為商品的價錢及數量
@@ -37,25 +37,25 @@ class VendingMachine {
     func vend(itemNamed name: String) throws {
         // 檢查是否有這個商品 沒有的話會拋出錯誤
         guard var item = inventory[name] else {
-            throw VendingMachineError.InvalidSelection
+            throw VendingMachineError.invalidSelection
         }
         
         // 檢查這個商品是否還有剩 已賣光的話會拋出錯誤
         guard item.count > 0 else {
-            throw VendingMachineError.OutOfStock
+            throw VendingMachineError.outOfStock
         }
         
         // 檢查目前投入的錢幣夠不夠 不夠的話會拋出錯誤
         guard item.price <= coinsDeposited else {
             // 參數為還需要補足多少錢幣 所以是商品價錢減掉已投入錢幣
-            throw VendingMachineError.InsufficientFunds(coinsNeeded: item.price - coinsDeposited)
+            throw VendingMachineError.insufficientFunds(coinsNeeded: item.price - coinsDeposited)
         }
         
         // 所有判斷都通過後 才確定會售出
         coinsDeposited -= item.price
         item.count -= 1
         inventory[name] = item
-        dispenseSnack(name)
+        dispenseSnack(snack: name)
     }
 }
 
@@ -72,11 +72,11 @@ do {
     // 其他可能需要執行的程式 這邊先省略
     
     // 以下每個 catch 為各自匹配錯誤的處理
-} catch VendingMachineError.InvalidSelection {
+} catch VendingMachineError.invalidSelection {
     print("無此商品")
-} catch VendingMachineError.OutOfStock {
+} catch VendingMachineError.outOfStock {
     print("商品已賣光")
-} catch VendingMachineError.InsufficientFunds(let coinsNeeded) {
+} catch VendingMachineError.insufficientFunds(let coinsNeeded) {
     print("金額不足，還差 \(coinsNeeded) 個錢幣")
 }
 
@@ -84,6 +84,8 @@ do {
 // 定義一個拋出函式 會返回一個 Int
 func someThrowingFunction() throws -> Int {
     // 內部執行的程式
+    // 假設返回 10
+    return 10
 }
 
 // 宣告一個可選型別 Int? 的常數 x
