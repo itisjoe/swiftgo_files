@@ -1,6 +1,6 @@
 
 // 定義一個將兩個整數變數的值互換的函式
-func swapTwoInts(inout a: Int, inout _ b: Int) {
+func swapTwoInts(_ a: inout Int, _ b: inout Int) {
     let temporaryA = a
     a = b
     b = temporaryA
@@ -15,14 +15,14 @@ swapTwoInts(&oneInt, &anotherInt)
 print("互換後的 oneInt 為 \(oneInt)，anotherInt 為 \(anotherInt)")
 
 // 與上面定義的函式功能相同 只是這時互換的變數型別為字串
-func swapTwoStrings(inout a: String, inout _ b: String) {
+func swapTwoStrings(_ a: inout String, _ b: inout String) {
     let temporaryA = a
     a = b
     b = temporaryA
 }
 
 
-func swapTwoValues<T>(inout a: T, inout _ b: T) {
+func swapTwoValues<T>(_ a: inout T, _ b: inout T) {
     let temporaryA = a
     a = b
     b = temporaryA
@@ -46,7 +46,7 @@ struct Stack<Element> {
     var items = [Element]()
     
     // 型別參數用於方法的參數型別 方法功能是增加一個元素到陣列最後一員
-    mutating func push(item: Element) {
+    mutating func push(_ item: Element) {
         items.append(item)
     }
     
@@ -84,8 +84,8 @@ if let topItem = stackOfStrings.topItem {
 }
 
 
-func findIndex<T: Equatable>(array: [T], _ valueToFind: T) -> Int? {
-    for (index, value) in array.enumerate() {
+func findIndex<T: Equatable>(of valueToFind: T, in array:[T]) -> Int? {
+    for (index, value) in array.enumerated() {
         if value == valueToFind {
             return index
         }
@@ -94,17 +94,17 @@ func findIndex<T: Equatable>(array: [T], _ valueToFind: T) -> Int? {
 }
 
 // 首先找看看 [Double] 陣列的值
-let doubleIndex = findIndex([689, 5566, 10.05], 9.2)
+let doubleIndex = findIndex(of: 9.2, in: [68.9, 55.66, 10.05])
 // 因為 9.2 不在陣列中 所以返回 nil
 
 // 接著找 [String] 陣列的值
-let stringIndex = findIndex(["Adam", "Kevin", "Jess"], "Kevin")
+let stringIndex = findIndex(of: "Kevin", in: ["Adam", "Kevin", "Jess"])
 // Kevin 為陣列中第 2 個值 所以會返回 1
 
 
 protocol Container {
     associatedtype ItemType
-    mutating func append(item: ItemType)
+    mutating func append(_ item: ItemType)
     var count: Int { get }
     subscript(i: Int) -> ItemType { get }
 }
@@ -113,7 +113,7 @@ protocol Container {
 struct NewStack<Element>: Container {
     // Stack<Element> 原實作的內容
     var items = [Element]()
-    mutating func push(item: Element) {
+    mutating func push(_ item: Element) {
         items.append(item)
     }
     mutating func pop() -> Element {
@@ -125,7 +125,7 @@ struct NewStack<Element>: Container {
     // typealias ItemType = Element
     
     // 協定 Container 實作的內容
-    mutating func append(item: Element) {
+    mutating func append(_ item: Element) {
         self.push(item)
     }
     var count: Int {
@@ -140,11 +140,10 @@ struct NewStack<Element>: Container {
 extension Array: Container {}
 
 
-func allItemsMatch<
-    C1: Container, C2: Container
-    where C1.ItemType == C2.ItemType, C1.ItemType: Equatable>
-    (someContainer: C1, _ anotherContainer: C2) -> Bool {
-    
+func allItemsMatch<C1: Container, C2: Container>
+    (_ someContainer: C1, _ anotherContainer: C2) -> Bool
+    where C1.ItemType == C2.ItemType, C1.ItemType: Equatable {
+        
     // 檢查兩個容器含有相同數量的元素
     if someContainer.count != anotherContainer.count {
         return false
@@ -171,7 +170,7 @@ newStackOfStrings.push("three")
 // 宣告一個陣列 也放置了三個字串
 var arrayOfStrings = ["one", "two", "three"]
 
-// 雖然 Stack 跟 Array 不是相同型別
+// 雖然 NewStack 跟 Array 不是相同型別
 // 但先前已將兩者都遵循了協定 Container
 // 且都包含相同型別的值
 // 所以可以把這兩個容器當做參數傳入函式
