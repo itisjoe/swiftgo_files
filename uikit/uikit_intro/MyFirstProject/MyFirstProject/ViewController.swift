@@ -20,21 +20,15 @@ class ViewController: UIViewController {
         self.view.addSubview(firstView)
 
         // 取得螢幕的尺寸
-        let fullScreenSize = UIScreen.mainScreen().bounds.size
+        let fullScreenSize = UIScreen.main.bounds.size
 
         // 設置 UIView 的位置到畫面的中心
         firstView.center = CGPoint(x: fullScreenSize.width * 0.5 , y: fullScreenSize.height * 0.5)
 
         // 將 UIView 的底色設置為藍色
-        firstView.backgroundColor = UIColor.blueColor()
+        firstView.backgroundColor = UIColor.blue
 
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 
 }
 
