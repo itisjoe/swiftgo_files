@@ -14,7 +14,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         // 取得螢幕的尺寸
-        let fullScreenSize = UIScreen.mainScreen().bounds.size
+        let fullScreenSize = UIScreen.main.bounds.size
 
         // 建立 UIPickerView 設置位置及尺寸
         let myPickerView = UIPickerView(frame: CGRect(x: 0, y: fullScreenSize.height * 0.3, width: fullScreenSize.width, height: 150))
