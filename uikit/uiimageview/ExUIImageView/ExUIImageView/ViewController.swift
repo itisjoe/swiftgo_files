@@ -14,7 +14,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         // 取得螢幕的尺寸
-        let fullScreenSize = UIScreen.mainScreen().bounds.size
+        let fullScreenSize = UIScreen.main.bounds.size
 
         // 使用 UIImageView(frame:) 建立一個 UIImageView
         var myImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
@@ -45,7 +45,7 @@ class ViewController: UIViewController {
         myImageView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
         
         // 設置圖片 highlighted 狀態
-        myImageView.highlighted = true
+        myImageView.isHighlighted = true
         
         // 設置新的位置並放入畫面中
         myImageView.center = CGPoint(x: fullScreenSize.width * 0.5, y: fullScreenSize.height * 0.55)
@@ -57,10 +57,10 @@ class ViewController: UIViewController {
         myImageView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
 
         // 設置背景顏色
-        myImageView.backgroundColor = UIColor.yellowColor()
+        myImageView.backgroundColor = UIColor.yellow
         
         // 設置圖片顯示模式
-        myImageView.contentMode = .BottomLeft
+        myImageView.contentMode = .bottomLeft
         
         // 設置新的位置並放入畫面中
         myImageView.center = CGPoint(x: fullScreenSize.width * 0.5, y: fullScreenSize.height * 0.8)

@@ -15,7 +15,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
        
         // 取得螢幕的尺寸
-        let fullScreenSize = UIScreen.mainScreen().bounds.size
+        let fullScreenSize = UIScreen.main.bounds.size
         
         myImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
         
@@ -42,10 +42,10 @@ class ViewController: UIViewController {
         let playButton = UIButton(frame: CGRect(x: 0, y: 0, width: 64, height: 64))
         
         // 設置播放按鈕的圖片
-        playButton.setImage(UIImage(named: "play"), forState: .Normal)
+        playButton.setImage(UIImage(named: "play"), for: .normal)
         
         // 設置按下播放按鈕的動作的方法
-        playButton.addTarget(self, action: #selector(ViewController.play), forControlEvents: .TouchUpInside)
+        playButton.addTarget(self, action: #selector(ViewController.play), for: .touchUpInside)
         
         // 設置位置及放入畫面中
         playButton.center = CGPoint(x: fullScreenSize.width * 0.35, y: fullScreenSize.height * 0.65)
@@ -55,10 +55,10 @@ class ViewController: UIViewController {
         let stopButton = UIButton(frame: CGRect(x: 0, y: 0, width: 64, height: 64))
         
         // 設置停止按鈕的圖片
-        stopButton.setImage(UIImage(named: "stop"), forState: .Normal)
+        stopButton.setImage(UIImage(named: "stop"), for: .normal)
         
         // 設置按下停止按鈕的動作的方法
-        stopButton.addTarget(self, action: #selector(ViewController.stop), forControlEvents: .TouchUpInside)
+        stopButton.addTarget(self, action: #selector(ViewController.stop), for: .touchUpInside)
         
         // 設置位置及放入畫面中
         stopButton.center = CGPoint(x: fullScreenSize.width * 0.65, y: fullScreenSize.height * 0.65)
