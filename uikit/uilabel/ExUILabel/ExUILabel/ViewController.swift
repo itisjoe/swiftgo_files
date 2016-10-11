@@ -20,31 +20,31 @@ class ViewController: UIViewController {
         myLabel.text = "Swift 起步走"
         
         // 文字顏色
-        myLabel.textColor = UIColor.redColor()
+        myLabel.textColor = UIColor.red
         
         // 文字的字型與大小
         myLabel.font = UIFont(name: "Helvetica-Light", size: 20)
 
         // 可以再修改文字的大小
-        myLabel.font = myLabel.font.fontWithSize(24)
+        myLabel.font = myLabel.font.withSize(24)
 
         // 或是可以使用系統預設字型 並設定文字大小
-        myLabel.font = UIFont.systemFontOfSize(36)
+        myLabel.font = UIFont.systemFont(ofSize: 36)
 
         // 設定文字位置 置左、置中或置右等等
-        myLabel.textAlignment = NSTextAlignment.Right
+        myLabel.textAlignment = NSTextAlignment.right
         
         // 也可以簡寫成這樣
-        myLabel.textAlignment = .Center
+        myLabel.textAlignment = .center
         
         // 文字行數
         myLabel.numberOfLines = 1
         
         // 文字過多時 過濾的方式
-        myLabel.lineBreakMode = NSLineBreakMode.ByTruncatingTail
+        myLabel.lineBreakMode = NSLineBreakMode.byTruncatingTail
         
         // 陰影的顏色 如不設定則預設為沒有陰影
-        myLabel.shadowColor = UIColor.blackColor()
+        myLabel.shadowColor = UIColor.black
 
         // 陰影的偏移量 需先設定陰影的顏色
         myLabel.shadowOffset = CGSize(width: 2, height: 2)
@@ -65,13 +65,13 @@ class ViewController: UIViewController {
         myLabel.bounds = CGRect(x: 60, y: 120, width: 250, height: 80)
 
         // 取得螢幕的尺寸
-        let fullScreenSize = UIScreen.mainScreen().bounds.size
+        let fullScreenSize = UIScreen.main.bounds.size
         
         // 設置於畫面的中心點
         myLabel.center = CGPoint(x: fullScreenSize.width * 0.5, y: fullScreenSize.height * 0.5)
 
         // UILabel 的背景顏色
-        myLabel.backgroundColor = UIColor.orangeColor()
+        myLabel.backgroundColor = UIColor.orange
         
         // 加入到畫面中
         self.view.addSubview(myLabel)
