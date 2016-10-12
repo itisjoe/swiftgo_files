@@ -16,11 +16,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         // 取得螢幕的尺寸
-        let fullScreenSize = UIScreen.mainScreen().bounds.size
+        let fullScreenSize = UIScreen.main.bounds.size
         
         // 建立一個 UIImageView
         imageView = UIImageView(image: UIImage(named: "01.jpg"))
-        imageView.contentMode = .ScaleAspectFit
+        imageView.contentMode = .scaleAspectFit
         imageView.frame = CGRect(x: 0, y: 0, width: 250, height: 250)
         imageView.center = CGPoint(x: fullScreenSize.width * 0.5, y: fullScreenSize.height * 0.3)
         self.view.addSubview(imageView)
@@ -29,16 +29,16 @@ class ViewController: UIViewController {
         mySlider=UISlider(frame: CGRect(x: 0, y: 0, width: fullScreenSize.width * 0.9, height: 50))
         
         // UISlider 底色
-        mySlider.backgroundColor = UIColor.lightGrayColor()
+        mySlider.backgroundColor = UIColor.lightGray
         
         // UISlider 滑桿按鈕右邊 尚未填滿的顏色
-        mySlider.maximumTrackTintColor = UIColor.orangeColor()
+        mySlider.maximumTrackTintColor = UIColor.orange
 
         // UISlider 滑桿按鈕左邊 已填滿的顏色
-        mySlider.minimumTrackTintColor = UIColor.purpleColor()
+        mySlider.minimumTrackTintColor = UIColor.purple
         
         // UISlider 滑桿按鈕的顏色
-        mySlider.thumbTintColor = UIColor.brownColor()
+        mySlider.thumbTintColor = UIColor.brown
         
         // UISlider 的最小值
         mySlider.minimumValue = 0
@@ -51,10 +51,10 @@ class ViewController: UIViewController {
         
         // UISlider 是否可以在變動時同步執行動作
         // 設定 false 時 則是滑動完後才會執行動作
-        mySlider.continuous = true
+        mySlider.isContinuous = true
         
         // UISlider 滑動滑桿時執行的動作
-        mySlider.addTarget(self,action:#selector(ViewController.onSliderChange), forControlEvents: UIControlEvents.ValueChanged)
+        mySlider.addTarget(self,action:#selector(ViewController.onSliderChange), for: .valueChanged)
         
         // 設置位置並放入畫面中
         mySlider.center = CGPoint(x: fullScreenSize.width * 0.5, y: fullScreenSize.height * 0.65)
