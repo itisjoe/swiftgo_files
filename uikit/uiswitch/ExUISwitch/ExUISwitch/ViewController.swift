@@ -50,7 +50,7 @@ class ViewController: UIViewController {
         // 取得這個 UISwtich 元件
         let tempSwitch = sender as! UISwitch
         
-        // 依據屬性 on 來為底色變色
+        // 依據屬性 isOn 來為底色變色
         if tempSwitch.isOn {
             self.view.backgroundColor = UIColor.black
         } else {
