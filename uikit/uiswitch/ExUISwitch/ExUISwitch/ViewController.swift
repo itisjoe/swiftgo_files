@@ -9,12 +9,12 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // 取得螢幕的尺寸
-        let fullScreenSize = UIScreen.mainScreen().bounds.size
+        let fullScreenSize = UIScreen.main.bounds.size
         
         // 建立一個 UISwitch
         var mySwitch = UISwitch()
@@ -22,22 +22,22 @@ class ViewController: UIViewController {
         // 設置位置並放入畫面中
         mySwitch.center = CGPoint(x: fullScreenSize.width * 0.5, y: fullScreenSize.height * 0.3)
         self.view.addSubview(mySwitch)
-    
-
+        
+        
         // 建立另一個 UISwitch
         mySwitch = UISwitch()
         
         // 設置滑桿鈕的顏色
-        mySwitch.thumbTintColor = UIColor.orangeColor()
+        mySwitch.thumbTintColor = UIColor.orange
         
         // 設置未選取時( off )的外觀顏色
-        mySwitch.tintColor = UIColor.blueColor()
-
+        mySwitch.tintColor = UIColor.blue
+        
         // 設置選取時( on )的外觀顏色
-        mySwitch.onTintColor = UIColor.brownColor()
+        mySwitch.onTintColor = UIColor.brown
         
         // 設置切換 UISwitch 時執行的動作
-        mySwitch.addTarget(self, action: #selector(ViewController.onChange), forControlEvents: .ValueChanged)
+        mySwitch.addTarget(self, action: #selector(ViewController.onChange), for: .valueChanged)
         
         // 設置位置並放入畫面中
         mySwitch.center = CGPoint(x: fullScreenSize.width * 0.5, y: fullScreenSize.height * 0.5)
@@ -46,22 +46,22 @@ class ViewController: UIViewController {
     }
     
     // UISwitch 切換時 執行動作的方法
-    func onChange(sender: AnyObject) {
+    func onChange(_ sender: AnyObject) {
         // 取得這個 UISwtich 元件
         let tempSwitch = sender as! UISwitch
         
         // 依據屬性 on 來為底色變色
-        if tempSwitch.on {
-            self.view.backgroundColor = UIColor.blackColor()
+        if tempSwitch.isOn {
+            self.view.backgroundColor = UIColor.black
         } else {
-            self.view.backgroundColor = UIColor.whiteColor()
+            self.view.backgroundColor = UIColor.white
         }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
 }
 
