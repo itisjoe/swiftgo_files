@@ -16,13 +16,13 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         // 取得螢幕的尺寸
-        let fullScreenSize = UIScreen.mainScreen().bounds.size
+        let fullScreenSize = UIScreen.main.bounds.size
 
         // 建立一個 UILabel
         myLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 40))
         myLabel.text = "0"
-        myLabel.textColor = UIColor.blackColor()
-        myLabel.textAlignment = .Center
+        myLabel.textColor = UIColor.black
+        myLabel.textAlignment = .center
         myLabel.center = CGPoint(x: fullScreenSize.width * 0.5, y: fullScreenSize.height * 0.3)
         self.view.addSubview(myLabel)
         
@@ -47,7 +47,7 @@ class ViewController: UIViewController {
         
         // UIStepper 是否可以在變動時同步執行動作
         // 設定 false 時 則是放開按鈕後才會執行動作
-        myStepper.continuous = true
+        myStepper.isContinuous = true
         
         // UIStepper 數值是否可以循環
         // 例如填 true 時 如果值已達到最大值
@@ -55,7 +55,7 @@ class ViewController: UIViewController {
         myStepper.wraps = true
         
         // UIStepper 按下增減按鈕後 執行的動作
-        myStepper.addTarget(self, action: #selector(ViewController.onStepperChange), forControlEvents: .ValueChanged)
+        myStepper.addTarget(self, action: #selector(ViewController.onStepperChange), for: .valueChanged)
         
         // 設置 UIStepper 位置並放入畫面中
         myStepper.center = CGPoint(x: fullScreenSize.width * 0.5, y: fullScreenSize.height * 0.5)
