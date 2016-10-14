@@ -27,39 +27,39 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         // 取得螢幕的尺寸
-        let fullScreenSize = UIScreen.mainScreen().bounds.size
+        let fullScreenSize = UIScreen.main.bounds.size
         
         // 建立 UITableView
-        self.tableView = UITableView(frame: CGRect(x: 0, y: 20, width: fullScreenSize.width, height: fullScreenSize.height - 20), style: .Plain)
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        self.view.addSubview(self.tableView)
+        tableView = UITableView(frame: CGRect(x: 0, y: 20, width: fullScreenSize.width, height: fullScreenSize.height - 20), style: .plain)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.delegate = self
+        tableView.dataSource = self
+        self.view.addSubview(tableView)
     
         
         // 建立 UISearchController 並設置搜尋控制器為 nil
-        self.searchController = UISearchController(searchResultsController: nil)
+        searchController = UISearchController(searchResultsController: nil)
         
         // 將更新搜尋結果的對象設為 self
-        self.searchController.searchResultsUpdater = self
+        searchController.searchResultsUpdater = self
         
         // 搜尋時是否隱藏 NavigationBar
         // 這個範例沒有使用 NavigationBar 所以設置什麼沒有影響
-        self.searchController.hidesNavigationBarDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
         
         // 搜尋時是否使用燈箱效果 (會將畫面變暗以集中搜尋焦點)
-        self.searchController.dimsBackgroundDuringPresentation = false
+        searchController.dimsBackgroundDuringPresentation = false
         
         // 搜尋框的樣式
-        self.searchController.searchBar.searchBarStyle = .Prominent
+        searchController.searchBar.searchBarStyle = .prominent
         
         // 設置搜尋框的尺寸為自適應
         // 因為會擺在 tableView 的 header
         // 所以尺寸會與 tableView 的 header 一樣
-        self.searchController.searchBar.sizeToFit()
+        searchController.searchBar.sizeToFit()
         
         // 將搜尋框擺在 tableView 的 header
-        self.tableView.tableHeaderView = self.searchController.searchBar
+        self.tableView.tableHeaderView = searchController.searchBar
         
     }
     
