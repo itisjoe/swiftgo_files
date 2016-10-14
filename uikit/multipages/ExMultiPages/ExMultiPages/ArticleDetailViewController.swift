@@ -14,29 +14,29 @@ class ArticleDetailViewController: UIViewController {
         super.viewDidLoad()
         
         // 取得螢幕的尺寸
-        let fullSize = UIScreen.mainScreen().bounds.size
+        let fullSize = UIScreen.main.bounds.size
         
         // 設置底色
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor.white
         
         // 頁面標題
         let myLabel = UILabel(frame: CGRect(x: 0, y: 0, width: fullSize.width, height: 40))
         myLabel.center = CGPoint(x: fullSize.width * 0.5, y: fullSize.height * 0.08)
-        myLabel.textAlignment = .Center
+        myLabel.textAlignment = .center
         myLabel.text = "Article Detail 頁"
         self.view.addSubview(myLabel)
 
         // 返回 Article 頁的 UIButton
         let myButton = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 30))
-        myButton.setTitle("回前頁", forState: .Normal)
-        myButton.backgroundColor = UIColor.lightGrayColor()
-        myButton.addTarget(nil, action: #selector(ArticleDetailViewController.goBack), forControlEvents: .TouchUpInside)
+        myButton.setTitle("回前頁", for: .normal)
+        myButton.backgroundColor = UIColor.lightGray
+        myButton.addTarget(nil, action: #selector(ArticleDetailViewController.goBack), for: .touchUpInside)
         myButton.center = CGPoint(x: fullSize.width * 0.5, y: fullSize.height * 0.5)
         self.view.addSubview(myButton)
     }
 
     func goBack() {
-        self.dismissViewControllerAnimated(true, completion:nil)
+        self.dismiss(animated: true, completion:nil)
     }
     
     override func didReceiveMemoryWarning() {
