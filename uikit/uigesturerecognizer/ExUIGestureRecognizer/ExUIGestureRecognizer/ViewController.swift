@@ -9,16 +9,14 @@
 import UIKit
 
 class ViewController: UIViewController {
-    var fullSize :CGSize!
+    // 取得螢幕的尺寸
+    var fullSize :CGSize! = UIScreen.main.bounds.size
     var myUIView :UIView!
     var anotherUIView :UIView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // 取得螢幕的尺寸
-        fullSize = UIScreen.mainScreen().bounds.size
-        
         /************
          
          Tap 輕點手勢
@@ -27,7 +25,7 @@ class ViewController: UIViewController {
         
         // 雙指輕點 (雙指以上手勢只能用實機測試)
         let doubleFingers = UITapGestureRecognizer(target:self,action:#selector(ViewController.doubleTap(_:)))
-        
+
         // 點幾下才觸發 設置 1 時 則是要點一下才會觸發 依此類推
         doubleFingers.numberOfTapsRequired = 1
         
@@ -48,7 +46,7 @@ class ViewController: UIViewController {
         singleFinger.numberOfTouchesRequired = 1
         
         // 雙指輕點沒有觸發時 才會檢測此手勢 以免手勢被蓋過
-        singleFinger.requireGestureRecognizerToFail(doubleFingers)
+        singleFinger.require(toFail: doubleFingers)
         
         // 為視圖加入監聽手勢
         self.view.addGestureRecognizer(singleFinger)
@@ -75,12 +73,12 @@ class ViewController: UIViewController {
     
         // 一個可供移動的 UIView
         myUIView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        myUIView.backgroundColor = UIColor.blueColor()
+        myUIView.backgroundColor = UIColor.blue
         self.view.addSubview(myUIView)
-        
+
         // 向上滑動
         let swipeUp = UISwipeGestureRecognizer(target:self, action:#selector(ViewController.swipe(_:)))
-        swipeUp.direction = .Up
+        swipeUp.direction = .up
         
         // 幾根指頭觸發 預設為 1
         swipeUp.numberOfTouchesRequired = 1
@@ -91,7 +89,7 @@ class ViewController: UIViewController {
         
         // 向左滑動
         let swipeLeft = UISwipeGestureRecognizer(target:self, action:#selector(ViewController.swipe(_:)))
-        swipeLeft.direction = .Left
+        swipeLeft.direction = .left
         
         // 為視圖加入監聽手勢
         self.view.addGestureRecognizer(swipeLeft)
@@ -99,7 +97,7 @@ class ViewController: UIViewController {
         
         // 向下滑動
         let swipeDown = UISwipeGestureRecognizer(target:self, action:#selector(ViewController.swipe(_:)))
-        swipeDown.direction = .Down
+        swipeDown.direction = .down
         
         // 為視圖加入監聽手勢
         self.view.addGestureRecognizer(swipeDown)
@@ -107,7 +105,7 @@ class ViewController: UIViewController {
         
         // 向右滑動
         let swipeRight = UISwipeGestureRecognizer(target:self, action:#selector(ViewController.swipe(_:)))
-        swipeRight.direction = .Right
+        swipeRight.direction = .right
 
         // 為視圖加入監聽手勢
         self.view.addGestureRecognizer(swipeRight)
@@ -121,7 +119,7 @@ class ViewController: UIViewController {
         
         // 一個可供移動的 UIView
         anotherUIView = UIView(frame: CGRect(x: fullSize.width * 0.5, y: fullSize.height * 0.5, width: 100, height: 100))
-        anotherUIView.backgroundColor = UIColor.orangeColor()
+        anotherUIView.backgroundColor = UIColor.orange
         self.view.addSubview(anotherUIView)
         
         // 拖曳手勢
@@ -139,38 +137,38 @@ class ViewController: UIViewController {
     }
     
     // 觸發拖曳手勢後 執行的動作
-    func pan(recognizer:UIPanGestureRecognizer) {
+    func pan(_ recognizer:UIPanGestureRecognizer) {
         // 設置 UIView 新的位置
-        let point = recognizer.locationInView(self.view)
+        let point = recognizer.location(in: self.view)
         anotherUIView.center = point
     }
-    
+
     // 觸發滑動手勢後 執行的動作
-    func swipe(recognizer:UISwipeGestureRecognizer) {
+    func swipe(_ recognizer:UISwipeGestureRecognizer) {
         let point = myUIView.center
 
-        if recognizer.direction == .Up {
+        if recognizer.direction == .up {
             print("Go Up")
             if point.y >= 150 {
                 myUIView.center = CGPoint(x: myUIView.center.x, y: myUIView.center.y - 100)
             } else {
                 myUIView.center = CGPoint(x: myUIView.center.x, y: 50)
             }
-        } else if recognizer.direction == .Left {
+        } else if recognizer.direction == .left {
             print("Go Left")
             if point.x >= 150 {
                 myUIView.center = CGPoint(x: myUIView.center.x - 100, y: myUIView.center.y)
             } else {
                 myUIView.center = CGPoint(x: 50, y: myUIView.center.y)
             }
-        } else if recognizer.direction == .Down {
+        } else if recognizer.direction == .down {
             print("Go Down")
             if point.y <= fullSize.height - 150 {
                 myUIView.center = CGPoint(x: myUIView.center.x, y: myUIView.center.y + 100)
             } else {
                 myUIView.center = CGPoint(x: myUIView.center.x, y: fullSize.height - 50)
             }
-        } else if recognizer.direction == .Right {
+        } else if recognizer.direction == .right {
             print("Go Right")
             if point.x <= fullSize.width - 150 {
                 myUIView.center = CGPoint(x: myUIView.center.x + 100, y: myUIView.center.y)
@@ -181,17 +179,17 @@ class ViewController: UIViewController {
     }
     
     // 觸發長按手勢後 執行的動作
-    func longPress(recognizer:UILongPressGestureRecognizer) {
-        if recognizer.state == .Began {
+    func longPress(_ recognizer:UILongPressGestureRecognizer) {
+        if recognizer.state == .began {
             print("長按開始")
-        } else if recognizer.state == .Ended {
+        } else if recognizer.state == .ended {
             print("長按結束")
         }
         
     }
 
     // 觸發單指輕點兩下手勢後 執行的動作
-    func singleTap(recognizer:UITapGestureRecognizer){
+    func singleTap(_ recognizer:UITapGestureRecognizer){
         print("單指連點兩下時觸發")
         
         // 取得每指的位置
@@ -199,18 +197,18 @@ class ViewController: UIViewController {
     }
     
     // 觸發雙指輕點一下手勢後 執行的動作
-    func doubleTap(recognizer:UITapGestureRecognizer){
+    func doubleTap(_ recognizer:UITapGestureRecognizer){
         print("雙指點一下時觸發")
 
         // 取得每指的位置
         self.findFingersPositon(recognizer)
     }
     
-    func findFingersPositon(recognizer:UITapGestureRecognizer) {
+    func findFingersPositon(_ recognizer:UITapGestureRecognizer) {
         // 取得每指的位置
-        let number = recognizer.numberOfTouches()
+        let number = recognizer.numberOfTouches
         for i in 0..<number {
-            let point = recognizer.locationOfTouch(i, inView: recognizer.view)
+            let point = recognizer.location(ofTouch: i, in: recognizer.view)
             print("第 \(i + 1) 指的位置：\(NSStringFromCGPoint(point))")
         }
     }
