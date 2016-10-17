@@ -1,8 +1,8 @@
 //
 //  DisplayViewController.swift
-//  ExNSUserDefaults
+//  ExUserDefaults
 //
-//  Created by joe feng on 2016/5/26.
+//  Created by joe feng on 2016/10/17.
 //  Copyright © 2016年 hsin. All rights reserved.
 //
 
@@ -14,25 +14,25 @@ class DisplayViewController: UIViewController {
         super.viewDidLoad()
 
         // 取得螢幕的尺寸
-        let fullSize = UIScreen.mainScreen().bounds.size
+        let fullSize = UIScreen.main.bounds.size
         
         // 設置底色
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor.white
         
         // 取得儲存的預設資料
-        let myUserDefaults = NSUserDefaults.standardUserDefaults()
+        let myUserDefaults = UserDefaults.standard
         
         // 顯示儲存資訊的 UILabel
         let myLabel = UILabel(frame: CGRect(x: 0, y: 0, width: fullSize.width, height: 40))
-        myLabel.textColor = UIColor.brownColor()
-        myLabel.textAlignment = .Center
+        myLabel.textColor = UIColor.brown
+        myLabel.textAlignment = .center
         myLabel.center = CGPoint(x: fullSize.width * 0.5, y: fullSize.height * 0.25)
         
-        if let info = myUserDefaults.objectForKey("info") as? String {
+        if let info = myUserDefaults.object(forKey: "info") as? String {
             myLabel.text = info
         } else {
             myLabel.text = "尚未儲存資訊"
-            myLabel.textColor = UIColor.redColor()
+            myLabel.textColor = UIColor.red
         }
         
         self.view.addSubview(myLabel)
@@ -42,5 +42,5 @@ class DisplayViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
 }
