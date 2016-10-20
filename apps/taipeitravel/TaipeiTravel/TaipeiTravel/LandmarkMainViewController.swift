@@ -28,7 +28,7 @@ class LandmarkMainViewController: BaseMainViewController {
         self.addData()
     }
     
-    override func goDetail(index: Int) {
+    override func goDetail(_ index: Int) {
         let thisData = self.apiData[self.apiDataForDistance[index].index]
         let title = thisData["stitle"] as? String ?? ""
         let intro = thisData["xbody"] as? String ?? ""
@@ -38,33 +38,32 @@ class LandmarkMainViewController: BaseMainViewController {
         let address = thisData["address"] as? String ?? "無地址資訊"
         
         var latitude = 0.0
-        if let num = thisData["latitude"] as? NSString {
-            latitude = num.doubleValue
+        if let num = thisData["latitude"] as? String {
+            latitude = Double(num)!
         }
         
         var longitude = 0.0
-        if let num = thisData["longitude"] as? NSString {
-            longitude = num.doubleValue
+        if let num = thisData["longitude"] as? String {
+            longitude = Double(num)!
         }
         
         let info :[String:AnyObject] = [
-            "title" : title,
-            "intro" : intro,
-            "type" : type,
-            "address" : address,
-            "openTime" : openTime,
-            "transportation" : transportation,
-            "latitude" : latitude,
-            "longitude" : longitude,
+            "title" : title as AnyObject,
+            "intro" : intro as AnyObject,
+            "type" : type as AnyObject,
+            "address" : address as AnyObject,
+            "openTime" : openTime as AnyObject,
+            "transportation" : transportation as AnyObject,
+            "latitude" : latitude as AnyObject,
+            "longitude" : longitude as AnyObject,
             ]
         
-        
-        self.myUserDefaults.setObject(info, forKey: "\(self.fetchType)Detail")
-        self.myUserDefaults.synchronize()
-        
         print(info["title"] as? String ?? "NO Title")
-        
-        self.navigationController?.pushViewController(LandmarkDetailViewController(), animated: true)
+
+        let detailViewController = LandmarkDetailViewController()
+        detailViewController.info = info
+
+        self.navigationController?.pushViewController(detailViewController, animated: true)
         
     }
 }

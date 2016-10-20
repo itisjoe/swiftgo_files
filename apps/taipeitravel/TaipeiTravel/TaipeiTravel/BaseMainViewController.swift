@@ -9,9 +9,9 @@
 import UIKit
 import CoreLocation
 
-class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, NSURLSessionDelegate, NSURLSessionDownloadDelegate {
+class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, URLSessionDelegate, URLSessionDownloadDelegate {
     var fullSize :CGSize!
-    var myUserDefaults :NSUserDefaults!
+    var myUserDefaults :UserDefaults!
     var myLocationManager :CLLocationManager!
     var fetchType :String!
     let refreshDays :Int = 5
@@ -36,14 +36,14 @@ class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITab
         super.viewDidLoad()
         
         // 取得螢幕的尺寸
-        self.fullSize = UIScreen.mainScreen().bounds.size
+        self.fullSize = UIScreen.main.bounds.size
         
         // 取得儲存的預設資料
-        self.myUserDefaults = NSUserDefaults.standardUserDefaults()
+        self.myUserDefaults = UserDefaults.standard
         
         // 導覽列樣式
-        self.view.backgroundColor = UIColor.whiteColor()
-        self.navigationController?.navigationBar.translucent = false
+        self.view.backgroundColor = UIColor.white
+        self.navigationController?.navigationBar.isTranslucent = false
         
         // 建立一個 CLLocationManager
         myLocationManager = CLLocationManager()
@@ -52,18 +52,18 @@ class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITab
         myLocationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         
         // 取得今天日期
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyyMMdd"
-        self.todayDateInt = Int(dateFormatter.stringFromDate(NSDate()))!
-        
+        self.todayDateInt = Int(dateFormatter.string(from: Date()))!
+
         // 應用程式儲存檔案的目錄路徑
-        let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+        let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         self.documentsPath = urls[urls.count-1].absoluteString
         
         self.taipeiDataUrl = "http://data.taipei/opendata/datalist/apiAccess?scope=resourceAquire&rid="
         
         // 載入中 環狀進度條
-        myActivityIndicator = UIActivityIndicatorView(activityIndicatorStyle:.Gray)
+        myActivityIndicator = UIActivityIndicatorView(activityIndicatorStyle:.gray)
         myActivityIndicator.center = CGPoint(x: self.fullSize.width * 0.5, y: self.fullSize.height * 0.4)
         myActivityIndicator.startAnimating()
         myActivityIndicator.hidesWhenStopped = true
@@ -71,16 +71,16 @@ class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITab
         
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if (CLLocationManager.authorizationStatus() == .Denied) {
+        if (CLLocationManager.authorizationStatus() == .denied) {
             // 設置定位權限的紀錄
-            self.myUserDefaults.setObject(false, forKey: "locationAuth")
+            self.myUserDefaults.set(false, forKey: "locationAuth")
             self.myUserDefaults.synchronize()
-        } else if (CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse) {
+        } else if (CLLocationManager.authorizationStatus() == .authorizedWhenInUse) {
             // 設置定位權限的紀錄
-            self.myUserDefaults.setObject(true, forKey: "locationAuth")
+            self.myUserDefaults.set(true, forKey: "locationAuth")
             self.myUserDefaults.synchronize()
             
             // 開始定位自身位置
@@ -99,7 +99,7 @@ class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITab
         }
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
         // 停止定位自身位置
@@ -108,7 +108,7 @@ class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITab
     
     func addData() {
         // 取得前一次取得資料的日期
-        let fetchDate = myUserDefaults.objectForKey("\(self.fetchType)FetchDate") as? Int
+        let fetchDate = myUserDefaults.object(forKey: "\(self.fetchType)FetchDate") as? Int
         
         // 如果尚未取得資料 或 前一次取得資料已經超過設定天數
         // 便向遠端 API 取得資料
@@ -122,16 +122,16 @@ class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITab
         
     }
     
-    func addTable(file :String?) {
+    func addTable(_ file :String?) {
         
         if let filePath = file {
-            if let fileurl = NSURL(string: filePath) {
+            if let fileurl = URL(string: filePath) {
                 self.jsonParse(fileurl)
             }
         }
         
         // 建立 UITableView 並設置原點及尺寸
-        self.myTableView = UITableView(frame: CGRect(x: 0, y: 0, width: self.fullSize.width, height: self.fullSize.height - 113), style: .Plain)
+        self.myTableView = UITableView(frame: CGRect(x: 0, y: 0, width: self.fullSize.width, height: self.fullSize.height - 113), style: .plain)
         
         //self.myTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         
@@ -149,19 +149,19 @@ class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITab
         myActivityIndicator.stopAnimating()
     }
     
-    func goDetail(index: Int) {
+    func goDetail(_ index: Int) {
         print("goDetail : \(index)")
     }
     
     
 // MARK: CLLocationManagerDelegate Methods
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let currentLocation :CLLocation = locations[0] as CLLocation
         
         // 更新自身定位座標
-        self.myUserDefaults.setObject(currentLocation.coordinate.latitude, forKey: "userLatitude")
-        self.myUserDefaults.setObject(currentLocation.coordinate.longitude, forKey: "userLongitude")
+        self.myUserDefaults.set(currentLocation.coordinate.latitude, forKey: "userLatitude")
+        self.myUserDefaults.set(currentLocation.coordinate.longitude, forKey: "userLongitude")
         self.myUserDefaults.synchronize()
         
         // 更新 table
@@ -176,19 +176,19 @@ class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITab
     }
     
     // 更改定位權限時執行
-    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        if (status == CLAuthorizationStatus.Denied) {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if (status == CLAuthorizationStatus.denied) {
             // 設置定位權限的紀錄
-            self.myUserDefaults.setObject(false, forKey: "locationAuth")
+            self.myUserDefaults.set(false, forKey: "locationAuth")
             self.myUserDefaults.synchronize()
-        } else if (status == CLAuthorizationStatus.AuthorizedWhenInUse) {
+        } else if (status == CLAuthorizationStatus.authorizedWhenInUse) {
             // 設置定位權限的紀錄
-            self.myUserDefaults.setObject(true, forKey: "locationAuth")
+            self.myUserDefaults.set(true, forKey: "locationAuth")
             
             // 更新記錄的座標 for 取得有限數量的資料
             for type in ["hotel", "landmark", "park", "toilet"] {
-                self.myUserDefaults.setObject(0.0, forKey: "\(type)RecordLatitude")
-                self.myUserDefaults.setObject(0.0, forKey: "\(type)RecordLongitude")
+                self.myUserDefaults.set(0.0, forKey: "\(type)RecordLatitude")
+                self.myUserDefaults.set(0.0, forKey: "\(type)RecordLongitude")
             }
 
             self.myUserDefaults.synchronize()
@@ -202,33 +202,33 @@ class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITab
 // MARK: UITableViewDelegate methods
     
     // 必須實作的方法：有幾個 cell
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.apiData.count
     }
     
     // 必須實作的方法：每個 cell 要顯示的內容
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // 取得 tableView 目前使用的 cell
         //let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
-        var cell = tableView.dequeueReusableCellWithIdentifier("Cell")
+        var cell = tableView.dequeueReusableCell(withIdentifier: "Cell")
         
         if cell == nil {
-            cell = UITableViewCell(style: .Value1, reuseIdentifier: "Cell")
+            cell = UITableViewCell(style: .value1, reuseIdentifier: "Cell")
         }
         
         // 設置 Accessory 按鈕樣式
-        cell!.accessoryType = .DisclosureIndicator
+        cell!.accessoryType = .disclosureIndicator
         
         // 這筆資料
         let thisData = self.apiData[self.apiDataForDistance[indexPath.row].index]
         
         // 顯示的內容
         if let myLabel = cell!.textLabel {
-            if let title = thisData["stitle"] as? NSString {
+            if let title = thisData["stitle"] as? String {
                 myLabel.text = title as String
-            } else if let title = thisData["ParkName"] as? NSString {
+            } else if let title = thisData["ParkName"] as? String {
                 myLabel.text = title as String
-            } else if let title = thisData["單位名稱"] as? NSString {
+            } else if let title = thisData["單位名稱"] as? String {
                 myLabel.text = title as String
             }
         }
@@ -237,37 +237,37 @@ class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITab
         cell!.detailTextLabel?.text = ""
         
         // 有定位權限
-        let locationAuth = myUserDefaults.objectForKey("locationAuth") as? Bool
+        let locationAuth = myUserDefaults.object(forKey: "locationAuth") as? Bool
         if locationAuth != nil && locationAuth! {
             // 取得目前使用者座標
-            let userLatitude = myUserDefaults.objectForKey("userLatitude") as? Double
-            let userLongitude = myUserDefaults.objectForKey("userLongitude") as? Double
+            let userLatitude = myUserDefaults.object(forKey: "userLatitude") as? Double
+            let userLongitude = myUserDefaults.object(forKey: "userLongitude") as? Double
             let userLocation = CLLocation(latitude: userLatitude!, longitude: userLongitude!)
             
             // 這筆資料的座標
             var thisDataLatitude = 0.0
-            if let num = thisData["latitude"] as? NSString {
-                thisDataLatitude = num.doubleValue
-            } else if let num = thisData["Latitude"] as? NSString {
-                thisDataLatitude = num.doubleValue
-            } else if let num = thisData["緯度"] as? NSString {
-                thisDataLatitude = num.doubleValue
+            if let num = thisData["latitude"] as? String {
+                thisDataLatitude = Double(num)!
+            } else if let num = thisData["Latitude"] as? String {
+                thisDataLatitude = Double(num)!
+            } else if let num = thisData["緯度"] as? String {
+                thisDataLatitude = Double(num)!
             }
             
             var thisDataLongitude = 0.0
-            if let num = thisData["longitude"] as? NSString {
-                thisDataLongitude = num.doubleValue
-            } else if let num = thisData["Longitude"] as? NSString {
-                thisDataLongitude = num.doubleValue
-            } else if let num = thisData["經度"] as? NSString {
-                thisDataLongitude = num.doubleValue
+            if let num = thisData["longitude"] as? String {
+                thisDataLongitude = Double(num)!
+            } else if let num = thisData["Longitude"] as? String {
+                thisDataLongitude = Double(num)!
+            } else if let num = thisData["經度"] as? String {
+                thisDataLongitude = Double(num)!
             }
             if thisDataLatitude == 0.0 && thisDataLongitude == 0.0 {
                 cell!.detailTextLabel?.text = ""
             } else {
                 let thisDataLocation = CLLocation(latitude: thisDataLatitude, longitude: thisDataLongitude)
                 
-                let distance = Int(userLocation.distanceFromLocation(thisDataLocation))
+                let distance = Int(userLocation.distance(from: thisDataLocation))
                 var detail = ""
                 if distance > 20000 {
                     detail = "超過 20 KM"
@@ -287,9 +287,9 @@ class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITab
     }
     
     // 點選 cell 後執行的動作
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 取消 cell 的選取狀態
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         
         self.goDetail(indexPath.row)
     }
@@ -298,40 +298,41 @@ class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITab
 // MARK: NSURLSessionDownloadDelegate Methods
     
     // 下載完成
-    func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didFinishDownloadingToURL location: NSURL) {
-        let targetUrl = NSURL(string: self.targetUrl)!
-        let data = NSData(contentsOfURL: location)
-        if ((data?.writeToURL(targetUrl, atomically: true)) != nil) {
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+        let targetUrl = URL(string: self.targetUrl)!
+        do {
+            let data = try? Data(contentsOf: location)
+            try data?.write(to: targetUrl, options: .atomic)
             print("普通獲取遠端資訊的方式：儲存資訊成功")
-            
+
             // 更新獲取資料的日期
-            self.myUserDefaults.setObject(self.todayDateInt, forKey: "\(self.fetchType)FetchDate")
+            self.myUserDefaults.set(self.todayDateInt, forKey: "\(self.fetchType)FetchDate")
             self.myUserDefaults.synchronize()
             
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 self.addTable(self.targetUrl)
             })
-            
-        } else {
+
+        } catch {
             print("普通獲取遠端資訊的方式：儲存資訊失敗")
-            
         }
+
     }
     
     
 // MARK: functional methods
     
     // 普通獲取遠端資訊的方式
-    func normalGet(myUrl :String) {
-        if let url = NSURL(string: myUrl) {
+    func normalGet(_ myUrl :String) {
+        if let url = URL(string: myUrl) {
             // 設置為預設的 session 設定
-            let sessionWithConfigure = NSURLSessionConfiguration.defaultSessionConfiguration()
+            let sessionWithConfigure = URLSessionConfiguration.default
             
             // 設置委任對象
-            let session = NSURLSession(configuration: sessionWithConfigure, delegate: self, delegateQueue: nil)
+            let session = Foundation.URLSession(configuration: sessionWithConfigure, delegate: self, delegateQueue: nil)
             
             // 設置遠端 API 網址
-            let dataTask = session.downloadTaskWithURL(url)
+            let dataTask = session.downloadTask(with: url)
             
             // 執行動作
             dataTask.resume()
@@ -339,14 +340,14 @@ class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITab
     }
     
     // 解析 json 檔案
-    func jsonParse(url :NSURL) {
+    func jsonParse(_ url :URL) {
         do {
-            let dict = try NSJSONSerialization.JSONObjectWithData(NSData(contentsOfURL: url)!, options: NSJSONReadingOptions.AllowFragments) as! [String:[String:AnyObject]]
+            let dict = try JSONSerialization.jsonObject(with: Data(contentsOf: url), options: JSONSerialization.ReadingOptions.allowFragments) as! [String:[String:AnyObject]]
             
             let dataArr = dict["result"]!["results"] as! [AnyObject]
             
             self.apiDataAll = dataArr
-            
+
             self.refreshAPIData()
             
         } catch {
@@ -356,30 +357,30 @@ class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITab
     }
     
     // 自資料取得緯度與經度
-    func fetchLatitudeAndLongitudeFromData(data :AnyObject) -> (latitude:Double, longitude:Double) {
+    func fetchLatitudeAndLongitudeFromData(_ data :AnyObject) -> (latitude:Double, longitude:Double) {
         var latitude = 0.0
-        if let num = data["latitude"] as? NSString {
-            latitude = num.doubleValue
-        } else if let num = data["Latitude"] as? NSString {
-            latitude = num.doubleValue
-        } else if let num = data["緯度"] as? NSString {
-            latitude = num.doubleValue
+        if let num = data["latitude"] as? String {
+            latitude = Double(num)!
+        } else if let num = data["Latitude"] as? String {
+            latitude = Double(num)!
+        } else if let num = data["緯度"] as? String {
+            latitude = Double(num)!
         }
         
         var longitude = 0.0
-        if let num = data["longitude"] as? NSString {
-            longitude = num.doubleValue
-        } else if let num = data["Longitude"] as? NSString {
-            longitude = num.doubleValue
-        } else if let num = data["經度"] as? NSString {
-            longitude = num.doubleValue
+        if let num = data["longitude"] as? String {
+            longitude = Double(num)!
+        } else if let num = data["Longitude"] as? String {
+            longitude = Double(num)!
+        } else if let num = data["經度"] as? String {
+            longitude = Double(num)!
         }
         
         return (latitude, longitude)
     }
     
     // 將資料填入 apiDataForDistance
-    func fillIntoAPIDataForDistanceAndSort(allData :[AnyObject]) {
+    func fillIntoAPIDataForDistanceAndSort(_ allData :[AnyObject]) {
         self.apiDataForDistance = []
         
         var index = 0
@@ -395,7 +396,7 @@ class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITab
             index += 1
         }
 
-        self.apiDataForDistance.sortInPlace(<)
+        self.apiDataForDistance.sort(by: <)
         
     }
     
@@ -406,25 +407,25 @@ class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITab
         }
 
         // 有定位權限
-        let locationAuth = myUserDefaults.objectForKey("locationAuth") as? Bool
+        let locationAuth = myUserDefaults.object(forKey: "locationAuth") as? Bool
         if locationAuth != nil && locationAuth! {
-            
+
             // 取得目前使用者座標
-            let userLatitude = myUserDefaults.objectForKey("userLatitude") as? Double
-            let userLongitude = myUserDefaults.objectForKey("userLongitude") as? Double
+            let userLatitude = myUserDefaults.object(forKey: "userLatitude") as? Double
+            let userLongitude = myUserDefaults.object(forKey: "userLongitude") as? Double
             let userLocation = CLLocation(latitude: userLatitude!, longitude: userLongitude!)
             
             // 記錄的座標
-            let recordLatitude = myUserDefaults.objectForKey("\(self.fetchType)RecordLatitude") as? Double ?? 0.0
-            let recordLongitude = myUserDefaults.objectForKey("\(self.fetchType)RecordLongitude") as? Double ?? 0.0
+            let recordLatitude = myUserDefaults.object(forKey: "\(self.fetchType)RecordLatitude") as? Double ?? 0.0
+            let recordLongitude = myUserDefaults.object(forKey: "\(self.fetchType)RecordLongitude") as? Double ?? 0.0
             let recordLocation = CLLocation(latitude: recordLatitude, longitude: recordLongitude)
             
             // 超過限定距離才重新取得有限數量資料
-            if userLocation.distanceFromLocation(recordLocation) > self.limitDistance {
+            if userLocation.distance(from: recordLocation) > self.limitDistance {
 
                 // 將所有資料依照與使用者距離重新排序
                 self.fillIntoAPIDataForDistanceAndSort(self.apiDataAll)
-                
+      
                 var tempAPIData :[AnyObject] = []
                 var tempAPIDataForDistance :[Coordinate] = []
                 for index in 0...self.limitNumber {
@@ -434,7 +435,7 @@ class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITab
                     tempAPIData.append(tempData)
                     
                     let (latitude, longitude) = self.fetchLatitudeAndLongitudeFromData(tempData)
-                    
+
                     tempAPIDataForDistance.append(
                         Coordinate(
                             index: index,
@@ -446,14 +447,17 @@ class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITab
                 self.apiDataForDistance = tempAPIDataForDistance
                 
                 // 更新記錄的座標
-                myUserDefaults.setObject(userLatitude, forKey: "\(self.fetchType)RecordLatitude")
-                myUserDefaults.setObject(userLongitude, forKey: "\(self.fetchType)RecordLongitude")
+                myUserDefaults.set(userLatitude, forKey: "\(self.fetchType)RecordLatitude")
+                myUserDefaults.set(userLongitude, forKey: "\(self.fetchType)RecordLongitude")
                 myUserDefaults.synchronize()
+            } else {
+                self.apiData = self.apiDataAll
             }
         } else {
             // 無定位權限 取得所有資料
             self.apiData = self.apiDataAll
         }
+
     }
     
     func refreshAPIData() {

@@ -9,9 +9,10 @@ import UIKit
 
 class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    let fullSize :CGSize = UIScreen.mainScreen().bounds.size
-    let myUserDefaults :NSUserDefaults = NSUserDefaults.standardUserDefaults()
+    let fullSize :CGSize = UIScreen.main.bounds.size
+    let myUserDefaults :UserDefaults = UserDefaults.standard
     var fetchType :String = ""
+    var info :[String:AnyObject]! = nil
     var detail :[String] = []
     var hasMap :Bool = false
     var myTableView :UITableView!
@@ -22,15 +23,15 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
         
         // 樣式
-        self.view.backgroundColor = UIColor.whiteColor()
-        self.navigationController?.navigationBar.translucent = false
+        self.view.backgroundColor = UIColor.white
+        self.navigationController?.navigationBar.isTranslucent = false
         self.automaticallyAdjustsScrollViewInsets = false
         
         // 建立 UITableView 並設置原點及尺寸
-        self.myTableView = UITableView(frame: CGRect(x: 0, y: 0, width: self.fullSize.width, height: self.fullSize.height - 113), style: .Plain)
+        self.myTableView = UITableView(frame: CGRect(x: 0, y: 0, width: self.fullSize.width, height: self.fullSize.height - 113), style: .plain)
         
         // 註冊重複使用的 cell
-        self.myTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        self.myTableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         
         // 設置委任對象
         self.myTableView.delegate = self
@@ -48,26 +49,26 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
 // MARK: UITableViewDelegate methods
     
     // 必須實作的方法：每一組有幾個 cell
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return hasMap ? 6 : 5
     }
     
     // 必須實作的方法：每個 cell 要顯示的內容
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // 取得 tableView 目前使用的 cell
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as UITableViewCell
         
-        cell.accessoryType = .None
+        cell.accessoryType = .none
         
         if self.hasMap {
-            cell.textLabel?.text = self.detail[indexPath.row] ?? ""
+            cell.textLabel?.text = self.detail[indexPath.row] 
             if indexPath.row == 0 {
-                cell.accessoryType = .DisclosureIndicator
+                cell.accessoryType = .disclosureIndicator
             } else if indexPath.row == 1 {
                 cell.textLabel?.text = "類型：" + (cell.textLabel?.text)!
             }
         } else {
-            cell.textLabel?.text = self.detail[indexPath.row + 1] ?? ""
+            cell.textLabel?.text = self.detail[indexPath.row + 1] 
             if indexPath.row == 0 {
                 cell.textLabel?.text = "類型：" + (cell.textLabel?.text)!
             }
@@ -75,30 +76,31 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         if indexPath.row > (self.hasMap ? 1 : 0) {
             cell.textLabel?.numberOfLines = 0
-            cell.textLabel?.lineBreakMode = .ByWordWrapping
+            cell.textLabel?.lineBreakMode = .byWordWrapping
         }
         
         return cell
     }
     
     // 點選 cell 後執行的動作
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 取消 cell 的選取狀態
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         
         if self.hasMap && indexPath.row == 0 {
             let viewController = MapViewController()
+            viewController.info = self.info
             viewController.fetchType = self.fetchType
             self.navigationController?.pushViewController(viewController, animated: true)
         } else {
-            let cell = myTableView.cellForRowAtIndexPath(indexPath)
+            let cell = myTableView.cellForRow(at: indexPath)
             let label = cell?.textLabel
             if indexPath.row == self.selectedRowIndex {
                 self.rowHeight = 88.0
                 self.selectedRowIndex = -1
             } else {
                 label?.preferredMaxLayoutWidth = fullSize.width * 0.9
-                let intrinsicSize = label?.intrinsicContentSize()
+                let intrinsicSize = label?.intrinsicContentSize
                 self.rowHeight = (intrinsicSize?.height)!
                 
                 self.selectedRowIndex = indexPath.row
@@ -109,7 +111,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     // 設置 cell 的高度
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         var height = CGFloat(44.0)
         
         if (self.hasMap && indexPath.row >= 2) || (!self.hasMap && indexPath.row >= 1) {

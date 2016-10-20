@@ -28,7 +28,7 @@ class ParkMainViewController: BaseMainViewController {
         self.addData()
     }
     
-    override func goDetail(index: Int) {
+    override func goDetail(_ index: Int) {
         let thisData = self.apiData[self.apiDataForDistance[index].index]
         let title = thisData["ParkName"] as? String ?? ""
         let intro = thisData["Introduction"] as? String ?? ""
@@ -42,32 +42,31 @@ class ParkMainViewController: BaseMainViewController {
         let location = thisData["Location"] as? String ?? "無地址資訊"
         
         var latitude = 0.0
-        if let num = thisData["Latitude"] as? NSString {
-            latitude = num.doubleValue
+        if let num = thisData["Latitude"] as? String {
+            latitude = Double(num)!
         }
         
         var longitude = 0.0
-        if let num = thisData["Longitude"] as? NSString {
-            longitude = num.doubleValue
+        if let num = thisData["Longitude"] as? String {
+            longitude = Double(num)!
         }
         
         let info :[String:AnyObject] = [
-            "title" : title,
-            "intro" : intro,
-            "type" : type,
-            "location" : location,
-            "area" : area,
-            "latitude" : latitude,
-            "longitude" : longitude,
+            "title" : title as AnyObject,
+            "intro" : intro as AnyObject,
+            "type" : type as AnyObject,
+            "location" : location as AnyObject,
+            "area" : area as AnyObject,
+            "latitude" : latitude as AnyObject,
+            "longitude" : longitude as AnyObject,
         ]
-        
-        
-        self.myUserDefaults.setObject(info, forKey: "\(self.fetchType)Detail")
-        self.myUserDefaults.synchronize()
-        
+
         print(info["title"] as? String ?? "NO Title")
+
+        let detailViewController = ParkDetailViewController()
+        detailViewController.info = info
         
-        self.navigationController?.pushViewController(ParkDetailViewController(), animated: true)
+        self.navigationController?.pushViewController(detailViewController, animated: true)
         
     }
 }

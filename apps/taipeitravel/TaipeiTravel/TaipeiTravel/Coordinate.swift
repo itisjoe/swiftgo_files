@@ -19,22 +19,22 @@ struct Coordinate {
 extension Coordinate: Comparable {}
 
 func ==(a: Coordinate, b: Coordinate) -> Bool {
-    let myUserDefaults = NSUserDefaults.standardUserDefaults()
+    let myUserDefaults = UserDefaults.standard
     
     // 是否取得定位權限
-    let locationAuth = myUserDefaults.objectForKey("locationAuth") as? Bool
+    let locationAuth = myUserDefaults.object(forKey: "locationAuth") as? Bool
     
     if locationAuth != nil && locationAuth! {
         // 取得目前使用者座標
-        let userLatitude = myUserDefaults.objectForKey("userLatitude") as? Double
-        let userLongitude = myUserDefaults.objectForKey("userLongitude") as? Double
+        let userLatitude = myUserDefaults.object(forKey: "userLatitude") as? Double
+        let userLongitude = myUserDefaults.object(forKey: "userLongitude") as? Double
         let userLocation = CLLocation(latitude: userLatitude!, longitude: userLongitude!)
         
         // 兩點的座標
         let aLocation = CLLocation(latitude: a.latitude, longitude: a.longitude)
         let bLocation = CLLocation(latitude: b.latitude, longitude: b.longitude)
 
-        return aLocation.distanceFromLocation(userLocation) == bLocation.distanceFromLocation(userLocation)
+        return aLocation.distance(from: userLocation) == bLocation.distance(from: userLocation)
     } else {
         return a.index == b.index
     }
@@ -42,22 +42,22 @@ func ==(a: Coordinate, b: Coordinate) -> Bool {
 }
 
 func <(a: Coordinate, b: Coordinate) -> Bool {
-    let myUserDefaults = NSUserDefaults.standardUserDefaults()
+    let myUserDefaults = UserDefaults.standard
 
     // 是否取得定位權限
-    let locationAuth = myUserDefaults.objectForKey("locationAuth") as? Bool
+    let locationAuth = myUserDefaults.object(forKey: "locationAuth") as? Bool
 
     if locationAuth != nil && locationAuth! {
         // 取得目前使用者座標
-        let userLatitude = myUserDefaults.objectForKey("userLatitude") as? Double
-        let userLongitude = myUserDefaults.objectForKey("userLongitude") as? Double
+        let userLatitude = myUserDefaults.object(forKey: "userLatitude") as? Double
+        let userLongitude = myUserDefaults.object(forKey: "userLongitude") as? Double
         let userLocation = CLLocation(latitude: userLatitude!, longitude: userLongitude!)
         
         // 兩點的座標
         let aLocation = CLLocation(latitude: a.latitude, longitude: a.longitude)
         let bLocation = CLLocation(latitude: b.latitude, longitude: b.longitude)
         
-        return aLocation.distanceFromLocation(userLocation) < bLocation.distanceFromLocation(userLocation)
+        return aLocation.distance(from: userLocation) < bLocation.distance(from: userLocation)
     } else {
         return a.index < b.index
     }

@@ -14,13 +14,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
 
     var window: UIWindow?
     var myLocationManager: CLLocationManager!
-    var myUserDefaults: NSUserDefaults!
+    var myUserDefaults: UserDefaults!
 
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         // 取得儲存的預設資料
-        self.myUserDefaults = NSUserDefaults.standardUserDefaults()
+        self.myUserDefaults = UserDefaults.standard
 
         // 建立一個 CLLocationManager
         myLocationManager = CLLocationManager()
@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         myLocationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         
         // 首次使用 向使用者詢問定位自身位置權限
-        if CLLocationManager.authorizationStatus() == .NotDetermined {
+        if CLLocationManager.authorizationStatus() == .notDetermined {
             // 取得定位服務授權
             myLocationManager.requestWhenInUseAuthorization()
             
@@ -38,19 +38,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             //   manager: CLLocationManager,
             //   didChangeAuthorizationStatus status: CLAuthorizationStatus)
             // 設置
-        } else if (CLLocationManager.authorizationStatus() == .Denied) {
+        } else if (CLLocationManager.authorizationStatus() == .denied) {
             // 設置定位權限的紀錄
-            self.myUserDefaults.setObject(false, forKey: "locationAuth")
+            self.myUserDefaults.set(false, forKey: "locationAuth")
 
             self.myUserDefaults.synchronize()
-        } else if (CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse) {
+        } else if (CLLocationManager.authorizationStatus() == .authorizedWhenInUse) {
             // 設置定位權限的紀錄
-            self.myUserDefaults.setObject(true, forKey: "locationAuth")
+            self.myUserDefaults.set(true, forKey: "locationAuth")
             
             // 更新記錄的座標 for 取得有限數量的資料
             for type in ["hotel", "landmark", "park", "toilet"] {
-                self.myUserDefaults.setObject(0.0, forKey: "\(type)RecordLatitude")
-                self.myUserDefaults.setObject(0.0, forKey: "\(type)RecordLongitude")
+                self.myUserDefaults.set(0.0, forKey: "\(type)RecordLatitude")
+                self.myUserDefaults.set(0.0, forKey: "\(type)RecordLongitude")
             }
             
             self.myUserDefaults.synchronize()
@@ -60,11 +60,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         UINavigationBar.appearance().barTintColor = UIColor.init(red: 0.24, green: 0.79, blue: 0.83, alpha: 1)
         
         // 設定導覽列預設按鈕顏色
-        UINavigationBar.appearance().tintColor = UIColor.blackColor()
+        UINavigationBar.appearance().tintColor = UIColor.black
 
         
         // 建立一個 UIWindow
-        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        self.window = UIWindow(frame: UIScreen.main.bounds)
         
         // 建立 UITabBarController
         let myTabBar = UITabBarController()
@@ -104,20 +104,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
 // MARK: CLLocationManagerDelegate Methods
     
     // 更改定位權限時執行
-    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        if (status == CLAuthorizationStatus.Denied) {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if (status == CLAuthorizationStatus.denied) {
             // 提示可至[設定]中開啟權限
-            let alertController = UIAlertController( title: "定位服務已關閉", message: "如要變更權限，請至 設定 > 隱私權 > 定位服務 開啟", preferredStyle: .Alert)
-            let okAction = UIAlertAction(title: "確認", style: .Default, handler:nil)
+            let alertController = UIAlertController( title: "定位服務已關閉", message: "如要變更權限，請至 設定 > 隱私權 > 定位服務 開啟", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "確認", style: .default, handler:nil)
             alertController.addAction(okAction)
-            self.window?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)
+            self.window?.rootViewController?.present(alertController, animated: true, completion: nil)
             
             // 設置定位權限的紀錄
-            self.myUserDefaults.setObject(false, forKey: "locationAuth")
+            self.myUserDefaults.set(false, forKey: "locationAuth")
             self.myUserDefaults.synchronize()
-        } else if (status == CLAuthorizationStatus.AuthorizedWhenInUse) {
+        } else if (status == CLAuthorizationStatus.authorizedWhenInUse) {
             // 設置定位權限的紀錄
-            self.myUserDefaults.setObject(true, forKey: "locationAuth")
+            self.myUserDefaults.set(true, forKey: "locationAuth")
             self.myUserDefaults.synchronize()
         }
     }
