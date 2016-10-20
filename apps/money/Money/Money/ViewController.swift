@@ -9,11 +9,11 @@
 import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    let fullsize = UIScreen.mainScreen().bounds.size
-    let myUserDefaults = NSUserDefaults.standardUserDefaults()
+    let fullsize = UIScreen.main.bounds.size
+    let myUserDefaults = UserDefaults.standard
     var db :SQLiteConnect?
-    let myFormatter = NSDateFormatter()
-    var currentDate :NSDate = NSDate()
+    let myFormatter = DateFormatter()
+    var currentDate :Date = Date()
     
     var days :[String]! = []
     var myRecords :[String:[[String:String]]]! = [:]
@@ -30,22 +30,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // 基本設定
         self.title = "記帳"
         self.view.backgroundColor = UIColor.init(red: 0.092, green: 0.092, blue: 0.092, alpha: 1)
-        self.navigationController?.navigationBar.translucent = false
+        self.navigationController?.navigationBar.isTranslucent = false
         
         // 連接資料庫
-        let dbFileName = myUserDefaults.objectForKey("dbFileName") as! String
+        let dbFileName = myUserDefaults.object(forKey: "dbFileName") as! String
         db = SQLiteConnect(file: dbFileName)
         
         // 導覽列右邊設定按鈕
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "settings")!, style: .Plain, target: self, action: #selector(ViewController.settingsBtnAction))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "settings")!, style: .plain, target: self, action: #selector(ViewController.settingsBtnAction))
 
         // 目前年月
         currentMonthLabel = UILabel(frame: CGRect(x: 0, y: 0, width: fullsize.width * 0.7, height: 50))
         currentMonthLabel.center = CGPoint(x: fullsize.width * 0.5, y: 35)
-        currentMonthLabel.textColor = UIColor.whiteColor()
+        currentMonthLabel.textColor = UIColor.white
         myFormatter.dateFormat = "yyyy 年 MM 月"
-        currentMonthLabel.text = myFormatter.stringFromDate(currentDate)
-        currentMonthLabel.textAlignment = .Center
+        currentMonthLabel.text = myFormatter.string(from: currentDate)
+        currentMonthLabel.textAlignment = .center
         currentMonthLabel.font = UIFont(name: "Helvetica Light", size: 32.0)
         currentMonthLabel.tag = 701
         self.view.addSubview(currentMonthLabel)
@@ -53,47 +53,47 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // 前一月份按鈕
         prevBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
         prevBtn.center = CGPoint(x: fullsize.width * 0.1, y: 35)
-        prevBtn.setImage(UIImage(named: "prev"), forState: .Normal)
-        prevBtn.addTarget(self, action: #selector(ViewController.prevBtnAction), forControlEvents: .TouchUpInside)
+        prevBtn.setImage(UIImage(named: "prev"), for: .normal)
+        prevBtn.addTarget(self, action: #selector(ViewController.prevBtnAction), for: .touchUpInside)
         self.view.addSubview(prevBtn)
         
         // 後一月份按鈕
         nextBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
         nextBtn.center = CGPoint(x: fullsize.width * 0.9, y: 35)
-        nextBtn.setImage(UIImage(named: "next"), forState: .Normal)
-        nextBtn.addTarget(self, action: #selector(ViewController.nextBtnAction), forControlEvents: .TouchUpInside)
+        nextBtn.setImage(UIImage(named: "next"), for: .normal)
+        nextBtn.addTarget(self, action: #selector(ViewController.nextBtnAction), for: .touchUpInside)
         self.view.addSubview(nextBtn)
         
         // 總金額顯示文字
         var dollarSignLabel = UILabel(frame: CGRect(x: 15, y: 70, width: 80, height: 30))
         dollarSignLabel.font = UIFont(name: "Helvetica Light", size: 16.0)
-        dollarSignLabel.textColor = UIColor.whiteColor()
+        dollarSignLabel.textColor = UIColor.white
         dollarSignLabel.text = "總計"
         self.view.addSubview(dollarSignLabel)
         dollarSignLabel = UILabel(frame: CGRect(x: fullsize.width - 35, y: 70, width: 30, height: 30))
         dollarSignLabel.font = UIFont(name: "Helvetica Light", size: 16.0)
-        dollarSignLabel.textColor = UIColor.whiteColor()
+        dollarSignLabel.textColor = UIColor.white
         dollarSignLabel.text = "元"
         self.view.addSubview(dollarSignLabel)
 
         // 總金額
         let amount = 0.0
-        let formatter = NSNumberFormatter()
-        formatter.numberStyle = .DecimalStyle
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
         amountLabel = UILabel(frame: CGRect(x: 20, y: 70, width: fullsize.width - 65, height: 30))
         amountLabel.font = UIFont(name: "Helvetica Light", size: 24.0)
-        amountLabel.textAlignment = .Right
-        amountLabel.textColor = UIColor.whiteColor()
-        amountLabel.text = "\(formatter.stringFromNumber(amount)!)"
+        amountLabel.textAlignment = .right
+        amountLabel.textColor = UIColor.white
+        amountLabel.text = formatter.string(from: NSNumber(value: amount))!
         self.view.addSubview(amountLabel)
         
         // 花費記錄列表
-        myTableView = UITableView(frame: CGRect(x: 0, y: 105, width: fullsize.width, height: fullsize.height - 169) , style: .Grouped)
+        myTableView = UITableView(frame: CGRect(x: 0, y: 105, width: fullsize.width, height: fullsize.height - 169) , style: .grouped)
         //myTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         myTableView.delegate = self
         myTableView.dataSource = self
         myTableView.allowsSelection = true
-        myTableView.backgroundColor = UIColor.blackColor()
+        myTableView.backgroundColor = UIColor.black
         myTableView.separatorColor = UIColor.init(red: 0.05, green: 0.05, blue: 0.05, alpha: 1)
         self.view.addSubview(myTableView)
         
@@ -104,19 +104,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // 底部新增記錄按鈕
         let addBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
         addBtn.center = CGPoint(x: fullsize.width * 0.5, y: fullsize.height - 105)
-        addBtn.addTarget(self, action: #selector(ViewController.addBtnAction), forControlEvents: .TouchUpInside)
-        addBtn.setImage(UIImage(named:"add"), forState: .Normal)
+        addBtn.addTarget(self, action: #selector(ViewController.addBtnAction), for: .touchUpInside)
+        addBtn.setImage(UIImage(named:"add"), for: .normal)
         self.view.addSubview(addBtn)
     
     }
 
-    override func viewWillAppear(animated: Bool) {
-        let displayYearMonth = myUserDefaults.objectForKey("displayYearMonth") as? String
+    override func viewWillAppear(_ animated: Bool) {
+        let displayYearMonth = myUserDefaults.object(forKey: "displayYearMonth") as? String
         if displayYearMonth != nil && displayYearMonth != "" {
             myFormatter.dateFormat = "yyyy-MM"
-            currentDate = myFormatter.dateFromString(displayYearMonth!)!
+            currentDate = myFormatter.date(from: displayYearMonth!)!
             
-            myUserDefaults.setObject("", forKey: "displayYearMonth")
+            myUserDefaults.set("", forKey: "displayYearMonth")
             myUserDefaults.synchronize()
         }
         
@@ -128,7 +128,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // 更新列表
     func updateRecordsList() {
         myFormatter.dateFormat = "yyyy-MM"
-        let yearMonth = myFormatter.stringFromDate(currentDate)
+        let yearMonth = myFormatter.string(from: currentDate)
         if let mydb = db {
             days = []
             myRecords = [:]
@@ -137,9 +137,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let statement = mydb.fetch("records", cond: "yearMonth == '\(yearMonth)'", order: "createTime desc, id desc")
             while sqlite3_step(statement) == SQLITE_ROW{
                 let id = Int(sqlite3_column_int(statement, 0))
-                let title = String.fromCString(UnsafePointer<CChar>(sqlite3_column_text(statement, 1))) ?? ""
+                let title = String(cString: sqlite3_column_text(statement, 1))
+                
+                
                 let amount = sqlite3_column_double(statement, 2)
-                let createDate = String.fromCString(UnsafePointer<CChar>(sqlite3_column_text(statement, 4))) ?? ""
+                let createDate = String(cString: sqlite3_column_text(statement, 4))
                 
                 if createDate != "" {
                     if !days.contains(createDate) {
@@ -165,15 +167,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             // 更新年月
             myFormatter.dateFormat = "yyyy 年 MM 月"
-            currentMonthLabel.text = myFormatter.stringFromDate(currentDate)
+            currentMonthLabel.text = myFormatter.string(from: currentDate)
         }
 
     }
     
     // 切換月份
-    func updateCurrentDate(dateComponents :NSDateComponents) {
-        let cal = NSCalendar.currentCalendar()
-        let newDate = cal.dateByAddingComponents(dateComponents, toDate: currentDate, options: NSCalendarOptions(rawValue: 0))
+    func updateCurrentDate(_ dateComponents :DateComponents) {
+        let cal = Calendar.current
+        let newDate = (cal as NSCalendar).date(byAdding: dateComponents, to: currentDate, options: NSCalendar.Options(rawValue: 0))
         
         currentDate = newDate!
         
@@ -184,14 +186,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     // 前一個月
     func prevBtnAction() {
-        let dateComponents = NSDateComponents()
+        var dateComponents = DateComponents()
         dateComponents.month = -1
         self.updateCurrentDate(dateComponents)
     }
     
     // 後一個月
     func nextBtnAction() {
-        let dateComponents = NSDateComponents()
+        var dateComponents = DateComponents()
         dateComponents.month = 1
         self.updateCurrentDate(dateComponents)
     }
@@ -203,7 +205,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     // 前往[新增]頁面
     func addBtnAction() {
-        myUserDefaults.setObject(0, forKey: "postID")
+        myUserDefaults.set(0, forKey: "postID")
         myUserDefaults.synchronize()
 
         self.navigationController?.pushViewController(PostViewController(), animated: false)
@@ -213,7 +215,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 // MARK: UITableView Delegate methods
     
     // 必須實作的方法：每一組有幾個 cell
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let date = days[section]
         guard let records = myRecords[date] else {
             return 0
@@ -223,15 +225,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     // 必須實作的方法：每個 cell 要顯示的內容
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // 取得 tableView 目前使用的 cell
-        var cell = tableView.dequeueReusableCellWithIdentifier("Cell")
+        var cell = tableView.dequeueReusableCell(withIdentifier: "Cell")
         
         if cell == nil {
-            cell = UITableViewCell(style: .Value1, reuseIdentifier: "Cell")
+            cell = UITableViewCell(style: .value1, reuseIdentifier: "Cell")
         }
         
-        cell!.textLabel?.textColor = UIColor.whiteColor()
+        cell!.textLabel?.textColor = UIColor.white
         cell!.detailTextLabel?.textColor = UIColor.init(red: 0.88, green: 0.83, blue: 0.73, alpha: 1)
         cell!.selectedBackgroundView = selectedBackgroundView
         
@@ -248,43 +250,43 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     // 點選 cell 後執行的動作
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 取消 cell 的選取狀態
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         
         let date = days[indexPath.section]
         guard let records = myRecords[date] else {
             return
         }
         
-        myUserDefaults.setObject(Int(records[indexPath.row]["id"]!), forKey: "postID")
+        myUserDefaults.set(Int(records[indexPath.row]["id"]!), forKey: "postID")
         myUserDefaults.synchronize()
         
         self.navigationController?.pushViewController(PostViewController(), animated: true)
     }
     
     // 有幾個 section
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return days.count
     }
     
     // section 標題
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return days[section]
     }
     
     // section 標題 高度
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
     }
 
     // section footer 高度
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return (days.count - 1) == section ? 60 : 3
     }
     
     // section header 樣式
-    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let headerView: UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
         headerView.textLabel!.textColor = UIColor.init(red: 0.88, green: 0.83, blue: 0.73, alpha: 1)
     }

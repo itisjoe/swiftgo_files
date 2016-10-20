@@ -14,11 +14,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         // 建立資料表
-        let myUserDefaults = NSUserDefaults.standardUserDefaults()
-        let dbInit = myUserDefaults.objectForKey("dbInit") as? Int
+        let myUserDefaults = UserDefaults.standard
+        let dbInit = myUserDefaults.object(forKey: "dbInit") as? Int
         if dbInit == nil {
             let dbFileName = "sqlite3.db"
             let db = SQLiteConnect(file: dbFileName)
@@ -33,8 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 ])
                 
                 if result {
-                    myUserDefaults.setObject(1, forKey: "dbInit")
-                    myUserDefaults.setObject(dbFileName, forKey: "dbFileName")
+                    myUserDefaults.set(1, forKey: "dbInit")
+                    myUserDefaults.set(dbFileName, forKey: "dbFileName")
                     myUserDefaults.synchronize()
                 }
             }
@@ -44,16 +44,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().barTintColor = UIColor.init(red: 1.0, green: 0.87, blue: 0.0, alpha: 1)
         
         // 設定導覽列預設按鈕顏色
-        UINavigationBar.appearance().tintColor = UIColor.blackColor()
+        UINavigationBar.appearance().tintColor = UIColor.black
         
         // 設定 UITableViewCell 預設底色
         UITableViewCell.appearance().backgroundColor = UIColor.init(red: 0.03, green: 0.03, blue: 0.03, alpha: 1)
 
         // 建立一個 UIWindow
-        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        self.window = UIWindow(frame: UIScreen.main.bounds)
         
         // 設置底色
-        self.window!.backgroundColor = UIColor.blackColor()
+        self.window!.backgroundColor = UIColor.black
         
         // 設置根視圖控制器
         self.window!.rootViewController = UINavigationController(rootViewController: ViewController())
