@@ -11,7 +11,7 @@ class Counter {
     }
     
     // 定義一個實體方法 會將變數屬性加上一個傳入的數字
-    func incrementBy(amount: Int) {
+    func increment(by amount: Int) {
         count += amount
     }
     
@@ -29,7 +29,7 @@ let counter = Counter()
 counter.increment()
 
 // 呼叫其內的一個實體方法, 傳入一個參數 9, 現在計數值為 10
-counter.incrementBy(9)
+counter.increment(by: 9)
 
 // 呼叫其內的一個實體方法, 將計數值歸零, 現在計數值為 0
 counter.reset()
@@ -41,7 +41,7 @@ struct Point {
     var x = 0.0, y = 0.0
     
     // 一個變異方法 會將兩個屬性各別加上一個值
-    mutating func moveByX(deltaX: Double, y deltaY: Double) {
+    mutating func moveBy(x deltaX: Double, y deltaY: Double) {
         x += deltaX
         y += deltaY
     }
@@ -51,7 +51,7 @@ struct Point {
 var somePoint = Point(x: 1.0, y: 1.0)
 
 // 修改其內的屬性值
-somePoint.moveByX(2.0, y: 3.0)
+somePoint.moveBy(x: 2.0, y: 3.0)
 
 // 現在兩個屬性已經被改變了
 // 印出：x: 3.0, y: 4.0
@@ -70,29 +70,29 @@ struct AnotherPoint {
 // 定義一個三態開關的列舉
 enum TriStateSwitch {
     // 列舉的三個成員
-    case Off, Low, High
+    case off, low, high
     
     // 變異方法 會在三個成員中依序切換
     mutating func next() {
         switch self {
-        case Off:
-            self = Low
-        case Low:
-            self = High
-        case High:
-            self = Off
+        case .off:
+            self = .low
+        case .low:
+            self = .high
+        case .high:
+            self = .off
         }
     }
 }
 
-// 宣告一個列舉的變數 且目前 ovenLight 為 TriStateSwitch.Low
-var ovenLight = TriStateSwitch.Low
+// 宣告一個列舉的變數 且目前 ovenLight 為 TriStateSwitch.low
+var ovenLight = TriStateSwitch.low
 
 // 每次呼叫這個變異方法 都會在三個成員中依序切換
 ovenLight.next()
-// 現在 ovenLight 為 .High
+// 現在 ovenLight 為 .high
 ovenLight.next()
-// 現在 ovenLight 為 .Off
+// 現在 ovenLight 為 .off
 
 
 // 定義一個類別

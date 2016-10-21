@@ -71,14 +71,14 @@ print(anotherSimpleMath.number)
 struct Color {
     let red, green, blue: Double
     
-    // 這個建構器有寫外部參數名稱跟內部參數名稱
+    // 這個建構器有寫 參數標籤 跟 參數名稱
     init(red r: Double, green g : Double, blue b: Double) {
         self.red   = r
         self.green = g
         self.blue  = b
     }
     
-    // 這個建構器則是合併成一個參數名稱 外部跟內部參數名稱相同
+    // 這個建構器則是合併成一個參數名稱
     init(white: Double) {
         red   = white
         green = white
@@ -92,13 +92,13 @@ var anotherColor = Color(white: 1.0)
 
 struct SomeNumbers {
     let number: Int
-    // 使用下底線 _ 表示要省略外部參數名稱
+    // 使用下底線 _ 表示要省略參數標籤
     init(_ n: Int) {
         number = n
     }
 }
 
-// 生成一個實體時 參數前就不需要有外部參數名稱
+// 生成一個實體時 參數前就不需要有參數標籤
 var oneNumbers = SomeNumbers(9)
 
 
@@ -234,15 +234,15 @@ if anotherAnimal == nil {
 
 
 enum TemperatureUnit {
-    case Kelvin, Celsius, Fahrenheit
+    case kelvin, celsius, fahrenheit
     init?(symbol: Character) {
         switch symbol {
         case "K":
-            self = .Kelvin
+            self = .kelvin
         case "C":
-            self = .Celsius
+            self = .celsius
         case "F":
-            self = .Fahrenheit
+            self = .fahrenheit
         default:
             return nil
         }
@@ -262,7 +262,7 @@ if anotherUnit == nil {
 
 
 enum AnotherTemperatureUnit: Character {
-    case Kelvin = "K", Celsius = "C", Fahrenheit = "F"
+    case kelvin = "K", celsius = "C", fahrenheit = "F"
 }
 
 // 可以匹配到成員的原始值 所以建構成功

@@ -19,34 +19,34 @@ class ViewController: UIViewController {
         myTextView = UITextView(frame: CGRect(x: 0, y: 0, width: 250, height: 200))
         
         // 背景顏色
-        myTextView.backgroundColor = UIColor.darkGrayColor()
+        myTextView.backgroundColor = UIColor.darkGray
 
         // 文字顏色
-        myTextView.textColor = UIColor.whiteColor()
+        myTextView.textColor = UIColor.white
         
         // 文字字型及大小
         myTextView.font = UIFont(name: "Helvetica-Light", size: 20)
         
         // 文字向左對齊
-        myTextView.textAlignment = .Left
+        myTextView.textAlignment = .left
         
         // 預設文字內容
         myTextView.text = "Swift 起步走"
 
         // 適用的鍵盤樣式 這邊選擇預設的
-        myTextView.keyboardType = .Default
+        myTextView.keyboardType = .default
         
         // 鍵盤上的 return 鍵樣式 這邊選擇預設的
-        myTextView.returnKeyType = .Default
+        myTextView.returnKeyType = .default
         
         // 文字是否可以被編輯
-        myTextView.editable = true
+        myTextView.isEditable = true
         
         // 文字是否可以被選取
-        myTextView.selectable = true
+        myTextView.isSelectable = true
         
         // 取得螢幕的尺寸
-        let fullScreenSize = UIScreen.mainScreen().bounds.size
+        let fullScreenSize = UIScreen.main.bounds.size
         
         // 設置於畫面的中間偏上位置
         myTextView.center = CGPoint(x: fullScreenSize.width * 0.5, y: fullScreenSize.height * 0.3)
@@ -59,13 +59,13 @@ class ViewController: UIViewController {
         let facebook = UIMenuItem(title: "FB", action: #selector(ViewController.sendFB))
 
         // 建立選單
-        let menu = UIMenuController.sharedMenuController()
+        let menu = UIMenuController.shared
         
         // 將新的選項加入選單
         menu.menuItems = [mail,facebook]
         
         // 增加一個觸控事件
-        let tap = UITapGestureRecognizer(target: self, action: #selector(ViewController.hideKeyboard(_:)))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(ViewController.hideKeyboard(tapG:)))
 
         tap.cancelsTouchesInView = false
         

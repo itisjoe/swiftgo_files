@@ -19,7 +19,7 @@ func addOne(number: Int) {
 
 // 呼叫函式 傳入整數 12
 // 印出：13
-addOne(12)
+addOne(number: 12)
 
 
 // 建立一個有兩個參數的函式 參數的型別分別為 String 及 Int
@@ -28,41 +28,40 @@ func hello(name: String, age: Int) {
 }
 
 // 呼叫函式
-hello("Jack", age: 25)
+hello(name: "Jack", age: 25)
 
 
 func hello2(name n: String, age a: Int) {
-    // n 跟 a 為內部參數名稱 在函式內部使用
+    // n 跟 a 為參數名稱 在函式內部使用
     print("\(n) is \(a) years old .")
 }
 
-// name 跟 age 為外部參數名稱 呼叫函式時要標註在參數之前
+// name 跟 age 為參數標籤 呼叫函式時要標註在參數之前
 hello2(name: "Jack", age: 25)
 
 
-// 第二個參數的外部參數名稱 使用下底線 _ 替換
-func hello3(name: String, _ age: Int) {
+// 參數標籤使用下底線 _ 替換
+func hello3(_ name: String, _ age: Int) {
     print("\(name) is \(age) years old .")
 }
 
-// 呼叫函式時 第二個參數就可以不用寫外部參數名稱
+// 呼叫函式時 就可以不用寫參數標籤
 hello3("Jack", 33)
 
 
-// 第一個參數不需要外部參數名稱
-// 第二個及之後的參數 可以使用其內部參數名稱作為外部參數名稱 這邊就是 age
+// 使用函式的參數名稱作為參數標籤 這邊就是 name 與 age
 func hello4(name: String, age: Int) {
     print("\(name) is \(age) years old .")
 }
 
-// 呼叫函式時 第二個參數的外部參數名稱是 age 而內部參數名稱也是 age
-hello4("Jack", age: 25)
+// 呼叫函式時 使用的參數標籤即為參數名稱
+hello4(name: "Jack", age: 25)
 
 
 func sayHello(to name: String, and name2: String) {
     print("Hello \(name) and \(name2) !")
 }
-// 外部參數名稱設為 to 跟 and
+// 參數標籤設為 to 跟 and
 // 這行看起來就像個完整的英文句子 可以明顯的知道這個函式要幹嘛
 sayHello(to: "Joe", and: "Amy")
 
@@ -72,7 +71,7 @@ func someFunction(number: Int = 12) {
 }
 
 // 印出：6
-someFunction(6)
+someFunction(number: 6)
 
 // 沒有傳入值 則會使用預設值 印出：12
 someFunction()
@@ -85,12 +84,12 @@ func arithmeticMean(numbers: Double...) -> Double {
     }
     return total / Double(numbers.count)
 }
-arithmeticMean(1, 2, 3, 4, 5) // 返回 3.0
-arithmeticMean(3, 8, 19) // 返回 10.0
+arithmeticMean(numbers: 1, 2, 3, 4, 5) // 返回 3.0
+arithmeticMean(numbers: 3, 8, 19) // 返回 10.0
 
 
-// 定義一個[有一個輸入輸出參數]的函式 參數前要加上 inout
-func newNumber(inout number: Int) {
+// 定義一個[有一個輸入輸出參數]的函式 參數型別前要加上 inout
+func newNumber(number: inout Int) {
     number *= 2
 }
 
@@ -98,7 +97,7 @@ var n = 10
 print(n) // 這時 n 為 10
 
 // 傳入的參數在函式結束後 改變仍然存在
-newNumber(&n)
+newNumber(number: &n)
 
 print(n) // 所以這時再印出 就會是 20
 
@@ -112,7 +111,7 @@ func addTen(number: Int) -> Int {
 }
 
 // 呼叫函式 傳入整數 12 會返回 22
-let newNumber = addTen(12)
+let newNumber = addTen(number: 12)
 
 // 印出：22
 print(newNumber)
@@ -129,7 +128,7 @@ func findNumbers(number: Int) -> (Int, Int) {
 }
 
 // 呼叫函式 傳入整數 12 會返回 (12, 22)
-let numbers = findNumbers(12)
+let numbers = findNumbers(number: 12)
 // numbers 為一個元組 可以自 0 開始算 依序取得其內的值
 // 印出：12 and 22
 print("\(numbers.0) and \(numbers.1)")
@@ -142,7 +141,7 @@ func findNumbers2(number: Int) -> (oldNumber: Int, newNumber: Int) {
 }
 
 // 呼叫函式 傳入整數 24 會返回 (24, 34)
-let numbers2 = findNumbers2(24)
+let numbers2 = findNumbers2(number: 24)
 // 這邊即可使用定義函式時 返回元組內的值設定的名稱
 // 印出：24 and 34
 print("\(numbers2.oldNumber) and \(numbers2.newNumber)")
@@ -162,11 +161,11 @@ func findNumbers3(arr: [Int]) -> (Int, Int)? {
 
 // 呼叫函式
 // 因為返回的是一個可選型別 這邊先做可選綁定的動作 確定有值後再印出來
-if let numbers = findNumbers3([11,22,33]) {
+if let numbers = findNumbers3(arr: [11,22,33]) {
     print("\(numbers.0) and \(numbers.1)")
 }
 // 如果傳入的陣列 內部沒有值
-if let numbers = findNumbers3([]) {
+if let numbers = findNumbers3(arr: []) {
     print("這裡不會被印出來")
 }
 
@@ -186,7 +185,7 @@ func addTwoInts(number1: Int, number2: Int) -> Int {
 
 // 定義另一個函式，有三個參數依序為
 // 型別為 (Int, Int) -> Int 的函式, Int, Int
-func printMathResult(mathFunction: (Int, Int) -> Int, _ a: Int, _ b: Int) {
+func printMathResult(_ mathFunction: (Int, Int) -> Int, _ a: Int, _ b: Int) {
     print("Result: \(mathFunction(a, b))")
 }
 
@@ -213,7 +212,7 @@ func chooseStepFunction(backwards: Bool) -> (Int) -> Int {
 // 宣告一個整數常數
 let number = 3
 // 宣告一個函式常數
-let someFunction2 = chooseStepFunction(number > 0)
+let someFunction2 = chooseStepFunction(backwards: number > 0)
 // 根據 chooseStepFunction 函式的內容 傳入 true 時 會返回 stepBackward 函式
 // 所以 someFunction2 會被指派為 stepBackward
 
@@ -235,6 +234,6 @@ func anotherChooseStepFunction(backwards: Bool) -> (Int) -> Int {
 }
 
 let number2 = -35
-let someFunction3 = anotherChooseStepFunction(number2 > 0)
+let someFunction3 = anotherChooseStepFunction(backwards: number2 > 0)
 
 someFunction3(10) // 返回 11

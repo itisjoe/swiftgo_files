@@ -28,10 +28,6 @@ var oneNumber = 9 % 4
 print(oneNumber) // 餘數等於 1
 
 
-var anotherNumber = 8.0 % 2.5 // 8.0 = (2.5 * 3.0) + 0.5
-print(anotherNumber) // 餘數等於 0.5
-
-
 let number1 = 3
 var anotherNumber1 = -number1 // 為 -3
 var finalNumber1 = -anotherNumber1 // 為 3

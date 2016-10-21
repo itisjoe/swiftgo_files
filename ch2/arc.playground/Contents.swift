@@ -187,7 +187,7 @@ class HTMLElement {
     
     // 定義為 lazy 屬性 表示只有當初始化完成以及 self 確實存在後
     // 才能存取這個屬性
-    lazy var asHTML: Void -> String = {
+    lazy var asHTML: () -> String = {
         if let text = self.text {
             return "<\(self.name)>\(text)</\(self.name)>"
         } else {
@@ -222,7 +222,7 @@ class NewHTMLElement {
     let name: String
     let text: String?
     
-    lazy var asHTML: Void -> String = {
+    lazy var asHTML: () -> String = {
         // 這邊使用無主參考 unowned
         [unowned self] in
         if let text = self.text {

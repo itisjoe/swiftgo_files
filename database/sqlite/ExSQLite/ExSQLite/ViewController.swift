@@ -16,7 +16,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         // 資料庫檔案的路徑
-        let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+        let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let sqlitePath = urls[urls.count-1].absoluteString + "sqlite3.db"
         
         // 印出儲存檔案的位置
@@ -28,29 +28,29 @@ class ViewController: UIViewController {
         if let mydb = db {
             
             // create table
-            mydb.createTable("students", columnsInfo: [
+            let _ = mydb.createTable("students", columnsInfo: [
                 "id integer primary key autoincrement",
                 "name text",
                 "height double"])
         
             // insert
-            mydb.insert("students", rowInfo: ["name":"'大強'","height":"178.2"])
+            let _ = mydb.insert("students", rowInfo: ["name":"'大強'","height":"178.2"])
         
             // select
             let statement = mydb.fetch("students", cond: "1 == 1", order: nil)
             while sqlite3_step(statement) == SQLITE_ROW{
                 let id = sqlite3_column_int(statement, 0)
-                let name = String.fromCString(UnsafePointer<CChar>(sqlite3_column_text(statement, 1)))
+                let name = String(cString: sqlite3_column_text(statement, 1))
                 let height = sqlite3_column_double(statement, 2)
-                print("\(id). \(name!) 身高： \(height)")
+                print("\(id). \(name) 身高： \(height)")
             }
             sqlite3_finalize(statement)
         
             // update
-            mydb.update("students", cond: "id = 1", rowInfo: ["name":"'小強'","height":"176.8"])
+            let _ = mydb.update("students", cond: "id = 1", rowInfo: ["name":"'小強'","height":"176.8"])
         
             // delete
-            mydb.delete("students", cond: "id = 5")
+            let _ = mydb.delete("students", cond: "id = 5")
 
         }
     

@@ -89,23 +89,23 @@ extension Int {
 // 用來表示這個整數是負數、零還是正數
 extension Int {
     enum Kind {
-        case Negative, Zero, Positive
+        case negative, zero, positive
     }
     
     // 另外還新增一個計算屬性 用來返回列舉情況
     var kind: Kind {
         switch self {
         case 0:
-            return .Zero
+            return .zero
         case let x where x > 0:
-            return .Positive
+            return .positive
         default:
-            return .Negative
+            return .negative
         }
     }
 }
 
-// 依序會印出：Positive、Negative、Zero
+// 依序會印出：positive、negative、zero
 for number in [3, -12, 0] {
     print(number.kind)
 }

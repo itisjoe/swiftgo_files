@@ -106,7 +106,7 @@ for thing in things {
         print("元組為 \(x), \(y)")
     case let oneChar as Archer:
         print("弓箭手的名字：\(oneChar.name)，介紹：\(oneChar.intro)")
-    case let stringConverter as String -> String:
+    case let stringConverter as (String) -> String:
         print(stringConverter("Jess"))
     default:
         print("沒有配對到的值")

@@ -11,13 +11,11 @@ import UIKit
 class ViewController: UIViewController, UIScrollViewDelegate {
     var myScrollView: UIScrollView!
     var pageControl: UIPageControl!
-    var fullSize :CGSize!
-    
+    // 取得螢幕的尺寸
+    var fullSize :CGSize! = UIScreen.main.bounds.size
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // 取得螢幕的尺寸
-        fullSize = UIScreen.mainScreen().bounds.size
         
         // 建立 UIScrollView
         myScrollView = UIScrollView()
@@ -39,7 +37,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         myScrollView.delegate = self
 
         // 以一頁為單位滑動
-        myScrollView.pagingEnabled = true
+        myScrollView.isPagingEnabled = true
         
         // 加入到畫面中
         self.view.addSubview(myScrollView)
@@ -56,13 +54,13 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         pageControl.currentPage = 0
         
         // 目前所在頁數的點點顏色
-        pageControl.currentPageIndicatorTintColor = UIColor.blackColor()
+        pageControl.currentPageIndicatorTintColor = UIColor.black
         
         // 其餘頁數的點點顏色
-        pageControl.pageIndicatorTintColor = UIColor.lightGrayColor()
+        pageControl.pageIndicatorTintColor = UIColor.lightGray
         
         // 增加一個值改變時的事件
-        pageControl.addTarget(self, action: #selector(ViewController.pageChanged), forControlEvents: .ValueChanged)
+        pageControl.addTarget(self, action: #selector(ViewController.pageChanged), for: .valueChanged)
         
         // 加入到基底的視圖中 (不是加到 UIScrollView 裡)
         // 因為比較後面加入 所以會蓋在 UIScrollView 上面
@@ -75,7 +73,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
             myLabel = UILabel(frame: CGRect(x: 0, y: 0, width: fullSize.width, height: 40))
             myLabel.center = CGPoint(x: fullSize.width * (0.5 + CGFloat(i)), y: fullSize.height * 0.2)
             myLabel.font = UIFont(name: "Helvetica-Light", size: 48.0)
-            myLabel.textAlignment = .Center
+            myLabel.textAlignment = .center
             myLabel.text = "\(i + 1)"
             myScrollView.addSubview(myLabel)
         }
@@ -83,14 +81,14 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     }
     
     // 滑動結束時
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         // 左右滑動到新頁時 更新 UIPageControl 顯示的頁數
         let page = Int(scrollView.contentOffset.x / scrollView.frame.size.width)
         pageControl.currentPage = page
     }
     
     // 點擊點點換頁
-    func pageChanged(sender: UIPageControl) {
+    func pageChanged(_ sender: UIPageControl) {
         // 依照目前圓點在的頁數算出位置
         var frame = myScrollView.frame
         frame.origin.x = frame.size.width * CGFloat(sender.currentPage)

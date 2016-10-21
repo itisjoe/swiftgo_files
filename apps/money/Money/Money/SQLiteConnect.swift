@@ -10,12 +10,14 @@ import Foundation
 
 class SQLiteConnect {
     
-    var db :COpaquePointer = nil
+    var db :OpaquePointer? = nil
     let sqlitePath :String
     
     init?(file :String) {
-        let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+        // 資料庫檔案的路徑
+        let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         sqlitePath = urls[urls.count-1].absoluteString + file
+        
         db = self.openDatabase(sqlitePath)
         
         if db == nil {
@@ -24,11 +26,11 @@ class SQLiteConnect {
     }
     
     // 連結資料庫 connect database
-    func openDatabase(path :String) -> COpaquePointer {
-        var connectdb: COpaquePointer = nil
+    func openDatabase(_ path :String) -> OpaquePointer? {
+        var connectdb: OpaquePointer? = nil
         if sqlite3_open(path, &connectdb) == SQLITE_OK {
             print("Successfully opened database \(path)")
-            return connectdb
+            return connectdb!
         } else {
             print("Unable to open database.")
             return nil
@@ -36,11 +38,11 @@ class SQLiteConnect {
     }
     
     // 建立資料表 create table
-    func createTable(tableName :String, columnsInfo :[String]) -> Bool {
+    func createTable(_ tableName :String, columnsInfo :[String]) -> Bool {
         let sql = "create table if not exists \(tableName) "
-            + "(\(columnsInfo.joinWithSeparator(",")))" as NSString
+            + "(\(columnsInfo.joined(separator: ",")))"
         
-        if sqlite3_exec(self.db, sql.UTF8String, nil, nil, nil) == SQLITE_OK{
+        if sqlite3_exec(self.db, sql.cString(using: String.Encoding.utf8), nil, nil, nil) == SQLITE_OK{
             return true
         }
         
@@ -48,13 +50,13 @@ class SQLiteConnect {
     }
     
     // 新增資料
-    func insert(tableName :String, rowInfo :[String:String]) -> Bool {
-        var statement :COpaquePointer = nil
+    func insert(_ tableName :String, rowInfo :[String:String]) -> Bool {
+        var statement :OpaquePointer? = nil
         let sql = "insert into \(tableName) "
-            + "(\(rowInfo.keys.joinWithSeparator(","))) "
-            + "values (\(rowInfo.values.joinWithSeparator(",")))" as NSString
+            + "(\(rowInfo.keys.joined(separator: ","))) "
+            + "values (\(rowInfo.values.joined(separator: ",")))"
         
-        if sqlite3_prepare_v2(self.db, sql.UTF8String, -1, &statement, nil) == SQLITE_OK {
+        if sqlite3_prepare_v2(self.db, sql.cString(using: String.Encoding.utf8), -1, &statement, nil) == SQLITE_OK {
             if sqlite3_step(statement) == SQLITE_DONE {
                 return true
             }
@@ -65,8 +67,8 @@ class SQLiteConnect {
     }
     
     // 讀取資料
-    func fetch(tableName :String, cond :String?, order :String?) -> COpaquePointer {
-        var statement :COpaquePointer = nil
+    func fetch(_ tableName :String, cond :String?, order :String?) -> OpaquePointer {
+        var statement :OpaquePointer? = nil
         var sql = "select * from \(tableName)"
         if let condition = cond {
             sql += " where \(condition)"
@@ -76,14 +78,14 @@ class SQLiteConnect {
             sql += " order by \(orderBy)"
         }
         
-        sqlite3_prepare_v2(self.db, (sql as NSString).UTF8String, -1, &statement, nil)
+        sqlite3_prepare_v2(self.db, sql.cString(using: String.Encoding.utf8), -1, &statement, nil)
         
-        return statement
+        return statement!
     }
     
     // 更新資料
-    func update(tableName :String, cond :String?, rowInfo :[String:String]) -> Bool {
-        var statement :COpaquePointer = nil
+    func update(_ tableName :String, cond :String?, rowInfo :[String:String]) -> Bool {
+        var statement :OpaquePointer? = nil
         var sql = "update \(tableName) set "
         
         // row info
@@ -91,14 +93,14 @@ class SQLiteConnect {
         for (k, v) in rowInfo {
             info.append("\(k) = \(v)")
         }
-        sql += info.joinWithSeparator(",")
+        sql += info.joined(separator: ",")
         
         // condition
         if let condition = cond {
             sql += " where \(condition)"
         }
         
-        if sqlite3_prepare_v2(self.db, (sql as NSString).UTF8String, -1, &statement, nil) == SQLITE_OK {
+        if sqlite3_prepare_v2(self.db, sql.cString(using: String.Encoding.utf8), -1, &statement, nil) == SQLITE_OK {
             if sqlite3_step(statement) == SQLITE_DONE {
                 return true
             }
@@ -110,8 +112,8 @@ class SQLiteConnect {
     }
     
     // 刪除資料
-    func delete(tableName :String, cond :String?) -> Bool {
-        var statement :COpaquePointer = nil
+    func delete(_ tableName :String, cond :String?) -> Bool {
+        var statement :OpaquePointer? = nil
         var sql = "delete from \(tableName)"
         
         // condition
@@ -119,7 +121,7 @@ class SQLiteConnect {
             sql += " where \(condition)"
         }
         
-        if sqlite3_prepare_v2(self.db, (sql as NSString).UTF8String, -1, &statement, nil) == SQLITE_OK {
+        if sqlite3_prepare_v2(self.db, sql.cString(using: String.Encoding.utf8), -1, &statement, nil) == SQLITE_OK {
             if sqlite3_step(statement) == SQLITE_DONE {
                 return true
             }

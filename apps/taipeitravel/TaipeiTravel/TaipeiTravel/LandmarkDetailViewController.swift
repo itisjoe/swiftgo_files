@@ -14,14 +14,11 @@ class LandmarkDetailViewController: DetailViewController {
         super.viewDidLoad()
         
         self.fetchType = "landmark"
-        
-        // 取得單筆資訊
-        let info :[String:AnyObject] = myUserDefaults.objectForKey("\(self.fetchType)Detail") as? [String:AnyObject] ?? [:]
-        
+
         let latitude = info["latitude"] as? Double ?? 0.0
         let longitude = info["longitude"] as? Double ?? 0.0
         hasMap = latitude == 0.0 && longitude == 0.0 ? false : true
-        
+
         // 設置資訊
         detail = [
             "地圖",

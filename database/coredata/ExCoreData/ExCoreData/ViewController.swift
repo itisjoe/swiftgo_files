@@ -2,27 +2,26 @@
 //  ViewController.swift
 //  ExCoreData
 //
-//  Created by joe feng on 2016/5/30.
+//  Created by joe feng on 2016/10/17.
 //  Copyright © 2016年 hsin. All rights reserved.
 //
 
 import UIKit
+import CoreData
 
 class ViewController: UIViewController {
 
-    // 用來操作 Core Data 的常數
-    let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         let myEntityName = "Student"
-        let coreDataConnect = CoreDataConnect(moc: self.moc)
+        let myContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let coreDataConnect = CoreDataConnect(context: myContext)
 
         // auto increment
-        let myUserDefaults = NSUserDefaults.standardUserDefaults()
+        let myUserDefaults = UserDefaults.standard
         var seq = 1
-        if let idSeq = myUserDefaults.objectForKey("idSeq") as? Int {
+        if let idSeq = myUserDefaults.object(forKey: "idSeq") as? Int {
             seq = idSeq + 1
         }
         
@@ -30,34 +29,34 @@ class ViewController: UIViewController {
         let insertResult = coreDataConnect.insert(
             myEntityName, attributeInfo: [
                 "id" : "\(seq)",
-                "name" : "小強",
-                "height" : "176.1"
+                "name" : "小強\(seq)",
+                "height" : "\(176.5 + Double(seq))"
             ])
         if insertResult {
             print("新增資料成功")
             
-            myUserDefaults.setObject(seq, forKey: "idSeq")
+            myUserDefaults.set(seq, forKey: "idSeq")
             myUserDefaults.synchronize()
         }
         
         // select
-        let selectResult = coreDataConnect.fetch(myEntityName, predicate: nil, sort: [["id":true]], limit: nil)
+        let selectResult = coreDataConnect.retrieve(myEntityName, predicate: nil, sort: [["id":true]], limit: nil)
         if let results = selectResult {
             for result in results {
-                print("\(result.id). \(result.name!) 身高： \(result.height)")
+                print("\(result.value(forKey: "id")!). \(result.value(forKey: "name")!) 身高： \(result.value(forKey: "height")!)")
             }
         }
         
         // update
-        let updateName = "二強"
-        var predicate = "name = '\(updateName)'"
-        let updateResult = coreDataConnect.update(myEntityName, predicate: predicate, attributeInfo: ["height":"162.2"])
+        let updateId = seq - 1
+        var predicate = "id = \(updateId)"
+        let updateResult = coreDataConnect.update(myEntityName, predicate: predicate, attributeInfo: ["height":"\(seq * 10)"])
         if updateResult {
             print("更新資料成功")
         }
         
         // delete
-        let deleteID = 2
+        let deleteID = seq - 2
         predicate = "id = \(deleteID)"
         let deleteResult = coreDataConnect.delete(myEntityName, predicate: predicate)
         if deleteResult {

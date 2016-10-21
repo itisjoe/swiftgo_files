@@ -1,86 +1,86 @@
 
 //這是一個定義指南針四個方位的列舉
 enum CompassPoint {
-    case North
-    case South
-    case East
-    case West
+    case north
+    case south
+    case east
+    case west
 }
 
 // 多個成員值可以寫在同一行 以逗號 , 隔開
 // 這是一個定義太陽系八大行星的列舉
 enum Planet {
-    case Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune
+    case mercury, venus, earth, mars, jupiter, saturn, uranus, neptune
 }
 
 
 // 這邊使用上面定義過的指南針方位的列舉
 
-// 型別為 CompassPoint 的一個變數 值為其列舉內的 West
-var directionToHead = CompassPoint.West
+// 型別為 CompassPoint 的一個變數 值為其列舉內的 west
+var directionToHead = CompassPoint.west
 
 // 這時已經可以自動推斷這個變數的型別為 CompassPoint
 // 如果要再指派新的值 可以省略列舉的型別名稱
-directionToHead = .North
+directionToHead = .north
 
 
-directionToHead = .South
+directionToHead = .south
 switch directionToHead {
-case .North:
+case .north:
     print("Lots of planets have a north")
-case .South:
+case .south:
     print("Watch out for penguins") // 這行會被印出
-case .East:
+case .east:
     print("Where the sun rises")
-case .West:
+case .west:
     print("Where the skies are blue")
 }
 
 
 enum Barcode {
-    case UPCA(Int, Int, Int, Int)
-    case QRCode(String)
+    case upc(Int, Int, Int, Int)
+    case qrCode(String)
 }
 
 
-// 指派 Barcode 型別 成員值為 UPCA
+// 指派 Barcode 型別 成員值為 upc
 // 相關值為 (8, 85909, 51226, 3)
-var productBarcode = Barcode.UPCA(8, 85909, 51226, 3)
+var productBarcode = Barcode.upc(8, 85909, 51226, 3)
 
 // 如果要修改為儲存 QR Code 條碼
-productBarcode = .QRCode("ABCDEFG")
+productBarcode = .qrCode("ABCDEFG")
 
-// 這時 .UPCA(8, 85909, 51226, 3) 會被 .QRCode("ABCDEFG") 所取代
+// 這時 .upc(8, 85909, 51226, 3) 會被 .qrCode("ABCDEFG") 所取代
 // 一個變數 同一時間只能儲存一個列舉的成員值(及其相關值)
 
 
 switch productBarcode {
-case .UPCA(let numberSystem, let manufacturer, let product, let check):
+case .upc(let numberSystem, let manufacturer, let product, let check):
     print("UPC-A: \(numberSystem), \(manufacturer), \(product), \(check).")
-case .QRCode(let productCode):
+case .qrCode(let productCode):
     print("QR Code: \(productCode).") // 會印出這行
 }
 
 
 switch productBarcode {
-case let .UPCA(numberSystem, manufacturer, product, check):
+case let .upc(numberSystem, manufacturer, product, check):
     print("UPC-A: \(numberSystem), \(manufacturer), \(product), \(check).")
-case let .QRCode(productCode):
+case let .qrCode(productCode):
     print("QR Code: \(productCode).")
 }
 
 
 enum WeekDay: Int {
-    case Monday = 1
-    case Tuesday = 2
-    case Wednesday = 3
-    case Thursday = 4
-    case Friday = 5
-    case Saturday = 6
-    case Sunday = 7
+    case monday = 1
+    case tuesday = 2
+    case wednesday = 3
+    case thursday = 4
+    case friday = 5
+    case saturday = 6
+    case sunday = 7
 }
 
-let today = WeekDay.Friday
+let today = WeekDay.friday
 // 使用 rawValue 屬性來取得原始值
 // 印出：5
 print(today.rawValue)
@@ -88,38 +88,38 @@ print(today.rawValue)
 
 // 第一個成員有設置原始值 1, 接著下去成員的原始值就是 2, 3, 4 這樣遞增下去
 enum SomePlanet: Int {
-    case Mercury = 1, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune
+    case mercury = 1, venus, earth, mars, jupiter, saturn, uranus, neptune
 }
 
-let ourPlanet = SomePlanet.Earth
+let ourPlanet = SomePlanet.earth
 
 // 印出：3
 print(ourPlanet.rawValue)
 
 
 enum AnotherCompassPoint: String {
-    case North, South, East, West
+    case north, south, east, west
 }
 
-let directionPoint = AnotherCompassPoint.East
+let directionPoint = AnotherCompassPoint.east
 
-// 印出：East
+// 印出：east
 print(directionPoint.rawValue)
 
 
 // 一個使用原始值的列舉 原始值依序是 1,2,3,4,5,6,7,8
 enum OtherPlanet: Int {
-    case Mercury = 1, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune
+    case mercury = 1, venus, earth, mars, jupiter, saturn, uranus, neptune
 }
 
 let possiblePlanet = OtherPlanet(rawValue: 7)
-// possiblePlanet 型別為 OtherPlanet? 值為 OtherPlanet.Uranus
+// possiblePlanet 型別為 OtherPlanet? 值為 OtherPlanet.uranus
 
 
 let positionToFind = 9
 if let targetPlanet = OtherPlanet(rawValue: positionToFind) {
     switch targetPlanet {
-    case .Earth:
+    case .earth:
         print("We are here !")
     default:
         print("Not Safe !")
@@ -133,40 +133,40 @@ if let targetPlanet = OtherPlanet(rawValue: positionToFind) {
 // 定義一個列舉
 enum ArithmeticExpression {
     // 一個純數字成員
-    case Number(Int)
+    case number(Int)
     
     // 兩個成員 表示為加法及乘法運算 各自有兩個[列舉的實體]相關值
-    indirect case Addition(ArithmeticExpression, ArithmeticExpression)
-    indirect case Multiplication(ArithmeticExpression, ArithmeticExpression)
+    indirect case addition(ArithmeticExpression, ArithmeticExpression)
+    indirect case multiplication(ArithmeticExpression, ArithmeticExpression)
 }
 
 // 或是你也可以把 indirect 加在 enum 前面
 // 表示整個列舉都是可以遞迴的
 /*
 indirect enum ArithmeticExpression {
-    case Number(Int)
-    case Addition(ArithmeticExpression, ArithmeticExpression)
-    case Multiplication(ArithmeticExpression, ArithmeticExpression)
+    case number(Int)
+    case addition(ArithmeticExpression, ArithmeticExpression)
+    case multiplication(ArithmeticExpression, ArithmeticExpression)
 }
 */
 
 
-func evaluate(expression: ArithmeticExpression) -> Int {
+func evaluate(_ expression: ArithmeticExpression) -> Int {
     switch expression {
-    case .Number(let value):
+    case .number(let value):
         return value
-    case .Addition(let left, let right):
+    case .addition(let left, let right):
         return evaluate(left) + evaluate(right)
-    case .Multiplication(let left, let right):
+    case .multiplication(let left, let right):
         return evaluate(left) * evaluate(right)
     }
 }
 
 // 計算 (5 + 4) * 2
-let five = ArithmeticExpression.Number(5)
-let four = ArithmeticExpression.Number(4)
-let sum = ArithmeticExpression.Addition(five, four)
-let product = ArithmeticExpression.Multiplication(sum, ArithmeticExpression.Number(2))
+let five = ArithmeticExpression.number(5)
+let four = ArithmeticExpression.number(4)
+let sum = ArithmeticExpression.addition(five, four)
+let product = ArithmeticExpression.multiplication(sum, ArithmeticExpression.number(2))
 
 // 印出：18
 print(evaluate(product))

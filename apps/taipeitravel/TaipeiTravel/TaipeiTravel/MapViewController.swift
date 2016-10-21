@@ -11,9 +11,10 @@ import MapKit
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate  {
     
-    let fullSize :CGSize = UIScreen.mainScreen().bounds.size
-    let myUserDefaults :NSUserDefaults = NSUserDefaults.standardUserDefaults()
+    let fullSize :CGSize = UIScreen.main.bounds.size
+    let myUserDefaults :UserDefaults = UserDefaults.standard
     var fetchType :String = ""
+    var info :[String:AnyObject]! = nil
     var latitude :Double = 0.0
     var longitude :Double = 0.0
     var myMapView :MKMapView!
@@ -22,11 +23,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         super.viewDidLoad()
         
         // 樣式
-        self.view.backgroundColor = UIColor.whiteColor()
-        self.navigationController?.navigationBar.translucent = false
-        
-        // 取得地圖資訊
-        let info :[String:AnyObject] = myUserDefaults.objectForKey("\(self.fetchType)Detail") as? [String:AnyObject] ?? [:]
+        self.view.backgroundColor = UIColor.white
+        self.navigationController?.navigationBar.isTranslucent = false
         
         latitude = info["latitude"] as? Double ?? 0.0
         longitude = info["longitude"] as? Double ?? 0.0
@@ -40,13 +38,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         myMapView.delegate = self
         
         // 地圖樣式
-        myMapView.mapType = .Standard
+        myMapView.mapType = .standard
         
         // 顯示自身定位位置
         myMapView.showsUserLocation = true
         
         // 允許縮放地圖
-        myMapView.zoomEnabled = true
+        myMapView.isZoomEnabled = true
         
         // 地圖預設顯示的範圍大小 (數字越小越精確)
         let latDelta = 0.005

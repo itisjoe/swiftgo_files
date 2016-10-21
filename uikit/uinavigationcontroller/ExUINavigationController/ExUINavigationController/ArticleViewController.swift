@@ -14,27 +14,27 @@ class ArticleViewController: UIViewController {
         super.viewDidLoad()
 
         // 底色
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor.white
         
         // 導覽列標題
         self.title = "Article"
         
         // 導覽列底色
-        self.navigationController?.navigationBar.barTintColor = UIColor.cyanColor()
+        self.navigationController!.navigationBar.barTintColor = UIColor.cyan
         
         // 導覽列是否半透明
-        self.navigationController?.navigationBar.translucent = false
+        self.navigationController!.navigationBar.isTranslucent = false
         
         // 導覽列右邊按鈕
-        let rightButton = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: #selector(ArticleViewController.edit))
+        let rightButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(ArticleViewController.edit))
         // 加到導覽列中
         self.navigationItem.rightBarButtonItem = rightButton
         
         // 建立一個按鈕
         let myButton = UIButton(frame: CGRect(x: 100, y: 100, width: 120, height: 40))
-        myButton.setTitle("回前頁", forState: .Normal)
-        myButton.backgroundColor = UIColor.blueColor()
-        myButton.addTarget(self, action: #selector(ArticleViewController.back), forControlEvents: .TouchUpInside)
+        myButton.setTitle("回前頁", for: .normal)
+        myButton.backgroundColor = UIColor.blue
+        myButton.addTarget(self, action: #selector(ArticleViewController.back), for: .touchUpInside)
         self.view.addSubview(myButton)
         
     }
@@ -44,7 +44,7 @@ class ArticleViewController: UIViewController {
     }
     
     func back() {
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController!.popViewController(animated: true)
     }
 
     override func didReceiveMemoryWarning() {

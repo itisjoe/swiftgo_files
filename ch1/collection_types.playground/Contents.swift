@@ -20,15 +20,15 @@ arr3 = []
 var anotherArr: [Int] = []
 
 
-var threeInts = [Int](count: 3, repeatedValue:0)
+var threeInts = Array(repeating: 0, count: 3)
 // threeInts 是一種 [Int] 陣列, 等於 [0, 0, 0]
 
 
 // 首先創建一個 [0,0,0] 的陣列
-var secondThreeInts = [Int](count: 3, repeatedValue:0)
+var secondThreeInts = Array(repeating: 0, count: 3)
 
 // 接著再創建一個 [2,2,2] 的陣列
-var anotherThreeInts = [Int](count: 3, repeatedValue:2)
+var anotherThreeInts = Array(repeating: 2, count: 3)
 
 // 最後將兩個陣列合併
 var SixInts = secondThreeInts + anotherThreeInts
@@ -82,14 +82,14 @@ var arr6 = ["Apples", "Eggs"]
 arr6.append("Milk") // 加入新的值 順序會在最後一個
 // 現在 arr6 會變成 ["Apples", "Eggs", "Milk"]
 
-// 如果要選擇加入的索引值的位置 使用 insert(_:atIndex:) 方法
-// arr6.insert(要加入的值, atIndex:要加入的索引值位置)
-arr6.insert("Rice" ,atIndex:0 )
+// 如果要選擇加入的索引值的位置 使用 insert(_:at:) 方法
+// arr6.insert(要加入的值, at:要加入的索引值位置)
+arr6.insert("Rice" ,at: 0)
 // 現在 arr6 會變成 ["Rice" ,"Apples", "Eggs", "Milk"]
 // 所有索引值在後面的都會順延往後一個位置
 
-// 移除一個索引位置的值 使用 removeAtIndex(_:) 方法
-arr6.removeAtIndex(1) // 將排在第二個的 Apples 移除
+// 移除一個索引位置的值 使用 remove(at:) 方法
+arr6.remove(at:1) // 將排在第二個的 Apples 移除
 // 所有後面的值都會遞補向前一個位置
 // 現在 arr6 會變成 ["Rice", "Eggs", "Milk"]
 
@@ -108,8 +108,8 @@ for item in arr7 {
 // Eggs
 // Milk
 
-// 當你同時也需要獲得陣列值時 可以使用 enumerate() 方法
-for (index, value) in arr7.enumerate() {
+// 當你同時也需要獲得陣列值時 可以使用 enumerated() 方法
+for (index, value) in arr7.enumerated() {
     print("Item \(index + 1): \(value)")
 }
 // 會依序印出：
@@ -178,8 +178,8 @@ for item in mySet3 {
 // Apples
 // Eggs
 
-// 因為 Set 沒有順序, 可以使用 sort() 方法來返回一個有序的陣列
-for item in mySet3.sort() {
+// 因為 Set 沒有順序, 可以使用 sorted() 方法來返回一個有序的陣列
+for item in mySet3.sorted() {
     print(item)
 }
 // 會印出：
@@ -192,17 +192,17 @@ let oddDigits: Set = [1, 3, 5, 7, 9]
 let evenDigits: Set = [0, 2, 4, 6, 8]
 let singleDigitPrimeNumbers: Set = [2, 3, 5, 7]
 
-oddDigits.intersect(evenDigits).sort()
+oddDigits.intersection(evenDigits).sorted()
 // [] 空 Set 因為兩個 Set 沒有交集
 
-oddDigits.exclusiveOr(singleDigitPrimeNumbers).sort()
+oddDigits.symmetricDifference(singleDigitPrimeNumbers).sorted()
 // [1, 2, 9] 因為兩個 Set 都有 3,5,7
 // 所以返回兩個 Set 中 除了這三個值以外的值
 
-oddDigits.union(evenDigits).sort()
+oddDigits.union(evenDigits).sorted()
 // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] 包含兩個 Set 中所有的值
 
-oddDigits.subtract(singleDigitPrimeNumbers).sort()
+oddDigits.subtracting(singleDigitPrimeNumbers).sorted()
 // [1, 9] 因為 3,5,7 在 singleDigitPrimeNumbers 內
 // 所以返回 oddDigits 中 除了這三個值之外的值
 
@@ -211,13 +211,13 @@ let houseAnimals: Set = ["狗", "貓"]
 let farmAnimals: Set = ["牛", "雞", "羊", "狗", "貓"]
 let cityAnimals: Set = ["鳥", "鼠"]
 
-houseAnimals.isSubsetOf(farmAnimals)
+houseAnimals.isSubset(of:farmAnimals)
 // 返回 true 因為 farmAnimals 包含 houseAnimals 內所有的值
 
-farmAnimals.isSupersetOf(houseAnimals)
+farmAnimals.isSuperset(of:houseAnimals)
 // 與上一行意思一樣 只是效果相反 所以也是返回 true
 
-farmAnimals.isDisjointWith(cityAnimals)
+farmAnimals.isDisjoint(with:cityAnimals)
 // 返回 true 因為 farmAnimals 跟 cityAnimals 沒有交集
 
 
@@ -271,9 +271,9 @@ myDict3.updateValue("London Heathrow", forKey: "LHR")
 // 印出：London Heathrow
 print(myDict3["LHR"])
 
-// 使用 removeValueForKey(_:) 移除一個值
+// 使用 removeValue(forKey:) 移除一個值
 // 返回被刪除的值, 如果沒有對應的值的話則會返回 nil
-myDict3.removeValueForKey("DUB")
+myDict3.removeValue(forKey: "DUB")
 
 
 var myDict4 = ["LHR": "London", "DUB": "Dublin"]
@@ -286,9 +286,9 @@ var someArr1 = [String](myDict4.keys)
 var someArr2 = [String](myDict4.values)
 // someArr2 為 ["London", "Dublin"]
 
-// 如果需要固定順序的話 可以加上 sort() 方法
-someArr1.sort()
-someArr2.sort()
+// 如果需要固定順序的話 可以加上 sorted() 方法
+someArr1.sorted()
+someArr2.sorted()
 
 
 var myDict5 = ["LHR": "London", "DUB": "Dublin"]

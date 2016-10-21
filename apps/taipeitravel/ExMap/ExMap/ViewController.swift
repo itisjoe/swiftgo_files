@@ -32,7 +32,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         
         
         // 取得螢幕的尺寸
-        let fullSize = UIScreen.mainScreen().bounds.size
+        let fullSize = UIScreen.main.bounds.size
 
         // 建立一個 MKMapView
         myMapView = MKMapView(frame: CGRect(x: 0, y: 20, width: fullSize.width, height: fullSize.height - 20))
@@ -41,13 +41,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         myMapView.delegate = self
 
         // 地圖樣式
-        myMapView.mapType = .Standard
-        
+        myMapView.mapType = .standard
+
         // 顯示自身定位位置
         myMapView.showsUserLocation = true
         
         // 允許縮放地圖
-        myMapView.zoomEnabled = true
+        myMapView.isZoomEnabled = true
         
         // 地圖預設顯示的範圍大小 (數字越小越精確)
         let latDelta = 0.05
@@ -56,7 +56,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         
         // 設置地圖顯示的範圍與中心點座標
         let center:CLLocation = CLLocation(latitude: 25.05, longitude: 121.515)
-        let currentRegion:MKCoordinateRegion = MKCoordinateRegion(center: center.coordinate, span: currentLocationSpan)
+        let currentRegion = MKCoordinateRegion(center: center.coordinate, span: currentLocationSpan)
         myMapView.setRegion(currentRegion, animated: true)
         
         // 加入到畫面中
@@ -78,11 +78,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
 
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         // 首次使用 向使用者詢問定位自身位置權限
-        if CLLocationManager.authorizationStatus() == .NotDetermined {
+        if CLLocationManager.authorizationStatus() == .notDetermined {
             // 取得定位服務授權
             myLocationManager.requestWhenInUseAuthorization()
 
@@ -90,21 +90,21 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             myLocationManager.startUpdatingLocation()
         }
         // 使用者已經拒絕定位自身位置權限
-        else if CLLocationManager.authorizationStatus() == .Denied {
+        else if CLLocationManager.authorizationStatus() == .denied {
             // 提示可至[設定]中開啟權限
-            let alertController = UIAlertController( title: "定位權限已關閉", message: "如要變更權限，請至 設定 > 隱私權 > 定位服務 開啟", preferredStyle: .Alert)
-            let okAction = UIAlertAction(title: "確認", style: .Default, handler:nil)
+            let alertController = UIAlertController( title: "定位權限已關閉", message: "如要變更權限，請至 設定 > 隱私權 > 定位服務 開啟", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "確認", style: .default, handler:nil)
             alertController.addAction(okAction)
-            self.presentViewController( alertController, animated: true, completion: nil)
+            self.present( alertController, animated: true, completion: nil)
         }
         // 使用者已經同意定位自身位置權限
-        else if CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse {
+        else if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
             // 開始定位自身位置
             myLocationManager.startUpdatingLocation()
         }
     }
 
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
         // 停止定位自身位置
@@ -114,11 +114,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
 // MARK: MKMapViewDelegate Methods
     
     //自定義大頭針樣式
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is MKUserLocation {
             // 建立可重複使用的 MKAnnotationView
             let reuseId = "MyPin"
-            var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
+            var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
             if pinView == nil {
                 // 建立一個地圖圖示視圖
                 pinView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
@@ -141,7 +141,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             
             // 建立可重複使用的 MKPinAnnotationView
             let reuseId = "Pin"
-            var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
+            var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
             if pinView == nil {
                 // 建立一個大頭針視圖
                 pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
@@ -150,9 +150,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
                 // 會以落下釘在地圖上的方式出現
                 pinView?.animatesDrop = true
                 // 大頭針的顏色
-                pinView?.pinTintColor = UIColor.blueColor()
+                pinView?.pinTintColor = UIColor.blue
                 // 這邊將額外視圖的右邊視圖設為一個按鈕
-                pinView?.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
+                pinView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
             } else {
                 pinView?.annotation = annotation
             }
@@ -162,29 +162,29 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
 
     }
 
-    func mapView(mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
         print("地圖縮放或滑動時")
     }
 
-    func mapViewDidFinishLoadingMap(mapView: MKMapView) {
+    func mapViewDidFinishLoadingMap(_ mapView: MKMapView) {
         print("載入地圖完成時")
     }
     
-    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         print("點擊大頭針的說明")
     }
     
-    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         print("點擊大頭針")
     }
     
-    func mapView(mapView: MKMapView, didDeselectAnnotationView view: MKAnnotationView) {
+    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
         print("取消點擊大頭針")
     }
 
 // MARK: CLLocationManagerDelegate Methods
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         // 印出目前所在位置座標
         let currentLocation :CLLocation = locations[0] as CLLocation
         print("\(currentLocation.coordinate.latitude), \(currentLocation.coordinate.longitude)")

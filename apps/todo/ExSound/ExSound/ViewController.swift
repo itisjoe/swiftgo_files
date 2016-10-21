@@ -16,9 +16,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         // 建立播放器
-        let soundPath = NSBundle.mainBundle().pathForResource("woohoo", ofType: "wav")
+        let soundPath = Bundle.main.path(forResource: "woohoo", ofType: "wav")
         do {
-            myPlayer = try AVAudioPlayer(contentsOfURL: NSURL.fileURLWithPath(soundPath!))
+            myPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: soundPath!))
 
             // 重複播放次數 設為 0 則是只播放一次 不重複
             myPlayer.numberOfLoops = 0
@@ -30,9 +30,9 @@ class ViewController: UIViewController {
 
         // 建立一個按鈕
         let myButton = UIButton(frame: CGRect(x: 100, y: 200, width: 100, height: 60))
-        myButton.setTitle("音效", forState: .Normal)
-        myButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
-        myButton.addTarget(self, action: #selector(ViewController.go), forControlEvents: .TouchUpInside)
+        myButton.setTitle("音效", for: .normal)
+        myButton.setTitleColor(UIColor.blue, for: .normal)
+        myButton.addTarget(self, action: #selector(ViewController.go), for: .touchUpInside)
         self.view.addSubview(myButton)
     
     }

@@ -16,7 +16,7 @@ class MyCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
 
         // 取得螢幕寬度
-        let w = Double(UIScreen.mainScreen().bounds.size.width)
+        let w = Double(UIScreen.main.bounds.size.width)
         
         // 建立一個 UIImageView
         imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: w/3 - 10.0, height: w/3 - 10.0))
@@ -24,8 +24,8 @@ class MyCollectionViewCell: UICollectionViewCell {
         
         // 建立一個 UILabel
         titleLabel = UILabel(frame:CGRect(x: 0, y: 0, width: w/3 - 10.0, height: 40))
-        titleLabel.textAlignment = .Center
-        titleLabel.textColor = UIColor.orangeColor()
+        titleLabel.textAlignment = .center
+        titleLabel.textColor = UIColor.orange
         self.addSubview(titleLabel)
     }
     

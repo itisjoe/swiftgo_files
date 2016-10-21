@@ -28,7 +28,7 @@ class ToiletMainViewController: BaseMainViewController {
         self.addData()
     }
     
-    override func goDetail(index: Int) {
+    override func goDetail(_ index: Int) {
         let thisData = self.apiData[self.apiDataForDistance[index].index]
         let type = thisData["類別"] as? String ?? ""
 
@@ -46,34 +46,33 @@ class ToiletMainViewController: BaseMainViewController {
         let type3 = thisData["貼心公廁"] as? String ?? ""
         
         var latitude = 0.0
-        if let num = thisData["緯度"] as? NSString {
-            latitude = num.doubleValue
+        if let num = thisData["緯度"] as? String {
+            latitude = Double(num)!
         }
         
         var longitude = 0.0
-        if let num = thisData["經度"] as? NSString {
-            longitude = num.doubleValue
+        if let num = thisData["經度"] as? String {
+            longitude = Double(num)!
         }
         
         let info :[String:AnyObject] = [
-            "title" : title,
-            "number" : number,
-            "type" : type,
-            "address" : address,
-            "type1" : type1,
-            "type2" : type2,
-            "type3" : type3,
-            "latitude" : latitude,
-            "longitude" : longitude,
+            "title" : title as AnyObject,
+            "number" : number as AnyObject,
+            "type" : type as AnyObject,
+            "address" : address as AnyObject,
+            "type1" : type1 as AnyObject,
+            "type2" : type2 as AnyObject,
+            "type3" : type3 as AnyObject,
+            "latitude" : latitude as AnyObject,
+            "longitude" : longitude as AnyObject,
         ]
-        
-        self.myUserDefaults.setObject(info, forKey: "\(self.fetchType)Detail")
-        self.myUserDefaults.synchronize()
-        
+
         print(info["title"] as? String ?? "NO Title")
         
-        self.navigationController?.pushViewController(ToiletDetailViewController(), animated: true)
+        let detailViewController = ToiletDetailViewController()
+        detailViewController.info = info
         
+        self.navigationController?.pushViewController(detailViewController, animated: true)
     }
 
 }

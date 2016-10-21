@@ -18,8 +18,8 @@ class ChechedRecordsViewController: BaseViewController {
         checkStatus = true
         
         // 建立 UITableView
-        myTableView = UITableView(frame: CGRect(x: 0, y: 0, width: fullsize.width, height: fullsize.height - 64), style: .Plain)
-        myTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        myTableView = UITableView(frame: CGRect(x: 0, y: 0, width: fullsize.width, height: fullsize.height - 64), style: .plain)
+        myTableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         myTableView.delegate = self
         myTableView.dataSource = self
         myTableView.allowsSelection = true

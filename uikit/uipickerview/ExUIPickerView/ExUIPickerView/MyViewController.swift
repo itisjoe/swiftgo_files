@@ -16,25 +16,25 @@ class MyViewController: UIViewController, UIPickerViewDelegate, UIPickerViewData
     var whatMeal = "早餐"
 
     // UIPickerViewDataSource 必須實作的方法：UIPickerView 有幾列可以選擇
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 2
     }
     
     // UIPickerViewDataSource 必須實作的方法：UIPickerView 各列有多少行資料
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         // 設置第一列時
         if component == 0 {
             // 返回陣列 week 的成員數量
             return week.count
         }
-
+        
         // 否則就是設置第二列
         // 返回陣列 meals 的成員數量
         return meals.count
     }
     
     // UIPickerView 每個選項顯示的資料
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         // 設置第一列時
         if component == 0 {
             // 設置為陣列 week 的第 row 項資料
@@ -47,7 +47,7 @@ class MyViewController: UIViewController, UIPickerViewDelegate, UIPickerViewData
     }
     
     // UIPickerView 改變選擇後執行的動作
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         // 改變第一列時
         if component == 0 {
             // whatDay 設置為陣列 week 的第 row 項資料

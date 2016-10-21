@@ -6,11 +6,12 @@ func addTwoInts(number1: Int, number2: Int) -> Int {
 
 // 建立另一個函式，有三個參數依序為
 // 型別為 (Int, Int) -> Int 的函式, Int, Int
-func printMathResult(mathFunction: (Int, Int) -> Int, _ a: Int, _ b: Int) {
+func printMathResult(_ mathFunction: (Int, Int) -> Int, _ a: Int, _ b: Int) {
     print("Result: \(mathFunction(a, b))")
 }
 
 
+// 呼叫 printMathResult() 函式 參數分別為 閉包, Int, Int
 printMathResult({(number1: Int, number2: Int) -> Int in
     return number1 + number2
     }, 12, 85)
@@ -57,11 +58,11 @@ printMathResult(+, 12, 85)
 func someFunction(closure: () -> ()) {
     // 內部執行的程式
 }
-// 內部參數名稱為 closure
+// 參數名稱為 closure
 // 閉包的型別為 () -> () 沒有參數也沒有返回值
 
 // 不使用尾隨閉包進行函式呼叫
-someFunction({
+someFunction(closure: {
     // 閉包內的程式
 })
 // 可以看到這個閉包作為參數 是放在 () 裡面
@@ -120,23 +121,17 @@ let alsoIncrementByTen = incrementByTen
 alsoIncrementByTen() // 50
 
 
-func someFunctionWithNoescapeClosure(@noescape closure: () -> Void) {
-    // 而這個閉包的生命週期只在這個函式內
-    closure()
-}
-
-
-// 宣告一個函式之外的變數 是一個陣列 陣列成員的型別為閉包 () -> Void
+// 參數為一個閉包的函式 參數型別前面標註 @escaping
 var completionHandlers: [() -> Void] = []
-
-// 接著定義一個函式 參數為一個閉包 型別與上面陣列成員的型別一樣
-func someFunctionWithEscapingClosure(completionHandler: () -> Void) {
-    // 這個函式將閉包加入一個函式之外的陣列變數中
+func someFunctionWithEscapingClosure(completionHandler: @escaping () -> Void) {
     completionHandlers.append(completionHandler)
 }
 
-// 如果將這個函式的參數前面加上 @noescape 的話會報錯誤 因為閉包逃逸了
 
+// 定義另一個[參數不為逃逸的閉包]的函式
+func someFunctionWithNonescapingClosure(closure: () -> Void) {
+    closure()
+}
 
 // 定義一個類別
 class SomeClass {
@@ -144,9 +139,14 @@ class SomeClass {
     func doSomething() {
         // 使用到前面定義的兩個函式 都使用了尾隨閉包來讓語法更為簡潔
         // 傳入當參數的閉包 內部都是將實體的屬性指派為新的值
+        
+        // 參數型別標註為 @escaping 的閉包
+        // 需要顯式地參考 self
         someFunctionWithEscapingClosure { self.x = 100 }
-        // 可以看到這個標註 @noescape 的參數的閉包 其內可以隱式的參考 self
-        someFunctionWithNoescapeClosure { x = 200 }
+
+        // 而為非逃逸的閉包
+        // 其內可以隱式地參考 self
+        someFunctionWithNonescapingClosure { x = 200 }
     }
 }
 
@@ -173,7 +173,7 @@ var customersInLine = ["Albee", "Alex", "Eddie", "Zack", "Kevin"]
 print(customersInLine.count)
 
 // 接著宣告一個閉包 會移除掉陣列的第一個成員
-let customerProvider = { customersInLine.removeAtIndex(0) }
+let customerProvider = { customersInLine.remove(at: 0) }
 
 // 這時仍然是印出：5
 print(customersInLine.count)
@@ -182,14 +182,14 @@ print(customersInLine.count)
 // 印出：開始移除 Albee ！
 print("開始移除 \(customerProvider()) ！")
 
-// 這時就只剩下 4 個成員了
+// 這時就只剩下 4 個成員了 印出：4
 print(customersInLine.count)
 
 
 // 這時 customersInLine 為 ["Alex", "Eddie", "Zack", "Kevin"]
 
-// 定義一個閉包作為參數的函式
-func serveCustomer(customerProvider: () -> String) {
+// 定義一個[參數為閉包]的函式
+func serve(customer customerProvider: () -> String) {
     // 函式內部會呼叫這個閉包
     print("開始移除 \(customerProvider()) ！")
 }
@@ -197,19 +197,19 @@ func serveCustomer(customerProvider: () -> String) {
 // 呼叫函式時 [移除陣列第一個成員]這個動作被當做閉包的內容
 // 閉包被當做參數傳入函式
 // 這時才會移除陣列第一個成員
-serveCustomer( { customersInLine.removeAtIndex(0) } )
+serve(customer: { customersInLine.remove(at: 0) } )
 
 
 // 這時 customersInLine 為 ["Eddie", "Zack", "Kevin"]
 
-// 這個函式的參數前面標註了 @autoclosure 表示這參數可以是一個自動閉包的簡化寫法
-func serveCustomer(@autoclosure customerProvider: () -> String) {
+// 這個函式的參數型別前面標註了 @autoclosure 表示這參數可以是一個自動閉包的簡化寫法
+func serve(customer customerProvider: @autoclosure () -> String) {
     print("開始移除 \(customerProvider()) ！")
 }
 
-// 因為函式的參數有標註 @autoclosure 這個參數可以不用大括號 {}
+// 因為函式的參數型別有標註 @autoclosure 這個參數可以不用大括號 {}
 // 而僅僅只需要[移除第一個成員]這個表達式 而這個表達式會返回[被移除的成員的值]
-serveCustomer(customersInLine.removeAtIndex(0))
+serve(customer: customersInLine.remove(at: 0))
 
 
 // 這時 customersInLine 為 ["Zack", "Kevin"]
@@ -217,16 +217,16 @@ serveCustomer(customersInLine.removeAtIndex(0))
 // 宣告另一個變數 為一個陣列 其內成員的型別為 () -> String
 var customerProviders: [() -> String] = []
 
-// 定義一個函式 參數標註 @autoclosure(escaping) 表示參數是一個可逃逸自動閉包
-func collectCustomerProviders(@autoclosure(escaping) customerProvider: () -> String) {
+// 定義一個函式 參數型別前面標註 @autoclosure @escaping 表示參數是一個可逃逸自動閉包
+func collectCustomerProviders(_ customerProvider: @autoclosure @escaping () -> String) {
     // 函式內部的動作是將當做參數的這個閉包 再加入新的陣列中 因為可逃逸 所以不會出錯
     customerProviders.append(customerProvider)
 }
 
 // 呼叫兩次函式
 // 會將 customersInLine 剩餘的兩個成員都移除並轉加入新的陣列中
-collectCustomerProviders(customersInLine.removeAtIndex(0))
-collectCustomerProviders(customersInLine.removeAtIndex(0))
+collectCustomerProviders(customersInLine.remove(at: 0))
+collectCustomerProviders(customersInLine.remove(at: 0))
 
 // 印出：獲得了 2 個成員
 print("獲得了 \(customerProviders.count) 個成員")
@@ -238,3 +238,4 @@ for customerProvider in customerProviders {
 // 依序印出：
 // 開始移除 Zack ！
 // 開始移除 Kevin ！
+

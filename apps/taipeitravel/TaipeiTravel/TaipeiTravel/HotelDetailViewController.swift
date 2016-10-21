@@ -14,10 +14,7 @@ class HotelDetailViewController: DetailViewController {
         super.viewDidLoad()
         
         self.fetchType = "hotel"
-        
-        // 取得飯店資訊
-        let info :[String:AnyObject] = myUserDefaults.objectForKey("\(self.fetchType)Detail") as? [String:AnyObject] ?? [:]
-        
+
         let latitude = info["latitude"] as? Double ?? 0.0
         let longitude = info["longitude"] as? Double ?? 0.0
         hasMap = latitude == 0.0 && longitude == 0.0 ? false : true
@@ -38,12 +35,12 @@ class HotelDetailViewController: DetailViewController {
 // MARK: UITableViewDelegate methods
     
     // 必須實作的方法：每一組有幾個 cell
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return hasMap ? 4 : 3
     }
 
     // 設置 cell 的高度
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         var height = CGFloat(44.0)
         
         if (self.hasMap && indexPath.row == 3) || (!self.hasMap && indexPath.row == 2) {

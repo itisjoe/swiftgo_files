@@ -7,17 +7,18 @@
 //
 
 import UIKit
+import WebKit
 
-class ViewController: UIViewController, UITextFieldDelegate, UIWebViewDelegate {
+class ViewController: UIViewController, UITextFieldDelegate, WKNavigationDelegate {
     var myTextField :UITextField!
-    var myWebView :UIWebView!
+    var myWebView :WKWebView!
     var myActivityIndicator:UIActivityIndicatorView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // 取得螢幕的尺寸
-        let fullScreenSize = UIScreen.mainScreen().bounds.size
+        let fullScreenSize = UIScreen.main.bounds.size
         
         // 預設尺寸
         let goWidth = 100.0
@@ -26,51 +27,51 @@ class ViewController: UIViewController, UITextFieldDelegate, UIWebViewDelegate {
         
         // 建立五個 UIButton
         var myButton = UIButton(frame: CGRect(x: 0, y: 20, width: actionWidth, height: actionWidth))
-        myButton.setImage(UIImage(named: "back")!, forState: .Normal)
-        myButton.addTarget(self, action: #selector(ViewController.back), forControlEvents: .TouchUpInside)
+        myButton.setImage(UIImage(named: "back")!, for: .normal)
+        myButton.addTarget(self, action: #selector(ViewController.back), for: .touchUpInside)
         self.view.addSubview(myButton)
         
         myButton = UIButton(frame: CGRect(x: actionWidth, y: 20, width: actionWidth, height: actionWidth))
-        myButton.setImage(UIImage(named: "forward")!, forState: .Normal)
-        myButton.addTarget(self, action: #selector(ViewController.forward), forControlEvents: .TouchUpInside)
+        myButton.setImage(UIImage(named: "forward")!, for: .normal)
+        myButton.addTarget(self, action: #selector(ViewController.forward), for: .touchUpInside)
         self.view.addSubview(myButton)
         
         myButton = UIButton(frame: CGRect(x: actionWidth * 2, y: 20, width: actionWidth, height: actionWidth))
-        myButton.setImage(UIImage(named: "refresh")!, forState: .Normal)
-        myButton.addTarget(self, action: #selector(ViewController.reload), forControlEvents: .TouchUpInside)
+        myButton.setImage(UIImage(named: "refresh")!, for: .normal)
+        myButton.addTarget(self, action: #selector(ViewController.reload), for: .touchUpInside)
         self.view.addSubview(myButton)
 
         myButton = UIButton(frame: CGRect(x: actionWidth * 3, y: 20, width: actionWidth, height: actionWidth))
-        myButton.setImage(UIImage(named: "stop")!, forState: .Normal)
-        myButton.addTarget(self, action: #selector(ViewController.stop), forControlEvents: .TouchUpInside)
+        myButton.setImage(UIImage(named: "stop")!, for: .normal)
+        myButton.addTarget(self, action: #selector(ViewController.stop), for: .touchUpInside)
         self.view.addSubview(myButton)
         
         myButton = UIButton(frame: CGRect(x: Double(fullScreenSize.width) - goWidth, y: 20, width: goWidth, height: actionWidth))
-        myButton.setTitle("前往", forState: .Normal)
-        myButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        myButton.addTarget(self, action: #selector(ViewController.go), forControlEvents: .TouchUpInside)
+        myButton.setTitle("前往", for: .normal)
+        myButton.setTitleColor(UIColor.black, for: .normal)
+        myButton.addTarget(self, action: #selector(ViewController.go), for: .touchUpInside)
         self.view.addSubview(myButton)
         
         // 建立一個 UITextField 用來輸入網址
         myTextField = UITextField(frame: CGRect(x: 0, y: 20.0 + CGFloat(actionWidth), width: fullScreenSize.width, height: 40))
         myTextField.text = "https://www.google.com"
-        myTextField.backgroundColor = UIColor.init(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
-        myTextField.clearButtonMode = .WhileEditing
-        myTextField.returnKeyType = .Go
+        myTextField.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+        myTextField.clearButtonMode = .whileEditing
+        myTextField.returnKeyType = .go
         myTextField.delegate = self
         self.view.addSubview(myTextField)
 
-        // 建立 UIWebView
-        myWebView = UIWebView(frame: CGRect(x: 0, y: 60.0 + CGFloat(actionWidth), width: fullScreenSize.width, height: fullScreenSize.height - 60 - CGFloat(actionWidth)))
+        // 建立 WKWebView
+        myWebView = WKWebView(frame: CGRect(x: 0, y: 60.0 + CGFloat(actionWidth), width: fullScreenSize.width, height: fullScreenSize.height - 60 - CGFloat(actionWidth)))
 
         // 設置委任對象
-        myWebView.delegate = self
+        myWebView.navigationDelegate = self
         
         // 加入到畫面中
         self.view.addSubview(myWebView)
         
         // 建立環狀進度條
-        myActivityIndicator = UIActivityIndicatorView(activityIndicatorStyle:.Gray)
+        myActivityIndicator = UIActivityIndicatorView(activityIndicatorStyle:.gray)
         myActivityIndicator.center = CGPoint(x: fullScreenSize.width * 0.5, y: fullScreenSize.height * 0.5)
         self.view.addSubview(myActivityIndicator);
         
@@ -106,44 +107,36 @@ class ViewController: UIViewController, UITextFieldDelegate, UIWebViewDelegate {
         self.view.endEditing(true)
 
         // 前往網址
-        let url = NSURL(string:myTextField.text!)
-        let urlRequest = NSURLRequest(URL: url!)
-        myWebView.loadRequest(urlRequest)
-        
+        let url = URL(string:myTextField.text!)
+        let urlRequest = URLRequest(url: url!)
+        myWebView.load(urlRequest)
+
         // 你也可以設置 HTML 內容到一個常數
         // 用來載入一個靜態的網頁內容
         // let content = "<html><body><h1>Hello World !</h1></body></html>"
         // myWebView.loadHTMLString(content, baseURL: nil)
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.go()
         
         return true
     }
-    
-    func webViewDidStartLoad(webView: UIWebView) {
+
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         // 顯示進度條
         myActivityIndicator.startAnimating()
     }
     
-    func webViewDidFinishLoad(webView: UIWebView) {
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         // 隱藏進度條
         myActivityIndicator.stopAnimating()
         
         // 更新網址列的內容
-        if let currentURL = myWebView.request?.URL!.absoluteString {
-            myTextField.text = currentURL
+        if let currentURL = myWebView.url {
+            myTextField.text = currentURL.absoluteString
         }
     }
-
-
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 
 }
 

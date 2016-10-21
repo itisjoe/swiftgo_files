@@ -9,17 +9,14 @@
 import UIKit
 
 class ViewController: UIViewController {
-    var fullSize :CGSize!
+    // 取得螢幕的尺寸
+    var fullSize :CGSize! = UIScreen.main.bounds.size
     var myImageView :UIImageView!
     var anotherImageView :UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // 取得螢幕的尺寸
-        fullSize = UIScreen.mainScreen().bounds.size
-
-        
         /************
          
          Pinch 縮放手勢
@@ -35,7 +32,7 @@ class ViewController: UIViewController {
 
         self.view.addGestureRecognizer(pinch)
         
-        
+
         /************
          
          Rotation 旋轉手勢
@@ -55,23 +52,23 @@ class ViewController: UIViewController {
     }
 
     // 觸發旋轉手勢後 執行的動作
-    func rotation(recognizer:UIRotationGestureRecognizer) {
+    func rotation(_ recognizer:UIRotationGestureRecognizer) {
         // 弧度
         let radian = recognizer.rotation
         
         // 旋轉的弧度轉換為角度
         let angle = radian * (180 / CGFloat(M_PI))
         
-        anotherImageView.transform = CGAffineTransformMakeRotation(radian)
+        anotherImageView.transform = CGAffineTransform(rotationAngle: radian)
         
         print("旋轉角度： \(angle)")
     }
     
     // 觸發縮放手勢後 執行的動作
-    func pinch(recognizer:UIPinchGestureRecognizer) {
-        if recognizer.state == .Began {
+    func pinch(_ recognizer:UIPinchGestureRecognizer) {
+        if recognizer.state == .began {
             print("開始縮放")
-        } else if recognizer.state == .Changed {
+        } else if recognizer.state == .changed {
             // 圖片原尺寸
             let frm = myImageView.frame
             
@@ -88,7 +85,7 @@ class ViewController: UIViewController {
             if w * scale > 100 && w * scale < 400 {
                 myImageView.frame = CGRect(x: frm.origin.x, y: frm.origin.y, width: w * scale, height: h * scale)
             }
-        } else if recognizer.state == .Ended {
+        } else if recognizer.state == .ended {
             print("結束縮放")
         }
         

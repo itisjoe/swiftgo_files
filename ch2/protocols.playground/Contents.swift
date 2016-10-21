@@ -39,23 +39,23 @@ protocol Togglable {
 
 // 定義一個開關切換的列舉
 enum OnOffSwitch: Togglable {
-    case Off, On
+    case off, on
     
     // 實作這個遵循協定後需要定義的變異方法
     mutating func toggle() {
         // 會在 On, Off 兩者中切換
         switch self {
-        case Off:
-            self = On
-        case On:
-            self = Off
+        case .off:
+            self = .on
+        case .on:
+            self = .off
         }
     }
 }
 
-var lightSwitch = OnOffSwitch.Off
+var lightSwitch = OnOffSwitch.off
 lightSwitch.toggle()
-// lightSwitch 現在切換為 .On
+// lightSwitch 現在切換為 .on
 
 
 protocol OtherProtocol {
@@ -104,7 +104,7 @@ class OneClass: SomeOtherProtocol {
 
 // 定義另一個類別 有一個型別為 SomeOtherProtocol 的常數
 class AnotherClass {
-    // 常數屬性 型別為[協定 SomeOtherProtocol]
+    // 常數屬性 型別為一個協定：SomeOtherProtocol
     let oneMember: SomeOtherProtocol
     
     // 建構器有個參數 member 型別為 SomeOtherProtocol
@@ -117,7 +117,7 @@ class AnotherClass {
 // 先宣告一個類別 OneClass 的實體
 let oneInstance = OneClass();
 
-// 任何遵循[協定 SomeOtherProtocol]的實體 都可以被當做[協定 SomeOtherProtocol]型別
+// 任何遵循 協定：SomeOtherProtocol 的實體 都可以被當做 協定：SomeOtherProtocol 型別
 // 所以上面宣告的 oneInstance 可以被當做參數傳入
 let twoInstance = AnotherClass(member: oneInstance)
 
@@ -142,7 +142,7 @@ class GameCharacter: GameCharacterProtocol {
     // 定義為可選型別 會先初始化為 nil 之後再將其設置為負責其他動作的另一個型別的實體
     var delegate: GameCharacterProtocolDelegate?
     
-    // 因為遵循[協定 GameCharacterProtocol]
+    // 因為遵循協定：GameCharacterProtocol
     // 所以需要實作 attack() 這個方法
     func attack() {
         print("攻擊！")
@@ -152,7 +152,7 @@ class GameCharacter: GameCharacterProtocol {
     }
 }
 
-// 定義一個類別 遵循[協定 GameCharacterProtocolDelegate]
+// 定義一個類別 遵循協定：GameCharacterProtocolDelegate
 // 這個類別生成的實體會被委任其他動作
 class GameCharacterDelegate: GameCharacterProtocolDelegate {
     // 必須實作這個方法
@@ -240,13 +240,13 @@ struct OnePerson: Named, Aged {
 }
 
 // 定義一個函式 有一個參數 定義為遵循這兩個協定的型別
-// 所以寫成 protocol<Named, Aged> 格式
-func wishHappyBirthday(celebrator: protocol<Named, Aged>) {
+// 所以寫成 : Named & Aged 格式
+func wishHappyBirthday(to celebrator: Named & Aged) {
     print("生日快樂！ \(celebrator.name) ， \(celebrator.age) 歲囉！")
 }
 
 let birthdayPerson = OnePerson(name: "Brian", age: 25)
-wishHappyBirthday(birthdayPerson)
+wishHappyBirthday(to: birthdayPerson)
 // 印出：生日快樂！ Brian ， 25 歲囉！
 
 
@@ -255,13 +255,13 @@ protocol HasArea {
     var area: Double { get }
 }
 
-// 定義一個圓的類別 遵循[協定 HasArea] 所以會有 area 屬性
+// 定義一個圓的類別 遵循協定：HasArea 所以會有 area 屬性
 class Circle: HasArea {
     var area: Double
     init(radius: Double) { self.area = 3.14 * radius * radius }
 }
 
-// 定義一個國家的類別 遵循[協定 HasArea] 所以會有 area 屬性
+// 定義一個國家的類別 遵循協定：HasArea 所以會有 area 屬性
 class Country: HasArea {
     var area: Double
     init(area: Double) { self.area = area }
@@ -306,10 +306,10 @@ import Foundation
 // 定義一個可選協定 用於計數 分別有兩種不同的增量值
 @objc protocol CounterDataSource {
     // 定義一個可選方法 可以傳入一個要增加的整數
-    optional func incrementForCount(count: Int) -> Int
+    @objc optional func increment(forCount: Int) -> Int
     
     // 定義一個可選屬性 為一個固定增加的整數
-    optional var fixedIncrement: Int { get }
+    @objc optional var fixedIncrement: Int { get }
 }
 
 // 定義一個遵循可選協定的類別 計數用
@@ -320,7 +320,7 @@ class CounterSource: CounterDataSource {
     
     // 不過因為是可選的 所以另一個可選方法可以不用實作 這邊將其註解起來
     /*
-     @objc func incrementForCount(count: Int) -> Int {
+     @objc func increment(forCount: Int) -> Int {
      return count
      }
      */
@@ -330,21 +330,21 @@ class CounterSource: CounterDataSource {
 // 用來計數的變數
 var count = 0
 
-// 生成一個型別為[可選協定 CounterDataSource]的實體
+// 生成一個型別為可選協定：CounterDataSource 的實體
 // 因為類別 CounterSource 有遵循這個協定 所以可以指派為這個類別的實體
 var dataSource: CounterDataSource = CounterSource()
 
 // 迴圈跑 4 次
 for _ in 1...4 {
     // 使用可選綁定
-    // 首先呼叫 incrementForCount() 方法 但因為這是個可選方法 所以需要加上 ?
-    // 而目前這個 incrementForCount 沒有實作這個方法
+    // 首先呼叫 increment(forCount:) 方法 但因為這是個可選方法 所以需要加上 ?
+    // 而目前這個 increment 沒有實作這個方法
     // 所以會返回 nil 也就不會執行 if 內的程式
-    if let amount = dataSource.incrementForCount?(count){
+    if let amount = dataSource.increment?(forCount: count){
         count += amount
     }
-        // 接著依舊使用可選綁定 取得屬性 fixedIncrement
-        // 因為有設置這個屬性 所以會有值 流程則會進入此 else if 內的程式
+    // 接著依舊使用可選綁定 取得屬性 fixedIncrement
+    // 因為有設置這個屬性 所以會有值 流程則會進入此 else if 內的程式
     else if let amount = dataSource.fixedIncrement{
         count += amount
     }
@@ -377,18 +377,18 @@ member.superAttack()
 // 攻擊後的整理工作
 
 
-// 先為[協定 GameCharacterProtocol]經由擴展增加一個新的屬性
+// 先為協定：GameCharacterProtocol 經由擴展增加一個新的屬性
 extension GameCharacterProtocol {
     var description: String {
         return "成員"
     }
 }
 
-// 接著擴展[集合型別的協定 CollectionType] 且其內成員必須遵循[協定 GameCharacterProtocol]
-extension CollectionType where Generator.Element: GameCharacterProtocol {
+// 接著擴展 集合型別的協定：Collection 且其內成員必須遵循 協定：GameCharacterProtocol
+extension Collection where Iterator.Element: GameCharacterProtocol {
     var allDescription: String {
         let itemsAsText = self.map { $0.description }
-        return "[" + itemsAsText.joinWithSeparator(", ") + "]"
+        return "[" + itemsAsText.joined(separator: ", ") + "]"
     }
 }
 
@@ -398,8 +398,8 @@ let twoMember = GameCharacter()
 let threeMember = GameCharacter()
 let myTeam = [oneMember, twoMember, threeMember]
 
-// 因為陣列定義時有遵循[協定 CollectionType]
-// 且其內成員都遵循[協定 GameCharacterProtocol]
+// 因為陣列定義時有遵循 協定：CollectionType
+// 且其內成員都遵循 協定：GameCharacterProtocol
 // 所以這個 allDescription 屬性會自動獲得
 // 印出：[成員, 成員, 成員]
 print(myTeam.allDescription)
