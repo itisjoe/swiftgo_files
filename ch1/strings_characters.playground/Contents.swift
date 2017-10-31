@@ -3,6 +3,14 @@
 let someString = "Some string literal value"
 
 
+// 顯示多行字串字面量
+let someMultiLineString = """
+多行文字
+也就是多行字串字面量
+可以一併顯示
+"""
+
+
 // 這兩個是一樣的意思
 var emptyString = ""
 var anotherEmptyString = String()
@@ -16,7 +24,7 @@ let constantString = "Sun"
 //constantString = "Moon" // 這行會報錯誤 因為常數不能被修改
 
 
-for character in "Dog!".characters {
+for character in "Dog!" {
     print(character)
 }
 // 依序印出
@@ -57,7 +65,7 @@ let blackHeart = "\u{2665}"      // ♥,  Unicode 純量 U+2665
 let str2 = "What a lovely day !"
 
 // 印出字元數量：19
-print(str2.characters.count)
+print(str2.count)
 
 
 let str3 = "It is Sunday ."

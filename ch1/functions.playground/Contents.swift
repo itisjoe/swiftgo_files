@@ -166,7 +166,7 @@ if let numbers = findNumbers3(arr: [11,22,33]) {
 }
 // 如果傳入的陣列 內部沒有值
 if let numbers = findNumbers3(arr: []) {
-    print("這裡不會被印出來")
+    print("這裡不會被印出來 \(numbers.0)")
 }
 
 

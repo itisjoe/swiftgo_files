@@ -125,6 +125,31 @@ for index in 1..<5 {
 // 4 * 5 = 20
 
 
+let names = ["Anna", "Alex", "Brian", "Jack"]
+
+for name in names[2...] {
+    print(name)
+}
+// 從陣列索引值為 2 的值開始依序印出
+// Brian
+// Jack
+
+for name in names[...1] {
+    print(name)
+}
+// 依序印出至陣列索引值為 1 的值
+// Anna
+// Alex
+
+
+for name in names[..<2] {
+    print(name)
+}
+// 依序印出至陣列索引值為 1 的值 不包括索引值為 2 的值
+// Anna
+// Alex
+
+
 let isOn = false
 if !isOn {
     print("It is on .")

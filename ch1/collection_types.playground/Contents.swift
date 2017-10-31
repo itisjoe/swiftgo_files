@@ -269,7 +269,7 @@ var myDict3 = ["LHR": "London", "DUB": "Dublin"]
 // 返回一個對應值的型別的可選值 (這邊就是返回一個 String? )
 myDict3.updateValue("London Heathrow", forKey: "LHR")
 // 印出：London Heathrow
-print(myDict3["LHR"])
+print(myDict3["LHR"]!)
 
 // 使用 removeValue(forKey:) 移除一個值
 // 返回被刪除的值, 如果沒有對應的值的話則會返回 nil

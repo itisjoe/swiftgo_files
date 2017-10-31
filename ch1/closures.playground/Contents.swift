@@ -55,11 +55,11 @@ printMathResult(+, 12, 85)
 
 
 // 這是一個參數為閉包的函式
-func someFunction(closure: () -> ()) {
+func someFunction(closure: () -> Void) {
     // 內部執行的程式
 }
 // 參數名稱為 closure
-// 閉包的型別為 () -> () 沒有參數也沒有返回值
+// 閉包的型別為 () -> Void 沒有參數也沒有返回值
 
 // 不使用尾隨閉包進行函式呼叫
 someFunction(closure: {
