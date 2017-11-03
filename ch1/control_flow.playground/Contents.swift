@@ -147,13 +147,13 @@ switch somePoint {
 case (0, 0):
     print("(0, 0) 在原點")
 case (_, 0):
-    print("(\(somePoint.0), 0) 在 X 軸上")
+    print("\(somePoint) 在 X 軸上")
 case (0, _):
-    print("(0, \(somePoint.1)) 在 Y 軸上")
+    print("\(somePoint) 在 Y 軸上")
 case (-2...2, -2...2):
-    print("(\(somePoint.0), \(somePoint.1)) 在方形內")
+    print("\(somePoint) 在方形內")
 default:
-    print("(\(somePoint.0), \(somePoint.1)) 在方形外")
+    print("\(somePoint) 在方形外")
 }
 
 // 印出：(1, 1) 在方形內
