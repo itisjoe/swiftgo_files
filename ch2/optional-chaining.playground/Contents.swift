@@ -31,7 +31,7 @@ joe.residence = Residence()
 
 // 這時就會返回 1
 // 記得這是返回一個可選型別 Int?
-print(joe.residence?.numberOfRooms)
+//print(joe.residence?.numberOfRooms)
 
 
 // 與先前的類別 Person 相同

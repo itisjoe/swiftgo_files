@@ -103,10 +103,10 @@ let stringIndex = findIndex(of: "Kevin", in: ["Adam", "Kevin", "Jess"])
 
 
 protocol Container {
-    associatedtype ItemType
-    mutating func append(_ item: ItemType)
+    associatedtype Item
+    mutating func append(_ item: Item)
     var count: Int { get }
-    subscript(i: Int) -> ItemType { get }
+    subscript(i: Int) -> Item { get }
 }
 
 
@@ -140,9 +140,17 @@ struct NewStack<Element>: Container {
 extension Array: Container {}
 
 
+protocol OtherContainer {
+    associatedtype Item: Equatable
+    mutating func append(_ item: Item)
+    var count: Int { get }
+    subscript(i: Int) -> Item { get }
+}
+
+
 func allItemsMatch<C1: Container, C2: Container>
     (_ someContainer: C1, _ anotherContainer: C2) -> Bool
-    where C1.ItemType == C2.ItemType, C1.ItemType: Equatable {
+    where C1.Item == C2.Item, C1.Item: Equatable {
         
     // 檢查兩個容器含有相同數量的元素
     if someContainer.count != anotherContainer.count {
@@ -180,3 +188,64 @@ if allItemsMatch(newStackOfStrings, arrayOfStrings) {
     print("不符合")
 }
 // 印出：所有元素都符合
+
+
+extension Stack where Element: Equatable {
+    func isTop(_ item: Element) -> Bool {
+        guard let topItem = items.last else {
+            return false
+        }
+        return topItem == item
+    }
+}
+
+
+// 定義一個空的結構
+struct NotEquatable { }
+
+// 宣告一個元素型別為 NotEquatable 的 Stack
+var notEquatableStack = Stack<NotEquatable>()
+
+// 宣告一個型別為 NotEquatable 的值 並加入這個 Stack 中
+let notEquatableValue = NotEquatable()
+notEquatableStack.push(notEquatableValue)
+
+// 因為型別 NotEquatable 沒有遵循 Equatable 協定
+// notEquatableStack.isTop(notEquatableValue) // 這行會報錯誤
+
+
+extension Container where Item == Double {
+    func average() -> Double {
+        var sum = 0.0
+        for index in 0..<count {
+            sum += self[index]
+        }
+        return sum / Double(count)
+    }
+}
+print([1260.0, 1200.0, 98.6, 37.0].average())
+// 印出：648.9
+
+
+protocol AnotherContainer {
+    associatedtype Item
+    mutating func append(_ item: Item)
+    var count: Int { get }
+    subscript(i: Int) -> Item { get }
+    
+    associatedtype Iterator: IteratorProtocol where Iterator.Element == Item
+    func makeIterator() -> Iterator
+}
+
+
+extension Container {
+    subscript<Indices: Sequence>(indices: Indices) -> [Item]
+        where Indices.Iterator.Element == Int {
+            var result = [Item]()
+            for index in indices {
+                result.append(self[index])
+            }
+            return result
+    }
+}
+

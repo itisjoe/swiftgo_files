@@ -13,7 +13,7 @@ arr[3] = 12
 var dict = ["name":"Kevin","city":"Taipei"]
 
 // 印出鍵為 name 的值
-print(dict["name"])
+print(dict["name"]!)
 
 // 修改鍵為 city 的值為 New York
 dict["city"] = "New York"

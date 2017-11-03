@@ -56,7 +56,7 @@ productBarcode = .qrCode("ABCDEFG")
 
 switch productBarcode {
 case .upc(let numberSystem, let manufacturer, let product, let check):
-    print("UPC-A: \(numberSystem), \(manufacturer), \(product), \(check).")
+    print("UPC: \(numberSystem), \(manufacturer), \(product), \(check).")
 case .qrCode(let productCode):
     print("QR Code: \(productCode).") // 會印出這行
 }
@@ -64,7 +64,7 @@ case .qrCode(let productCode):
 
 switch productBarcode {
 case let .upc(numberSystem, manufacturer, product, check):
-    print("UPC-A: \(numberSystem), \(manufacturer), \(product), \(check).")
+    print("UPC: \(numberSystem), \(manufacturer), \(product), \(check).")
 case let .qrCode(productCode):
     print("QR Code: \(productCode).")
 }
