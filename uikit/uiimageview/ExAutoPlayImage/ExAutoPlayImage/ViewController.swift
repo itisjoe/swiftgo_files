@@ -9,14 +9,14 @@
 import UIKit
 
 class ViewController: UIViewController {
+    // 取得螢幕的尺寸
+    let fullScreenSize = UIScreen.main.bounds.size
+
     var myImageView: UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-        // 取得螢幕的尺寸
-        let fullScreenSize = UIScreen.main.bounds.size
-        
+
         myImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
         
         // 建立一個陣列 用來放置要輪播的圖片
@@ -66,21 +66,15 @@ class ViewController: UIViewController {
         
     }
     
-    func play() {
+    @objc func play() {
         print("play images auto play")
         myImageView.startAnimating()
     }
     
-    func stop() {
+    @objc func stop() {
         print("stop images auto play")
         myImageView.stopAnimating()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 
 }
 

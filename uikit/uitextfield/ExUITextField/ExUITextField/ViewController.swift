@@ -9,6 +9,8 @@
 import UIKit
 
 class ViewController: UIViewController, UITextFieldDelegate {
+    // 取得螢幕的尺寸
+    let fullScreenSize = UIScreen.main.bounds.size
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,9 +42,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // 委任模式( Delegation )所要實作方法的對象
         // 這邊就是交由 self 也就是 ViewController 本身
         myTextField.delegate = self
-
-        // 取得螢幕的尺寸
-        let fullScreenSize = UIScreen.main.bounds.size
         
         // 設置於畫面的中間偏上位置
         myTextField.center = CGPoint(x: fullScreenSize.width * 0.5, y: fullScreenSize.height * 0.3)
@@ -57,11 +56,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.view.endEditing(true)
         
         return true
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
 }

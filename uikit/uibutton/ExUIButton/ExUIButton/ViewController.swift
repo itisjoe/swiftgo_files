@@ -9,12 +9,11 @@
 import UIKit
 
 class ViewController: UIViewController {
+    // 取得螢幕的尺寸
+    let fullScreenSize = UIScreen.main.bounds.size
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // 取得螢幕的尺寸
-        let fullScreenSize = UIScreen.main.bounds.size
 
         // 為基底的 self.view 設置底色
         self.view.backgroundColor = UIColor.white
@@ -52,7 +51,7 @@ class ViewController: UIViewController {
         
     }
 
-    func clickButton() {
+    @objc func clickButton() {
         // 為基底的 self.view 的底色在黑色與白色兩者間切換
         if self.view.backgroundColor!.isEqual(UIColor.white) {
             self.view.backgroundColor = UIColor.black
@@ -60,12 +59,6 @@ class ViewController: UIViewController {
             self.view.backgroundColor = UIColor.white
         }
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 
 }
 

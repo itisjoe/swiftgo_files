@@ -9,7 +9,9 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    // 取得螢幕的尺寸
+    let fullScreenSize = UIScreen.main.bounds.size
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -64,9 +66,6 @@ class ViewController: UIViewController {
         // 或是也可以一起設置新的原點及尺寸
         myLabel.bounds = CGRect(x: 60, y: 120, width: 250, height: 80)
 
-        // 取得螢幕的尺寸
-        let fullScreenSize = UIScreen.main.bounds.size
-        
         // 設置於畫面的中心點
         myLabel.center = CGPoint(x: fullScreenSize.width * 0.5, y: fullScreenSize.height * 0.5)
 
@@ -77,12 +76,6 @@ class ViewController: UIViewController {
         self.view.addSubview(myLabel)
         
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 
 }
 

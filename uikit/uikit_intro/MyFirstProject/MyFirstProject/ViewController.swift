@@ -9,6 +9,8 @@
 import UIKit
 
 class ViewController: UIViewController {
+    // 取得螢幕的尺寸
+    let fullScreenSize = UIScreen.main.bounds.size
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,9 +20,6 @@ class ViewController: UIViewController {
 
         // 將 firstView 加入到 self.view
         self.view.addSubview(firstView)
-
-        // 取得螢幕的尺寸
-        let fullScreenSize = UIScreen.main.bounds.size
 
         // 設置 UIView 的位置到畫面的中心
         firstView.center = CGPoint(x: fullScreenSize.width * 0.5 , y: fullScreenSize.height * 0.5)

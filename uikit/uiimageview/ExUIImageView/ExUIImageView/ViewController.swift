@@ -9,12 +9,11 @@
 import UIKit
 
 class ViewController: UIViewController {
+    // 取得螢幕的尺寸
+    let fullScreenSize = UIScreen.main.bounds.size
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // 取得螢幕的尺寸
-        let fullScreenSize = UIScreen.main.bounds.size
 
         // 使用 UIImageView(frame:) 建立一個 UIImageView
         var myImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
@@ -67,12 +66,6 @@ class ViewController: UIViewController {
         self.view.addSubview(myImageView)
         
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 
 }
 

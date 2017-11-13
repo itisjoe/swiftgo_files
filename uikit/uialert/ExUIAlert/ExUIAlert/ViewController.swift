@@ -9,12 +9,11 @@
 import UIKit
 
 class ViewController: UIViewController {
+    // 取得螢幕的尺寸
+    let fullScreenSize = UIScreen.main.bounds.size
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // 取得螢幕的尺寸
-        let fullScreenSize = UIScreen.main.bounds.size
 
         // 設置一個按下會顯示簡單提示的按鈕
         var myButton = UIButton(type: .system)
@@ -62,7 +61,7 @@ class ViewController: UIViewController {
         self.view.addSubview(myButton)
     }
     
-    func simpleHint() {
+    @objc func simpleHint() {
         // 建立一個提示框
         let alertController = UIAlertController(title: "提示", message: "一個簡單提示，請按確認繼續", preferredStyle: .alert)
 
@@ -77,7 +76,7 @@ class ViewController: UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
 
-    func confirm() {
+    @objc func confirm() {
         // 建立一個提示框
         let alertController = UIAlertController(title: "送出", message: "確認要送出了嗎？", preferredStyle: .alert)
         
@@ -93,7 +92,7 @@ class ViewController: UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     
-    func deleteSomething() {
+    @objc func deleteSomething() {
         // 建立一個提示框
         let alertController = UIAlertController(title: "刪除", message: "刪除字樣會變紅色的", preferredStyle: .alert)
         
@@ -109,7 +108,7 @@ class ViewController: UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     
-    func login() {
+    @objc func login() {
         // 建立一個提示框
         let alertController = UIAlertController(title: "登入", message: "請輸入帳號與密碼", preferredStyle: .alert)
         
@@ -136,8 +135,8 @@ class ViewController: UIViewController {
             let acc = (alertController.textFields?.first)! as UITextField
             let password = (alertController.textFields?.last)! as UITextField
             
-            print("輸入的帳號為：\(acc.text)")
-            print("輸入的密碼為：\(password.text)")
+            print("輸入的帳號為：\(acc.text!)")
+            print("輸入的密碼為：\(password.text!)")
         }
         alertController.addAction(okAction)
         
@@ -145,7 +144,7 @@ class ViewController: UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     
-    func bottomAlert() {
+    @objc func bottomAlert() {
         // 建立一個提示框
         let alertController = UIAlertController(title: "底部提示", message: "這個提示會從底部彈出", preferredStyle: .actionSheet)
         
@@ -160,12 +159,6 @@ class ViewController: UIViewController {
         // 顯示提示框
         self.present(alertController, animated: true, completion: nil)
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 
 }
 

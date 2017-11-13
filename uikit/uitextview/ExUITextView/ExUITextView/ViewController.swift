@@ -9,6 +9,9 @@
 import UIKit
 
 class ViewController: UIViewController {
+    // 取得螢幕的尺寸
+    let fullScreenSize = UIScreen.main.bounds.size
+    
     // 建立一個 UITextView 的屬性
     var myTextView: UITextView!
 
@@ -45,9 +48,6 @@ class ViewController: UIViewController {
         // 文字是否可以被選取
         myTextView.isSelectable = true
         
-        // 取得螢幕的尺寸
-        let fullScreenSize = UIScreen.main.bounds.size
-        
         // 設置於畫面的中間偏上位置
         myTextView.center = CGPoint(x: fullScreenSize.width * 0.5, y: fullScreenSize.height * 0.3)
         
@@ -74,26 +74,20 @@ class ViewController: UIViewController {
         
     }
 
-    func hideKeyboard(tapG:UITapGestureRecognizer){
+    @objc func hideKeyboard(tapG:UITapGestureRecognizer){
         // 除了使用 self.view.endEditing(true)
         // 也可以用 resignFirstResponder()
         // 來針對一個元件隱藏鍵盤
         self.myTextView.resignFirstResponder()
     }
     
-    func sendMail() {
+    @objc func sendMail() {
         print("sendMail")
     }
 
-    func sendFB() {
+    @objc func sendFB() {
         print("sendFB")
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 
 }
 
