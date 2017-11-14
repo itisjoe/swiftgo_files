@@ -9,6 +9,8 @@
 import UIKit
 
 class ViewController: UIViewController {
+    // 取得螢幕的尺寸
+    let fullScreenSize = UIScreen.main.bounds.size
     
     var myDatePicker: UIDatePicker!
     var myLabel: UILabel!
@@ -16,9 +18,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // 取得螢幕的尺寸
-        let fullScreenSize = UIScreen.main.bounds.size
-        
         // 使用 UIDatePicker(frame:) 建立一個 UIDatePicker
         myDatePicker = UIDatePicker(frame: CGRect(x: 0, y: 0, width: fullScreenSize.width, height: 100))
         
@@ -69,18 +68,13 @@ class ViewController: UIViewController {
         
     }
 
-    func datePickerChanged(datePicker:UIDatePicker) {
+    @objc func datePickerChanged(datePicker:UIDatePicker) {
         // 設置要顯示在 UILabel 的日期時間格式
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm"
         
         // 更新 UILabel 的內容
         myLabel.text = formatter.string(from: datePicker.date)
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
 }

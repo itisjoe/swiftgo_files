@@ -9,14 +9,14 @@
 import UIKit
 
 class ViewController: UIViewController {
+    // 取得螢幕的尺寸
+    let fullScreenSize = UIScreen.main.bounds.size
+    
     var myLabel :UILabel!
     var myStepper :UIStepper!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // 取得螢幕的尺寸
-        let fullScreenSize = UIScreen.main.bounds.size
 
         // 建立一個 UILabel
         myLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 40))
@@ -63,16 +63,10 @@ class ViewController: UIViewController {
 
     }
     
-    func onStepperChange() {
+    @objc func onStepperChange() {
         // 將 UILabel 的值設置為 UIStepper 目前的值
         myLabel.text = "\(myStepper.value)"
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 
 }
 

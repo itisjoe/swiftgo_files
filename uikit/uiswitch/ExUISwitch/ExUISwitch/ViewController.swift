@@ -9,12 +9,11 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
+    // 取得螢幕的尺寸
+    let fullScreenSize = UIScreen.main.bounds.size
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // 取得螢幕的尺寸
-        let fullScreenSize = UIScreen.main.bounds.size
         
         // 建立一個 UISwitch
         var mySwitch = UISwitch()
@@ -46,7 +45,7 @@ class ViewController: UIViewController {
     }
     
     // UISwitch 切換時 執行動作的方法
-    func onChange(_ sender: AnyObject) {
+    @objc func onChange(_ sender: AnyObject) {
         // 取得這個 UISwtich 元件
         let tempSwitch = sender as! UISwitch
         
@@ -57,11 +56,6 @@ class ViewController: UIViewController {
             self.view.backgroundColor = UIColor.white
         }
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+
 }
 

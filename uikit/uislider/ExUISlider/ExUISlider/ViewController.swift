@@ -9,14 +9,14 @@
 import UIKit
 
 class ViewController: UIViewController {
+    // 取得螢幕的尺寸
+    let fullScreenSize = UIScreen.main.bounds.size
+    
     var imageView :UIImageView!
     var mySlider :UISlider!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // 取得螢幕的尺寸
-        let fullScreenSize = UIScreen.main.bounds.size
         
         // 建立一個 UIImageView
         imageView = UIImageView(image: UIImage(named: "01.jpg"))
@@ -62,16 +62,10 @@ class ViewController: UIViewController {
 
     }
 
-    func onSliderChange() {
+    @objc func onSliderChange() {
         // 設置圖片的透明度
         imageView.alpha = CGFloat(mySlider.value / mySlider.maximumValue)
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 
 }
 

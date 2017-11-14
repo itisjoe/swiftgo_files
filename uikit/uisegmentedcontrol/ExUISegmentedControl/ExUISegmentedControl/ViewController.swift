@@ -9,12 +9,11 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
+    // 取得螢幕的尺寸
+    let fullScreenSize = UIScreen.main.bounds.size
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // 取得螢幕的尺寸
-        let fullScreenSize = UIScreen.main.bounds.size
         
         // 使用 UISegmentedControl(items:) 建立 UISegmentedControl
         // 參數 items 是一個陣列 會依據這個陣列顯示選項
@@ -42,19 +41,13 @@ class ViewController: UIViewController {
     }
     
     // 切換選項時執行動作的方法
-    func onChange(_ sender: UISegmentedControl) {
+    @objc func onChange(_ sender: UISegmentedControl) {
         // 印出選到哪個選項 從 0 開始算起
         print(sender.selectedSegmentIndex)
         
         // 印出這個選項的文字
-        print(sender.titleForSegment(at: sender.selectedSegmentIndex))
+        print(sender.titleForSegment(at: sender.selectedSegmentIndex)!)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 
 }
 

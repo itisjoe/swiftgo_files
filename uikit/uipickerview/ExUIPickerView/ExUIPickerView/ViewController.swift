@@ -9,13 +9,12 @@
 import UIKit
 
 class ViewController: UIViewController {
+    // 取得螢幕的尺寸
+    let fullScreenSize = UIScreen.main.bounds.size
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // 取得螢幕的尺寸
-        let fullScreenSize = UIScreen.main.bounds.size
-
         // 建立 UIPickerView 設置位置及尺寸
         let myPickerView = UIPickerView(frame: CGRect(x: 0, y: fullScreenSize.height * 0.3, width: fullScreenSize.width, height: 150))
         
@@ -34,12 +33,6 @@ class ViewController: UIViewController {
         self.view.addSubview(myPickerView)
         
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 
 }
 

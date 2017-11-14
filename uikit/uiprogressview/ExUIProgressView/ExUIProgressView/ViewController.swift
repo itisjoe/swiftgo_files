@@ -9,6 +9,9 @@
 import UIKit
 
 class ViewController: UIViewController {
+    // 取得螢幕的尺寸
+    let fullScreenSize = UIScreen.main.bounds.size
+    
     var myProgressView:UIProgressView!
     var myActivityIndicator:UIActivityIndicatorView!
     var myTimer:Timer?
@@ -18,9 +21,6 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // 取得螢幕的尺寸
-        let fullScreenSize = UIScreen.main.bounds.size
 
         // 建立一個 UIProgressView
         myProgressView = UIProgressView(progressViewStyle : .default)
@@ -63,7 +63,7 @@ class ViewController: UIViewController {
         self.clickButton()
     }
 
-    func clickButton() {
+    @objc func clickButton() {
         // 進度推進時讓按鈕無法作用
         myButton.isEnabled = false
         
@@ -75,7 +75,7 @@ class ViewController: UIViewController {
         myTimer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(ViewController.showProgress), userInfo: ["test":"for userInfo test"], repeats: true)
     }
     
-    func showProgress(_ sender: Timer) {
+    @objc func showProgress(_ sender: Timer) {
         // 以一個計數器模擬背景處理的動作
         count += 5
         
@@ -86,7 +86,7 @@ class ViewController: UIViewController {
         if count >= complete {
             // 示範 userInfo 傳入的參數
             var info = sender.userInfo as? Dictionary<String, AnyObject>
-            print(info?["test"])
+            print(info?["test"] ?? "")
             
             // 重設計數器及 Timer 供下次按下按鈕測試
             count = 0
@@ -100,12 +100,6 @@ class ViewController: UIViewController {
             myButton.isEnabled = true
         }
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 
 }
 

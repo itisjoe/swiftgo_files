@@ -9,15 +9,14 @@
 import UIKit
 
 class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
-    
+    // 取得螢幕的尺寸
+    let fullScreenSize = UIScreen.main.bounds.size
+
     let meals = ["早餐","午餐","晚餐","宵夜"]
     var formatter: DateFormatter! = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // 取得螢幕的尺寸
-        let fullScreenSize = UIScreen.main.bounds.size
         
         // 建立一個 UITextField
         var myTextField = UITextField(frame: CGRect(x: 0, y: 0, width: fullScreenSize.width, height: 40))
@@ -119,7 +118,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
 
     // UIDatePicker 改變選擇時執行的動作
-    func datePickerChanged(datePicker:UIDatePicker) {
+    @objc func datePickerChanged(datePicker:UIDatePicker) {
         // 依據元件的 tag 取得 UITextField
         let myTextField = self.view?.viewWithTag(200) as? UITextField
         
@@ -128,13 +127,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
 
     // 按空白處會隱藏編輯狀態
-    func hideKeyboard(tapG:UITapGestureRecognizer){
+    @objc func hideKeyboard(tapG:UITapGestureRecognizer){
         self.view.endEditing(true)
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
 }

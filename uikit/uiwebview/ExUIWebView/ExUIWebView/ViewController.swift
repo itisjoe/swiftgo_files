@@ -10,6 +10,9 @@ import UIKit
 import WebKit
 
 class ViewController: UIViewController, UITextFieldDelegate, WKNavigationDelegate {
+    // 取得螢幕的尺寸
+    let fullScreenSize = UIScreen.main.bounds.size
+    
     var myTextField :UITextField!
     var myWebView :WKWebView!
     var myActivityIndicator:UIActivityIndicatorView!
@@ -17,9 +20,6 @@ class ViewController: UIViewController, UITextFieldDelegate, WKNavigationDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // 取得螢幕的尺寸
-        let fullScreenSize = UIScreen.main.bounds.size
-        
         // 預設尺寸
         let goWidth = 100.0
         let actionWidth = ( Double(fullScreenSize.width) - goWidth ) / 4
@@ -79,22 +79,22 @@ class ViewController: UIViewController, UITextFieldDelegate, WKNavigationDelegat
         self.go()
     }
     
-    func back() {
+    @objc func back() {
         // 上一頁
         myWebView.goBack()
     }
 
-    func forward() {
+    @objc func forward() {
         // 下一頁
         myWebView.goForward()
     }
     
-    func reload() {
+    @objc func reload() {
         // 重新讀取
         myWebView.reload()
     }
     
-    func stop() {
+    @objc func stop() {
         // 取消讀取
         myWebView.stopLoading()
         
@@ -102,7 +102,7 @@ class ViewController: UIViewController, UITextFieldDelegate, WKNavigationDelegat
         myActivityIndicator.stopAnimating()
     }
     
-    func go() {
+    @objc func go() {
         // 隱藏鍵盤
         self.view.endEditing(true)
 
