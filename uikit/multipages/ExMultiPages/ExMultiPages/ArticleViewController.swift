@@ -9,13 +9,12 @@
 import UIKit
 
 class ArticleViewController: UIViewController {
-
+    // 取得螢幕的尺寸
+    let fullSize = UIScreen.main.bounds.size
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // 取得螢幕的尺寸
-        let fullSize = UIScreen.main.bounds.size
-        
         // 設置底色
         self.view.backgroundColor = UIColor.white
 
@@ -43,18 +42,13 @@ class ArticleViewController: UIViewController {
         self.view.addSubview(myButton)
     }
     
-    func goDetail() {
+    @objc func goDetail() {
         self.present(ArticleDetailViewController(), animated: true, completion: nil)
     }
     
     
-    func goBack() {
+    @objc func goBack() {
         self.dismiss(animated: true, completion:nil)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
 }

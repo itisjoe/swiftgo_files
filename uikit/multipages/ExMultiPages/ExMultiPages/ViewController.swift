@@ -9,13 +9,12 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    // 取得螢幕的尺寸
+    let fullSize = UIScreen.main.bounds.size
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // 取得螢幕的尺寸
-        let fullSize = UIScreen.main.bounds.size
-
         // 設置底色
         self.view.backgroundColor = UIColor.white
 
@@ -69,19 +68,13 @@ class ViewController: UIViewController {
         print("viewDidDisappear")
     }
     
-    func goArticle() {
+    @objc func goArticle() {
         self.present(ArticleViewController(), animated: true, completion: nil)
     }
     
-    func goIntro() {
+    @objc func goIntro() {
         self.present(IntroViewController(), animated: true, completion: nil)
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 
 }
 

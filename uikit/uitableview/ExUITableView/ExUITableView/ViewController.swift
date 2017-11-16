@@ -9,6 +9,9 @@
 import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    // 取得螢幕的尺寸
+    let fullScreenSize = UIScreen.main.bounds.size
+    
     var info = [
         ["林書豪","陳信安"],
         ["陳偉殷","王建民","陳金鋒","林智勝"]
@@ -17,9 +20,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // 取得螢幕的尺寸
-        let fullScreenSize = UIScreen.main.bounds.size
-        
         // 建立 UITableView 並設置原點及尺寸
         let myTableView = UITableView(frame: CGRect(x: 0, y: 20, width: fullScreenSize.width, height: fullScreenSize.height - 20), style: .grouped)
         
@@ -138,11 +138,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return 80
     }
 */
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
 }
 

@@ -113,10 +113,5 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         return reusableView
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 }
 

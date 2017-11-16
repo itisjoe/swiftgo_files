@@ -9,15 +9,14 @@
 import UIKit
 
 class ViewController: UIViewController, UIScrollViewDelegate {
+    // 取得螢幕的尺寸
+    let fullSize = UIScreen.main.bounds.size
+    
     var myScrollView: UIScrollView!
-    var fullSize :CGSize!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // 取得螢幕的尺寸
-        fullSize = UIScreen.main.bounds.size
-        
         // 建立 UIScrollView
         myScrollView = UIScrollView()
         
@@ -130,12 +129,6 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         // 所以縮放完後再將 contentSize 設回原本大小
         myScrollView.contentSize = CGSize(width: fullSize.width * 3, height: fullSize.height * 2)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 
 }
 

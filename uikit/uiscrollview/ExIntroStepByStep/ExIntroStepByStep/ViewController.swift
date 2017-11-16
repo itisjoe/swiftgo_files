@@ -9,10 +9,11 @@
 import UIKit
 
 class ViewController: UIViewController, UIScrollViewDelegate {
+    // 取得螢幕的尺寸
+    var fullSize = UIScreen.main.bounds.size
+
     var myScrollView: UIScrollView!
     var pageControl: UIPageControl!
-    // 取得螢幕的尺寸
-    var fullSize :CGSize! = UIScreen.main.bounds.size
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,7 +89,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     }
     
     // 點擊點點換頁
-    func pageChanged(_ sender: UIPageControl) {
+    @objc func pageChanged(_ sender: UIPageControl) {
         // 依照目前圓點在的頁數算出位置
         var frame = myScrollView.frame
         frame.origin.x = frame.size.width * CGFloat(sender.currentPage)
@@ -97,12 +98,6 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         // 再將 UIScrollView 滑動到該點
         myScrollView.scrollRectToVisible(frame, animated:true)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 
 }
 

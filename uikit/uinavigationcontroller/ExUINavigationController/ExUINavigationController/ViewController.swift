@@ -50,23 +50,17 @@ class ViewController: UIViewController {
 
     }
     
-    func article() {
+    @objc func article() {
         self.navigationController!.pushViewController(ArticleViewController(), animated: true)
     }
     
-    func check() {
+    @objc func check() {
         print("check button action")
     }
     
-    func setting() {
+    @objc func setting() {
         self.navigationController!.pushViewController(SettingViewController(), animated: true)
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 
 }
 
