@@ -9,13 +9,12 @@
 import UIKit
 
 class DisplayViewController: UIViewController {
-
+    // 取得螢幕的尺寸
+    let fullSize = UIScreen.main.bounds.size
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // 取得螢幕的尺寸
-        let fullSize = UIScreen.main.bounds.size
-        
         // 設置底色
         self.view.backgroundColor = UIColor.white
         
@@ -38,9 +37,4 @@ class DisplayViewController: UIViewController {
         self.view.addSubview(myLabel)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
 }

@@ -9,15 +9,15 @@
 import UIKit
 
 class ViewController: UIViewController, UITextFieldDelegate {
+    // 取得螢幕的尺寸
+    let fullSize = UIScreen.main.bounds.size
+    
     var myTextField: UITextField!
     var myUserDefaults :UserDefaults!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // 取得螢幕的尺寸
-        let fullSize = UIScreen.main.bounds.size
-        
         // 設置底色
         self.view.backgroundColor = UIColor.white
         
@@ -66,7 +66,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
     }
 
-    func updateInfo() {
+    @objc func updateInfo() {
         print("update info")
         
         // 結束編輯 把鍵盤隱藏起來
@@ -76,7 +76,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         myUserDefaults.synchronize()
     }
     
-    func removeInfo() {
+    @objc func removeInfo() {
         print("remove info")
         
         myUserDefaults.removeObject(forKey: "info")
@@ -84,7 +84,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         myTextField.text = ""
     }
     
-    func display() {
+    @objc func display() {
         self.navigationController?.pushViewController(DisplayViewController(), animated: true)
     }
     
@@ -94,12 +94,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         return true
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 
 }
 

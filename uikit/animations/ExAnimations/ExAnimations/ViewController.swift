@@ -10,14 +10,15 @@ import UIKit
 
 class ViewController: UIViewController {
     // 取得螢幕的尺寸
-    var fullSize: CGSize! = UIScreen.main.bounds.size
+    var fullSize = UIScreen.main.bounds.size
+
     var myLabel: UILabel!
 
     let arrBounds = [CGSize(width: 100, height: 100), CGSize(width: 50, height: 50), CGSize(width: 150, height: 150), CGSize(width: 50, height: 50)]
     var arrCenter :[CGPoint]!
     let arrAlpha = [0.25, 0.75, 0.5, 1.0]
     let arrBackgroundColor = [UIColor.cyan, UIColor.green, UIColor.orange, UIColor.black]
-    let arrTransform = [CGAffineTransform(rotationAngle: CGFloat(M_PI * 0.25)), CGAffineTransform(rotationAngle: CGFloat(M_PI * 1.25)), CGAffineTransform(rotationAngle: CGFloat(M_PI * 1.75)), CGAffineTransform(rotationAngle: CGFloat(M_PI * 2))]
+    let arrTransform = [CGAffineTransform(rotationAngle: CGFloat(Double.pi * 0.25)), CGAffineTransform(rotationAngle: CGFloat(Double.pi * 1.25)), CGAffineTransform(rotationAngle: CGFloat(Double.pi * 1.75)), CGAffineTransform(rotationAngle: CGFloat(Double.pi * 2))]
 
     var indexBounds = 0
     var indexCenter = 0
@@ -95,7 +96,7 @@ class ViewController: UIViewController {
 
     }
 
-    func AnimateBounds() {
+    @objc func AnimateBounds() {
         let newSize = self.arrBounds[self.indexBounds]
         let originCenter = self.myLabel.center
         UIView.animate(withDuration: 0.5, animations: {
@@ -105,7 +106,7 @@ class ViewController: UIViewController {
         self.updateIndex("bounds")
     }
     
-    func AnimateAlpha() {
+    @objc func AnimateAlpha() {
         UIView.animate(withDuration: 0.5, animations: {
             self.myLabel.alpha = CGFloat(self.arrAlpha[self.indexAlpha])
         }, completion: { _ in
@@ -115,7 +116,7 @@ class ViewController: UIViewController {
         self.updateIndex("alpha")
     }
     
-    func AnimateBackgroundColor() {
+    @objc func AnimateBackgroundColor() {
         UIView.animate(withDuration: 1, delay: 0.2, options: .curveEaseIn, animations: {
             self.myLabel.backgroundColor = self.arrBackgroundColor[self.indexBackgroundColor]
             }, completion: { _ in
@@ -124,7 +125,7 @@ class ViewController: UIViewController {
         self.updateIndex("backgroundColor")
     }
     
-    func AnimateCenter() {
+    @objc func AnimateCenter() {
         UIView.animate(withDuration: 1.5, delay: 0.1, usingSpringWithDamping: 0.4, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
                 self.myLabel.center = self.arrCenter[self.indexCenter]
             }, completion: { _ in
@@ -133,14 +134,14 @@ class ViewController: UIViewController {
         self.updateIndex("center")
     }
     
-    func AnimateTransform() {
+    @objc func AnimateTransform() {
         UIView.animate(withDuration: 0.5, animations: {
             self.myLabel.transform = self.arrTransform[self.indexTransform]
         })
         self.updateIndex("transform")
     }
     
-    func AnimateAll() {
+    @objc func AnimateAll() {
         let newSize = self.arrBounds[self.indexBounds]
         UIView.animate(withDuration: 0.5, animations: {
             self.myLabel.bounds = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
@@ -171,13 +172,6 @@ class ViewController: UIViewController {
             self.indexTransform = self.indexTransform >= 3 ? 0 : self.indexTransform + 1
         }
     }
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 
 }
 

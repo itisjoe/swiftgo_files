@@ -10,7 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
     // 取得螢幕的尺寸
-    var fullSize :CGSize! = UIScreen.main.bounds.size
+    var fullSize = UIScreen.main.bounds.size
+
     var myImageView :UIImageView!
     var anotherImageView :UIImageView!
 
@@ -52,20 +53,20 @@ class ViewController: UIViewController {
     }
 
     // 觸發旋轉手勢後 執行的動作
-    func rotation(_ recognizer:UIRotationGestureRecognizer) {
+    @objc func rotation(_ recognizer:UIRotationGestureRecognizer) {
         // 弧度
         let radian = recognizer.rotation
         
         // 旋轉的弧度轉換為角度
-        let angle = radian * (180 / CGFloat(M_PI))
-        
+        let angle = radian * (180 / CGFloat(Double.pi))
+
         anotherImageView.transform = CGAffineTransform(rotationAngle: radian)
         
         print("旋轉角度： \(angle)")
     }
     
     // 觸發縮放手勢後 執行的動作
-    func pinch(_ recognizer:UIPinchGestureRecognizer) {
+    @objc func pinch(_ recognizer:UIPinchGestureRecognizer) {
         if recognizer.state == .began {
             print("開始縮放")
         } else if recognizer.state == .changed {
@@ -90,12 +91,6 @@ class ViewController: UIViewController {
         }
         
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 
 }
 

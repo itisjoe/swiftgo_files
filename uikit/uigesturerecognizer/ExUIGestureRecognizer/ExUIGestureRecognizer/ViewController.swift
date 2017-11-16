@@ -10,7 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
     // 取得螢幕的尺寸
-    var fullSize :CGSize! = UIScreen.main.bounds.size
+    var fullSize = UIScreen.main.bounds.size
+
     var myUIView :UIView!
     var anotherUIView :UIView!
 
@@ -137,14 +138,14 @@ class ViewController: UIViewController {
     }
     
     // 觸發拖曳手勢後 執行的動作
-    func pan(_ recognizer:UIPanGestureRecognizer) {
+    @objc func pan(_ recognizer:UIPanGestureRecognizer) {
         // 設置 UIView 新的位置
         let point = recognizer.location(in: self.view)
         anotherUIView.center = point
     }
 
     // 觸發滑動手勢後 執行的動作
-    func swipe(_ recognizer:UISwipeGestureRecognizer) {
+    @objc func swipe(_ recognizer:UISwipeGestureRecognizer) {
         let point = myUIView.center
 
         if recognizer.direction == .up {
@@ -179,7 +180,7 @@ class ViewController: UIViewController {
     }
     
     // 觸發長按手勢後 執行的動作
-    func longPress(_ recognizer:UILongPressGestureRecognizer) {
+    @objc func longPress(_ recognizer:UILongPressGestureRecognizer) {
         if recognizer.state == .began {
             print("長按開始")
         } else if recognizer.state == .ended {
@@ -189,7 +190,7 @@ class ViewController: UIViewController {
     }
 
     // 觸發單指輕點兩下手勢後 執行的動作
-    func singleTap(_ recognizer:UITapGestureRecognizer){
+    @objc func singleTap(_ recognizer:UITapGestureRecognizer){
         print("單指連點兩下時觸發")
         
         // 取得每指的位置
@@ -197,7 +198,7 @@ class ViewController: UIViewController {
     }
     
     // 觸發雙指輕點一下手勢後 執行的動作
-    func doubleTap(_ recognizer:UITapGestureRecognizer){
+    @objc func doubleTap(_ recognizer:UITapGestureRecognizer){
         print("雙指點一下時觸發")
 
         // 取得每指的位置
@@ -211,11 +212,6 @@ class ViewController: UIViewController {
             let point = recognizer.location(ofTouch: i, in: recognizer.view)
             print("第 \(i + 1) 指的位置：\(NSStringFromCGPoint(point))")
         }
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
 }
