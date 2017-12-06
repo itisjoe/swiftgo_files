@@ -37,7 +37,7 @@ class ViewController: UIViewController {
     
     }
 
-    func go() {
+    @objc func go() {
         // 播放音效
         myPlayer.play()
     }

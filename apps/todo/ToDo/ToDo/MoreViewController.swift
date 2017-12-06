@@ -42,17 +42,17 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
     
 // MARK: Button actions
 
-    func onSwitchChange(_ sender :UISwitch) {
+    @objc func onSwitchChange(_ sender :UISwitch) {
         myUserDefaults.set((sender.isOn ? 1 : 0 ), forKey: "soundOpen")
         myUserDefaults.synchronize()
     }
     
-    func goFB() {
+    @objc func goFB() {
         let requestUrl = URL(string: "https://www.facebook.com/1640636382849659")
         UIApplication.shared.open(requestUrl!, options: ["":""], completionHandler: nil)
     }
     
-    func goSoundSource() {
+    @objc func goSoundSource() {
         let requestUrl = URL(string: "http://www.pacdv.com/sounds")
         UIApplication.shared.open(requestUrl!, options: ["":""], completionHandler: nil)
     }

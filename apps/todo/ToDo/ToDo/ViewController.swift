@@ -60,12 +60,12 @@ class ViewController: BaseViewController {
 // MARK: Button actions
     
     // 按下更多按鈕時執行動作的方法
-    func moreBtnAction() {
+    @objc func moreBtnAction() {
         self.navigationController?.pushViewController(MoreViewController(), animated: true)
     }
 
     // 按下編輯按鈕時執行動作的方法
-    func editBtnAction() {
+    @objc func editBtnAction() {
         myTableView.setEditing(!myTableView.isEditing, animated: true)
         if (!myTableView.isEditing) {
             // 顯示編輯按鈕
@@ -78,7 +78,7 @@ class ViewController: BaseViewController {
             // 顯示完成按鈕
             for record in myRecords {
                 if let id = record.id {
-                    let btn = self.view.viewWithTag(cehckTagTemp + Int(id)) as? UIButton
+                    let btn = self.view.viewWithTag(cehckTagTemp + id.intValue) as? UIButton
                     btn?.isHidden = false
                 }
             }
@@ -95,7 +95,7 @@ class ViewController: BaseViewController {
             // 隱藏完成按鈕
             for record in myRecords {
                 if let id = record.id {
-                    let btn = self.view.viewWithTag(cehckTagTemp + Int(id)) as? UIButton
+                    let btn = self.view.viewWithTag(cehckTagTemp + id.intValue) as? UIButton
                     btn?.isHidden = true
                 }
             }
@@ -104,7 +104,7 @@ class ViewController: BaseViewController {
     }
     
     // 按下新增按鈕時執行動作的方法
-    func addBtnAction() {
+    @objc func addBtnAction() {
         // 結束編輯 把鍵盤隱藏起來
         self.view.endEditing(true)
         
@@ -223,7 +223,7 @@ class ViewController: BaseViewController {
     // 更新事項內容
     func updateRecordContent(_ indexPath :IndexPath) {
         let name = myRecords[indexPath.row].content!
-        let id = Int(myRecords[indexPath.row].id!)
+        let id = myRecords[indexPath.row].id!.intValue
         
         // 更新事項
         let updateAlertController = UIAlertController(title: "更新", message: nil, preferredStyle: .alert)

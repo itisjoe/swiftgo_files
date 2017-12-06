@@ -38,7 +38,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     // 按下編輯按鈕時執行動作的方法
-    func editBtnAction() {
+    @objc func editBtnAction() {
         myTableView.setEditing(!myTableView.isEditing, animated: true)
         if (!myTableView.isEditing) {
             // 顯示編輯按鈕
@@ -57,7 +57,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     
     // 按下新增按鈕時執行動作的方法
-    func addBtnAction() {
+    @objc func addBtnAction() {
         print("新增一筆資料")
         info.insert("new row", at: 0)
         

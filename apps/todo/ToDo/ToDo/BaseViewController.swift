@@ -100,7 +100,7 @@ class BaseViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         // 點選完成事項
         let checkBtn = UIButton(frame: CGRect(x: Double(fullsize.width) - 42, y: 2, width: 40, height: 40))
-        checkBtn.tag = cehckTagTemp + Int(myRecords[indexPath.row].id ?? 0)
+        checkBtn.tag = cehckTagTemp + (myRecords[indexPath.row].id ?? 0).intValue
         checkBtn.addTarget(self, action: #selector(ViewController.checkBtnAction), for: .touchUpInside)
         checkBtn.setImage(UIImage(named:(checkStatus ? "check" : "checkbox")), for: .normal)
         cell.contentView.addSubview(checkBtn)
@@ -144,7 +144,7 @@ class BaseViewController: UIViewController, UITableViewDelegate, UITableViewData
 // MARK: Button actions
     
     // 按下完成事項按鈕執行動作的方法
-    func checkBtnAction(_ sender: UIButton) {
+    @objc func checkBtnAction(_ sender: UIButton) {
         let id = sender.tag - cehckTagTemp
         if id != 0 {
             var index = -1

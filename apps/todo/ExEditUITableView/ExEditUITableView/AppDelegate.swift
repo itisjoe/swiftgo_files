@@ -13,7 +13,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         // 建立一個 UIWindow
@@ -31,9 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
-
-
-
 
 }
 
