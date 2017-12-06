@@ -66,7 +66,7 @@ class PostViewController: UIViewController, UITextFieldDelegate {
             myTextField.textAlignment = .right
             myTextField.textColor = UIColor.white
             myTextField.font = UIFont(name: "Helvetica Light", size: 24.0)
-            myTextField.attributedPlaceholder = NSAttributedString(string: "金額", attributes: [NSForegroundColorAttributeName: UIColor.lightGray])
+            myTextField.attributedPlaceholder = NSAttributedString(string: "金額", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray])
             myTextField.rightView = UIView(frame: CGRect(x: 0, y: 0, width: padding, height: padding))
             myTextField.rightViewMode = .always
             myTextField.tag = 501
@@ -93,7 +93,7 @@ class PostViewController: UIViewController, UITextFieldDelegate {
             myTextField.textAlignment = .right
             myTextField.textColor = UIColor.white
             myTextField.font = UIFont(name: "Helvetica Light", size: 24.0)
-            myTextField.attributedPlaceholder = NSAttributedString(string: "事由", attributes: [NSForegroundColorAttributeName: UIColor.lightGray])
+            myTextField.attributedPlaceholder = NSAttributedString(string: "事由", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray])
             myTextField.rightView = UIView(frame: CGRect(x: 0, y: 0, width: padding, height: padding))
             myTextField.rightViewMode = .always
             myTextField.tag = 502
@@ -162,7 +162,7 @@ class PostViewController: UIViewController, UITextFieldDelegate {
 // MARK: Button Actions
     
     // 刪除資訊
-    func deleteBtnAction() {
+    @objc func deleteBtnAction() {
         // 確認刪除框
         let alertController = UIAlertController(title: "刪除", message: "確認要刪除嗎？", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
@@ -182,7 +182,7 @@ class PostViewController: UIViewController, UITextFieldDelegate {
     }
 
     // 儲存資訊
-    func saveBtnAction() {
+    @objc func saveBtnAction() {
         // 取得金額
         var textField = self.view.viewWithTag(501) as! UITextField
         record.amount = Double(textField.text!) ?? 0
@@ -225,7 +225,7 @@ class PostViewController: UIViewController, UITextFieldDelegate {
     }
 
     // 選取日期時 按下完成
-    func doneTouched(_ sender:UIBarButtonItem) {
+    @objc func doneTouched(_ sender:UIBarButtonItem) {
         let textField = self.view.viewWithTag(503) as! UITextField
         let date = myFormatter.string(from: myDatePicker.date)
         textField.text = date
@@ -235,7 +235,7 @@ class PostViewController: UIViewController, UITextFieldDelegate {
     }
 
     // 選取日期時 按下取消
-    func cancelTouched(_ sender:UIBarButtonItem) {
+    @objc func cancelTouched(_ sender:UIBarButtonItem) {
         hideKeyboard(nil)
     }
 
@@ -261,7 +261,7 @@ class PostViewController: UIViewController, UITextFieldDelegate {
             let oldString = textField.text as NSString? ?? ""
             let newString = oldString.replacingCharacters(in: range, with: string)
             var count = 0
-            for c in newString.characters {
+            for c in newString {
                 if c == "." {
                     count = count + 1
                 }
@@ -279,7 +279,7 @@ class PostViewController: UIViewController, UITextFieldDelegate {
 // MARK: Functional Methods
     
     // 按空白處會隱藏編輯狀態
-    func hideKeyboard(_ tapG:UITapGestureRecognizer?){
+    @objc func hideKeyboard(_ tapG:UITapGestureRecognizer?){
         self.view.endEditing(true)
     }
     

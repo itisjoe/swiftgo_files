@@ -185,26 +185,26 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 // MARK: Button actions
 
     // 前一個月
-    func prevBtnAction() {
+    @objc func prevBtnAction() {
         var dateComponents = DateComponents()
         dateComponents.month = -1
         self.updateCurrentDate(dateComponents)
     }
     
     // 後一個月
-    func nextBtnAction() {
+    @objc func nextBtnAction() {
         var dateComponents = DateComponents()
         dateComponents.month = 1
         self.updateCurrentDate(dateComponents)
     }
     
     // 前往[關於]頁面
-    func settingsBtnAction() {
+    @objc func settingsBtnAction() {
         self.navigationController?.pushViewController(MoreViewController(), animated: true)
     }
     
     // 前往[新增]頁面
-    func addBtnAction() {
+    @objc func addBtnAction() {
         myUserDefaults.set(0, forKey: "postID")
         myUserDefaults.synchronize()
 
@@ -290,7 +290,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let headerView: UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
         headerView.textLabel!.textColor = UIColor.init(red: 0.88, green: 0.83, blue: 0.73, alpha: 1)
     }
-
 
 }
 
