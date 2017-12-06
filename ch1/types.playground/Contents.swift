@@ -82,7 +82,7 @@ print("I am \(myAge) years old .")
 let (_, _, myTrueHeight) = myInfo
 
 // 印出：My height is 178.25 .
-print("My height is \(myHeight) .")
+print("My height is \(myTrueHeight) .")
 
 
 let herInfo = (name:"Jess", age:24, height:160.5)

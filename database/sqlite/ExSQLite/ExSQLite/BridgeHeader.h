@@ -9,6 +9,6 @@
 #ifndef BridgeHeader_h
 #define BridgeHeader_h
 
-#include "sqlite3.h"
+#import "sqlite3.h"
 
 #endif /* BridgeHeader_h */
