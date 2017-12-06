@@ -39,17 +39,17 @@ class InfoMainViewController: UIViewController, UITableViewDelegate, UITableView
         self.view.addSubview(self.myTableView)
     }
 
-    func goFB() {
+    @objc func goFB() {
         let requestUrl = URL(string: "https://www.facebook.com/1640636382849659")
         UIApplication.shared.open(requestUrl!, options: ["":""], completionHandler: nil)
     }
     
-    func goIconSource() {
+    @objc func goIconSource() {
         let requestUrl = URL(string: "http://www.flaticon.com/")
         UIApplication.shared.open(requestUrl!, options: ["":""], completionHandler: nil)
     }
 
-    func goDataSource() {
+    @objc func goDataSource() {
         let requestUrl = URL(string: "http://data.taipei/")
         UIApplication.shared.open(requestUrl!, options: ["":""], completionHandler: nil)
     }
