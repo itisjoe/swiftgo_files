@@ -7,7 +7,7 @@
 - [Readmoo](https://readmoo.com/book/210058415000101)
 - [Leanpub](https://leanpub.com/swiftgo)
 
-或是前往 [GitBook](https://www.gitbook.com/book/itisjoe/swiftgo/details) 完整試閱前一版本的內容。
+或是前往 [http://itisjoe.github.io/swiftgo/](http://itisjoe.github.io/swiftgo/) 完整試閱前一版本的內容。
 
 有任何問題、建議或指教，請至[ FB 專頁](https://www.facebook.com/swiftgogogo)與我聯絡。
 
