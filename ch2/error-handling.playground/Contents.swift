@@ -6,7 +6,8 @@ enum VendingMachineError: Error {
 }
 
 
-throw VendingMachineError.insufficientFunds(coinsNeeded: 3)
+// 拋出一個自動販賣機還需要補足 3 個錢幣的錯誤
+//throw VendingMachineError.insufficientFunds(coinsNeeded: 3)
 
 
 // 先定義一個結構來表示一個商品的內容 分別為商品的價錢及數量

@@ -137,12 +137,12 @@ class SomeGameCharacter {
     }
 }
 
-// 生成一個類別 SomeGameCharacter 的實體常數 oneChar
+// 生成一個類別 SomeGameCharacter 的實體常數 anotherChar
 let anotherChar = SomeGameCharacter();
 
 // 角色受到攻擊 血量降低
 // 因為有 willSet 所以會印出：新的血量為90.0
-oneChar.hpValue = 90
+anotherChar.hpValue = 90
 
 // 設置完新的血量後 因為有 didSet 所以會印出：我損血了！哦阿！
 
