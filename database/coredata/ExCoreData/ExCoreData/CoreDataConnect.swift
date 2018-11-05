@@ -2,8 +2,8 @@
 //  CoreDataConnect.swift
 //  ExCoreData
 //
-//  Created by joe feng on 2016/10/18.
-//  Copyright © 2016年 hsin. All rights reserved.
+//  Created by joe feng on 2018/11/5.
+//  Copyright © 2018年 Feng. All rights reserved.
 //
 
 import Foundation
@@ -17,16 +17,24 @@ class CoreDataConnect {
     }
     
     // insert
-    func insert(_ myEntityName:String, attributeInfo:[String:String]) -> Bool {
-
-        let insetData = NSEntityDescription.insertNewObject(forEntityName: myEntityName, into: myContext)
+    func insert(
+        _ myEntityName:String,
+        attributeInfo:[String:String]) -> Bool {
+        
+        let insetData =
+            NSEntityDescription.insertNewObject(
+                forEntityName: myEntityName,
+                into: myContext)
         
         for (key,value) in attributeInfo {
             let t = insetData.entity.attributesByName[key]?.attributeType
             
-            if t == .integer16AttributeType || t == .integer32AttributeType || t == .integer64AttributeType {
+            if t == .integer16AttributeType
+                || t == .integer32AttributeType
+                || t == .integer64AttributeType {
                 insetData.setValue(Int(value), forKey: key)
-            } else if t == .doubleAttributeType || t == .floatAttributeType {
+            } else if t == .doubleAttributeType
+                || t == .floatAttributeType {
                 insetData.setValue(Double(value), forKey: key)
             } else if t == .booleanAttributeType {
                 insetData.setValue((value == "true" ? true : false), forKey: key)
@@ -47,8 +55,14 @@ class CoreDataConnect {
     }
     
     // retrieve
-    func retrieve(_ myEntityName:String, predicate:String?, sort:[[String:Bool]]?, limit:Int?) -> [NSManagedObject]? {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: myEntityName)
+    func retrieve(
+        _ myEntityName:String,
+        predicate:String?,
+        sort:[[String:Bool]]?,
+        limit:Int?) -> [NSManagedObject]? {
+        let request =
+            NSFetchRequest<NSFetchRequestResult>(
+                entityName: myEntityName)
         
         // predicate
         if let myPredicate = predicate {
@@ -60,7 +74,8 @@ class CoreDataConnect {
             var sortArr :[NSSortDescriptor] = []
             for sortCond in mySort {
                 for (k, v) in sortCond {
-                    sortArr.append(NSSortDescriptor(key: k, ascending: v))
+                    sortArr.append(
+                        NSSortDescriptor(key: k, ascending: v))
                 }
             }
             
@@ -72,27 +87,34 @@ class CoreDataConnect {
             request.fetchLimit = limitNumber
         }
         
-
+        
         do {
             return try myContext.fetch(request) as? [NSManagedObject]
-
+            
         } catch {
             fatalError("\(error)")
         }
-
+        
         return nil
     }
     
     // update
-    func update(_ myEntityName:String, predicate:String?, attributeInfo:[String:String]) -> Bool {
-        if let results = self.retrieve(myEntityName, predicate: predicate, sort: nil, limit: nil) {
+    func update(
+        _ myEntityName:String,
+        predicate:String?,
+        attributeInfo:[String:String]) -> Bool {
+        if let results = self.retrieve(
+            myEntityName, predicate: predicate, sort: nil, limit: nil) {
             for result in results {
                 for (key,value) in attributeInfo {
                     let t = result.entity.attributesByName[key]?.attributeType
                     
-                    if t == .integer16AttributeType || t == .integer32AttributeType || t == .integer64AttributeType {
+                    if t == .integer16AttributeType
+                        || t == .integer32AttributeType
+                        || t == .integer64AttributeType {
                         result.setValue(Int(value), forKey: key)
-                    } else if t == .doubleAttributeType || t == .floatAttributeType {
+                    } else if t == .doubleAttributeType
+                        || t == .floatAttributeType {
                         result.setValue(Double(value), forKey: key)
                     } else if t == .booleanAttributeType {
                         result.setValue((value == "true" ? true : false), forKey: key)
@@ -115,8 +137,10 @@ class CoreDataConnect {
     }
     
     // delete
-    func delete(_ myEntityName:String, predicate:String?) -> Bool {
-        if let results = self.retrieve(myEntityName, predicate: predicate, sort: nil, limit: nil) {
+    func delete(
+        _ myEntityName:String, predicate:String?) -> Bool {
+        if let results = self.retrieve(
+            myEntityName, predicate: predicate, sort: nil, limit: nil) {
             for result in results {
                 myContext.delete(result)
             }
@@ -133,5 +157,5 @@ class CoreDataConnect {
         return false
     }
     
+    
 }
-

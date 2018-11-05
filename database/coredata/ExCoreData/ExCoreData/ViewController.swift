@@ -2,8 +2,8 @@
 //  ViewController.swift
 //  ExCoreData
 //
-//  Created by joe feng on 2016/10/17.
-//  Copyright © 2016年 hsin. All rights reserved.
+//  Created by joe feng on 2018/11/5.
+//  Copyright © 2018年 Feng. All rights reserved.
 //
 
 import UIKit
@@ -15,9 +15,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         let myEntityName = "Student"
-        let myContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let myContext =
+            (UIApplication.shared.delegate as! AppDelegate)
+                .persistentContainer.viewContext
         let coreDataConnect = CoreDataConnect(context: myContext)
-
+        
         // auto increment
         let myUserDefaults = UserDefaults.standard
         var seq = 1
@@ -40,17 +42,22 @@ class ViewController: UIViewController {
         }
         
         // select
-        let selectResult = coreDataConnect.retrieve(myEntityName, predicate: nil, sort: [["id":true]], limit: nil)
+        let selectResult = coreDataConnect.retrieve(
+            myEntityName, predicate: nil, sort: [["id":true]], limit: nil)
         if let results = selectResult {
             for result in results {
-                print("\(result.value(forKey: "id")!). \(result.value(forKey: "name")!) 身高： \(result.value(forKey: "height")!)")
+                print("\(result.value(forKey: "id")!). \(result.value(forKey: "name")!)")
+                print("身高： \(result.value(forKey: "height")!)")
             }
         }
         
         // update
         let updateId = seq - 1
         var predicate = "id = \(updateId)"
-        let updateResult = coreDataConnect.update(myEntityName, predicate: predicate, attributeInfo: ["height":"\(seq * 10)"])
+        let updateResult = coreDataConnect.update(
+            myEntityName,
+            predicate: predicate,
+            attributeInfo: ["height":"\(seq * 10)"])
         if updateResult {
             print("更新資料成功")
         }
@@ -58,11 +65,12 @@ class ViewController: UIViewController {
         // delete
         let deleteID = seq - 2
         predicate = "id = \(deleteID)"
-        let deleteResult = coreDataConnect.delete(myEntityName, predicate: predicate)
+        let deleteResult = coreDataConnect.delete(
+            myEntityName, predicate: predicate)
         if deleteResult {
             print("刪除資料成功")
         }
-        
+
     }
 
 }
