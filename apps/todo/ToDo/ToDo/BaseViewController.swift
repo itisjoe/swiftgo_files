@@ -45,7 +45,7 @@ class BaseViewController: UIViewController, UITableViewDelegate, UITableViewData
         // 取得資料
         let selectResult = coreDataConnect.retrieve(myEntityName, predicate: "done = \(checkStatus ? "true" : "false")", sort: [["seq":false], ["id":false]], limit:nil)
         if let results = selectResult {
-            myRecords = results as! [Record]
+            myRecords = results as? [Record]
         }
         
         myTableView.reloadData()

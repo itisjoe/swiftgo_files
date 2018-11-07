@@ -172,9 +172,9 @@ class ViewController: BaseViewController {
         self.updateRecordContent(indexPath)
 
     }
-    
+
     // 編輯狀態時 拖曳切換 cell 位置後執行動作的方法 (必須實作這個方法才會出現排序功能)
-    func tableView(_ tableView: UITableView, moveRowAtIndexPath sourceIndexPath: IndexPath, toIndexPath destinationIndexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         print("\(sourceIndexPath.row) to \(destinationIndexPath.row)")
         
         var tempArr:[Record] = []
