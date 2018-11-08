@@ -20,7 +20,7 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionDownloadDe
         let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         documentsPath = urls[urls.count-1].absoluteString
         
-        taipeiDataUrl = "http://data.taipei/opendata/datalist/apiAccess?scope=resourceAquire&rid="
+        taipeiDataUrl = "https://data.taipei/opendata/datalist/apiAccess?scope=resourceAquire&rid="
         
         // 台北住宿資料 中文
         let strHotelID = "6f4e0b9b-8cb1-4b1d-a5c4-febd90f62469" //&limit=2&offset=0"
@@ -77,7 +77,7 @@ class ViewController: UIViewController, URLSessionDelegate, URLSessionDownloadDe
             print(dict.count)
             let dataArr = dict["result"]!["results"] as! [AnyObject]
             print(dataArr.count)
-            print(dataArr[3]["stitle"])
+            print(dataArr[3]["stitle"] as Any)
         } catch {
             print("解析 json 失敗")
         }

@@ -45,12 +45,12 @@ class InfoMainViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     @objc func goIconSource() {
-        let requestUrl = URL(string: "http://www.flaticon.com/")
+        let requestUrl = URL(string: "https://www.flaticon.com/")
         UIApplication.shared.open(requestUrl!, options: ["":""], completionHandler: nil)
     }
 
     @objc func goDataSource() {
-        let requestUrl = URL(string: "http://data.taipei/")
+        let requestUrl = URL(string: "https://data.taipei/")
         UIApplication.shared.open(requestUrl!, options: ["":""], completionHandler: nil)
     }
 

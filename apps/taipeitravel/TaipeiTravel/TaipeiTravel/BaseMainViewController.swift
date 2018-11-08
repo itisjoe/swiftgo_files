@@ -60,7 +60,7 @@ class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITab
         let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         self.documentsPath = urls[urls.count-1].absoluteString
         
-        self.taipeiDataUrl = "http://data.taipei/opendata/datalist/apiAccess?scope=resourceAquire&rid="
+        self.taipeiDataUrl = "https://data.taipei/opendata/datalist/apiAccess?scope=resourceAquire&rid="
         
         // 載入中 環狀進度條
         myActivityIndicator = UIActivityIndicatorView(activityIndicatorStyle:.gray)
@@ -108,7 +108,7 @@ class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITab
     
     func addData() {
         // 取得前一次取得資料的日期
-        let fetchDate = myUserDefaults.object(forKey: "\(self.fetchType)FetchDate") as? Int
+        let fetchDate = myUserDefaults.object(forKey: self.fetchType + "FetchDate") as? Int
         
         // 如果尚未取得資料 或 前一次取得資料已經超過設定天數
         // 便向遠端 API 取得資料
@@ -306,7 +306,7 @@ class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITab
             print("普通獲取遠端資訊的方式：儲存資訊成功")
 
             // 更新獲取資料的日期
-            self.myUserDefaults.set(self.todayDateInt, forKey: "\(self.fetchType)FetchDate")
+            self.myUserDefaults.set(self.todayDateInt, forKey: self.fetchType + "FetchDate")
             self.myUserDefaults.synchronize()
             
             DispatchQueue.main.async(execute: {
@@ -416,8 +416,8 @@ class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITab
             let userLocation = CLLocation(latitude: userLatitude!, longitude: userLongitude!)
             
             // 記錄的座標
-            let recordLatitude = myUserDefaults.object(forKey: "\(self.fetchType)RecordLatitude") as? Double ?? 0.0
-            let recordLongitude = myUserDefaults.object(forKey: "\(self.fetchType)RecordLongitude") as? Double ?? 0.0
+            let recordLatitude = myUserDefaults.object(forKey: self.fetchType + "RecordLatitude") as? Double ?? 0.0
+            let recordLongitude = myUserDefaults.object(forKey: self.fetchType + "RecordLongitude") as? Double ?? 0.0
             let recordLocation = CLLocation(latitude: recordLatitude, longitude: recordLongitude)
             
             // 超過限定距離才重新取得有限數量資料
@@ -447,8 +447,8 @@ class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITab
                 self.apiDataForDistance = tempAPIDataForDistance
                 
                 // 更新記錄的座標
-                myUserDefaults.set(userLatitude, forKey: "\(self.fetchType)RecordLatitude")
-                myUserDefaults.set(userLongitude, forKey: "\(self.fetchType)RecordLongitude")
+                myUserDefaults.set(userLatitude, forKey: self.fetchType + "RecordLatitude")
+                myUserDefaults.set(userLongitude, forKey: self.fetchType + "RecordLongitude")
                 myUserDefaults.synchronize()
             } else {
                 self.apiData = self.apiDataAll
