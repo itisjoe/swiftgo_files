@@ -2,10 +2,11 @@
 //  MoreViewController.swift
 //  Money
 //
-//  Created by joe feng on 2016/6/20.
-//  Copyright © 2016年 hsin. All rights reserved.
+//  Created by joe feng on 2018/11/9.
+//  Copyright © 2018年 Feng. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
 class MoreViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
@@ -21,11 +22,11 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         self.view.backgroundColor = UIColor.black
         self.navigationController?.navigationBar.isTranslucent = false
-        self.automaticallyAdjustsScrollViewInsets = false
         self.title = "關於"
         
         // 建立 UITableView
         myTableView = UITableView(frame: CGRect(x: 0, y: 0, width: fullSize.width, height: fullSize.height - 64), style: .grouped)
+        myTableView.contentInsetAdjustmentBehavior = .never
         myTableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         myTableView.delegate = self
         myTableView.dataSource = self
@@ -33,20 +34,20 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
         myTableView.backgroundColor = UIColor.black
         myTableView.separatorColor = UIColor.init(red: 0.05, green: 0.05, blue: 0.05, alpha: 1)
         self.view.addSubview(myTableView)
-
+        
     }
     
     
-// MARK: Button actions
+    // MARK: Button actions
     
     @objc func goFB() {
-        let requestUrl = URL(string: "https://www.facebook.com/1640636382849659")
-        UIApplication.shared.open(requestUrl!, options: ["":""], completionHandler: nil)
+        let requestUrl = URL(string: "https://www.facebook.com/swiftgogogo")
+        UIApplication.shared.open(requestUrl!)
     }
     
     @objc func goIconSource() {
-        let requestUrl = URL(string: "http://www.flaticon.com/")
-        UIApplication.shared.open(requestUrl!, options: ["":""], completionHandler: nil)
+        let requestUrl = URL(string: "https://www.flaticon.com/")
+        UIApplication.shared.open(requestUrl!)
     }
     
     
@@ -61,7 +62,7 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // 取得 tableView 目前使用的 cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as UITableViewCell
-
+        
         let button = UIButton(frame: CGRect(x: 15, y: 0, width: fullSize.width, height: 40))
         button.setTitleColor(UIColor.white, for: .normal)
         button.contentHorizontalAlignment = .left
@@ -99,7 +100,7 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         return title
     }
-
+    
     // section header 樣式
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let headerView: UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView

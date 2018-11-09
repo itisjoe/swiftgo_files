@@ -2,11 +2,13 @@
 //  PostViewController.swift
 //  Money
 //
-//  Created by joe feng on 2016/6/21.
-//  Copyright © 2016年 hsin. All rights reserved.
+//  Created by joe feng on 2018/11/9.
+//  Copyright © 2018年 Feng. All rights reserved.
 //
 
+import Foundation
 import UIKit
+import SQLite3
 
 class PostViewController: UIViewController, UITextFieldDelegate {
     struct Record {
@@ -25,11 +27,18 @@ class PostViewController: UIViewController, UITextFieldDelegate {
     var myDatePicker :UIDatePicker!
     var record :Record!
 
+    var dbURL: URL = {
+        do {
+            return try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("db.sqlite")
+        } catch {
+            fatalError("Error getting db URL from document directory.")
+        }
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let recordId = myUserDefaults.object(forKey: "postID") as! Int
-        let dbFileName = myUserDefaults.object(forKey: "dbFileName") as! String
         
         // 基本設定
         self.title = "新增"
@@ -38,7 +47,7 @@ class PostViewController: UIViewController, UITextFieldDelegate {
         let height :CGFloat = 44.0
         let padding :CGFloat = 10.0
         
-        db = SQLiteConnect(file: dbFileName)
+        db = SQLiteConnect(path: dbURL.path)
         
         if let mydb = db {
             // 取得此筆資料內容
@@ -54,7 +63,7 @@ class PostViewController: UIViewController, UITextFieldDelegate {
                     
                     record.amount = sqlite3_column_double(statement, 2)
                     record.createTime = String(cString: sqlite3_column_text(statement, 5))
-
+                    
                 }
                 sqlite3_finalize(statement)
             }
@@ -66,14 +75,14 @@ class PostViewController: UIViewController, UITextFieldDelegate {
             myTextField.textAlignment = .right
             myTextField.textColor = UIColor.white
             myTextField.font = UIFont(name: "Helvetica Light", size: 24.0)
-            myTextField.attributedPlaceholder = NSAttributedString(string: "金額", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray])
+            myTextField.attributedPlaceholder = NSAttributedString(string: "金額", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
             myTextField.rightView = UIView(frame: CGRect(x: 0, y: 0, width: padding, height: padding))
             myTextField.rightViewMode = .always
             myTextField.tag = 501
             myTextField.delegate = self
             if let str = record.amount {
                 myTextField.text = String(format: "%g",str)
-  }
+            }
             self.view.addSubview(myTextField)
             if recordId < 1 {
                 myTextField.becomeFirstResponder()
@@ -93,14 +102,14 @@ class PostViewController: UIViewController, UITextFieldDelegate {
             myTextField.textAlignment = .right
             myTextField.textColor = UIColor.white
             myTextField.font = UIFont(name: "Helvetica Light", size: 24.0)
-            myTextField.attributedPlaceholder = NSAttributedString(string: "事由", attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray])
+            myTextField.attributedPlaceholder = NSAttributedString(string: "事由", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
             myTextField.rightView = UIView(frame: CGRect(x: 0, y: 0, width: padding, height: padding))
             myTextField.rightViewMode = .always
             myTextField.tag = 502
             myTextField.returnKeyType = .next
             myTextField.delegate = self
             if let str = record.title {
-                myTextField.text = str 
+                myTextField.text = str
             }
             self.view.addSubview(myTextField)
             
@@ -149,7 +158,7 @@ class PostViewController: UIViewController, UITextFieldDelegate {
                 deleteBtn.addTarget(self, action: #selector(PostViewController.deleteBtnAction), for: .touchUpInside)
                 self.view.addSubview(deleteBtn)
             }
-
+            
         }
         
         // 按空白處隱藏編輯狀態
@@ -157,9 +166,9 @@ class PostViewController: UIViewController, UITextFieldDelegate {
         tap.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tap)
     }
-
     
-// MARK: Button Actions
+    
+    // MARK: Button Actions
     
     // 刪除資訊
     @objc func deleteBtnAction() {
@@ -176,17 +185,17 @@ class PostViewController: UIViewController, UITextFieldDelegate {
             _ = self.navigationController?.popViewController(animated: true)
         })
         alertController.addAction(okAction)
-
+        
         self.present(alertController,animated: false,completion:nil)
-
+        
     }
-
+    
     // 儲存資訊
     @objc func saveBtnAction() {
         // 取得金額
         var textField = self.view.viewWithTag(501) as! UITextField
         record.amount = Double(textField.text!) ?? 0
-
+        
         // 取得事由
         textField = self.view.viewWithTag(502) as! UITextField
         record.title = textField.text ?? ""
@@ -223,39 +232,39 @@ class PostViewController: UIViewController, UITextFieldDelegate {
             }
         }
     }
-
+    
     // 選取日期時 按下完成
     @objc func doneTouched(_ sender:UIBarButtonItem) {
         let textField = self.view.viewWithTag(503) as! UITextField
         let date = myFormatter.string(from: myDatePicker.date)
         textField.text = date
         record.createTime = date
-
+        
         hideKeyboard(nil)
     }
-
+    
     // 選取日期時 按下取消
     @objc func cancelTouched(_ sender:UIBarButtonItem) {
         hideKeyboard(nil)
     }
-
     
-// MARK: UITextField Delegate Methods
+    
+    // MARK: UITextField Delegate Methods
     
     // 按下 return 鍵
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // 事由欄位輸入時 點擊鍵盤[下一個]按鈕會跳往選取時間
         let title = self.view.viewWithTag(502) as! UITextField
         let date = self.view.viewWithTag(503) as! UITextField
-
+        
         title.resignFirstResponder()
         date.becomeFirstResponder()
-
+        
         return true
     }
     
     // 金額只能有一個小數點
-
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField.tag == 501 {
             let oldString = textField.text as NSString? ?? ""
@@ -276,7 +285,7 @@ class PostViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-// MARK: Functional Methods
+    // MARK: Functional Methods
     
     // 按空白處會隱藏編輯狀態
     @objc func hideKeyboard(_ tapG:UITapGestureRecognizer?){

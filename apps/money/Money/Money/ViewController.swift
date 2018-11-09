@@ -2,11 +2,12 @@
 //  ViewController.swift
 //  Money
 //
-//  Created by joe feng on 2016/6/20.
-//  Copyright © 2016年 hsin. All rights reserved.
+//  Created by joe feng on 2018/11/9.
+//  Copyright © 2018年 Feng. All rights reserved.
 //
 
 import UIKit
+import SQLite3
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let fullsize = UIScreen.main.bounds.size
@@ -17,6 +18,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var days :[String]! = []
     var myRecords :[String:[[String:String]]]! = [:]
+    var eachDayAmount :[String:Double] = [:]
     var currentMonthLabel :UILabel!
     var prevBtn :UIButton!
     var nextBtn :UIButton!
@@ -24,21 +26,28 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var myTableView :UITableView!
     var selectedBackgroundView :UIView!
 
+    var dbURL: URL = {
+        do {
+            return try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("db.sqlite")
+        } catch {
+            fatalError("Error getting db URL from document directory.")
+        }
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // 基本設定
         self.title = "記帳"
         self.view.backgroundColor = UIColor.init(red: 0.092, green: 0.092, blue: 0.092, alpha: 1)
         self.navigationController?.navigationBar.isTranslucent = false
         
         // 連接資料庫
-        let dbFileName = myUserDefaults.object(forKey: "dbFileName") as! String
-        db = SQLiteConnect(file: dbFileName)
+        db = SQLiteConnect(path: dbURL.path)
         
         // 導覽列右邊設定按鈕
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "settings")!, style: .plain, target: self, action: #selector(ViewController.settingsBtnAction))
-
+        
         // 目前年月
         currentMonthLabel = UILabel(frame: CGRect(x: 0, y: 0, width: fullsize.width * 0.7, height: 50))
         currentMonthLabel.center = CGPoint(x: fullsize.width * 0.5, y: 35)
@@ -75,7 +84,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         dollarSignLabel.textColor = UIColor.white
         dollarSignLabel.text = "元"
         self.view.addSubview(dollarSignLabel)
-
+        
         // 總金額
         let amount = 0.0
         let formatter = NumberFormatter()
@@ -100,16 +109,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // 點選 cell 後的 UIView
         selectedBackgroundView = UIView(frame: CGRect(x: 0, y: 0, width: fullsize.width, height: 44))
         selectedBackgroundView.backgroundColor = UIColor.init(red: 0.05, green: 0.05, blue: 0.05, alpha: 1)
-
+        
         // 底部新增記錄按鈕
         let addBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
-        addBtn.center = CGPoint(x: fullsize.width * 0.5, y: fullsize.height - 105)
+        addBtn.center = CGPoint(x: fullsize.width * 0.5, y: fullsize.height - 105 - 34)
         addBtn.addTarget(self, action: #selector(ViewController.addBtnAction), for: .touchUpInside)
         addBtn.setImage(UIImage(named:"add"), for: .normal)
         self.view.addSubview(addBtn)
-    
+        
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         let displayYearMonth = myUserDefaults.object(forKey: "displayYearMonth") as? String
         if displayYearMonth != nil && displayYearMonth != "" {
@@ -123,7 +132,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.updateRecordsList()
     }
     
-// MARK: functional methods
+    // MARK: functional methods
     
     // 更新列表
     func updateRecordsList() {
@@ -132,6 +141,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if let mydb = db {
             days = []
             myRecords = [:]
+            eachDayAmount = [:]
             var total = 0.0
             
             let statement = mydb.fetch("records", cond: "yearMonth == '\(yearMonth)'", order: "createTime desc, id desc")
@@ -147,14 +157,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     if !days.contains(createDate) {
                         days.append(createDate)
                         myRecords[createDate] = []
+                        eachDayAmount[createDate] = 0.0
                     }
-
+                    
+                    // 單日小計
+                    eachDayAmount[createDate] = eachDayAmount[createDate]! + amount
+                    
                     myRecords[createDate]?.append([
                         "id":"\(id)",
                         "title":"\(title)",
                         "amount":"\(amount)"
-                    ])
+                        ])
                     
+                    // 本月總計
                     total += amount
                 }
             }
@@ -169,7 +184,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             myFormatter.dateFormat = "yyyy 年 MM 月"
             currentMonthLabel.text = myFormatter.string(from: currentDate)
         }
-
+        
     }
     
     // 切換月份
@@ -181,9 +196,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         self.updateRecordsList()
     }
-
-// MARK: Button actions
-
+    
+    // MARK: Button actions
+    
     // 前一個月
     @objc func prevBtnAction() {
         var dateComponents = DateComponents()
@@ -207,12 +222,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @objc func addBtnAction() {
         myUserDefaults.set(0, forKey: "postID")
         myUserDefaults.synchronize()
-
+        
         self.navigationController?.pushViewController(PostViewController(), animated: false)
     }
-
     
-// MARK: UITableView Delegate methods
+    
+    // MARK: UITableView Delegate methods
     
     // 必須實作的方法：每一組有幾個 cell
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -220,7 +235,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         guard let records = myRecords[date] else {
             return 0
         }
-
+        
         return records.count
     }
     
@@ -241,7 +256,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         guard let records = myRecords[date] else {
             return cell!
         }
-
+        
         // 顯示的內容
         cell!.detailTextLabel?.text = String(format: "%g",Float(records[indexPath.row]["amount"]!)!)
         cell!.textLabel?.text = records[indexPath.row]["title"]
@@ -272,14 +287,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     // section 標題
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return days[section]
+        var str = days[section]
+        if let amount = eachDayAmount[str] {
+            str += "   小計：" + String(format:"%g", amount) + " 元"
+        }
+        
+        return str
     }
     
     // section 標題 高度
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
     }
-
+    
     // section footer 高度
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return (days.count - 1) == section ? 60 : 3
