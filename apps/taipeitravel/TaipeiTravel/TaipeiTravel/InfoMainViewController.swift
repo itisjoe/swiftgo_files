@@ -40,18 +40,18 @@ class InfoMainViewController: UIViewController, UITableViewDelegate, UITableView
     }
 
     @objc func goFB() {
-        let requestUrl = URL(string: "https://www.facebook.com/1640636382849659")
-        UIApplication.shared.open(requestUrl!, options: ["":""], completionHandler: nil)
+        let requestUrl = URL(string: "https://www.facebook.com/swiftgogogo")
+        UIApplication.shared.open(requestUrl!)
     }
-    
+
     @objc func goIconSource() {
         let requestUrl = URL(string: "https://www.flaticon.com/")
-        UIApplication.shared.open(requestUrl!, options: ["":""], completionHandler: nil)
+        UIApplication.shared.open(requestUrl!)
     }
 
     @objc func goDataSource() {
         let requestUrl = URL(string: "https://data.taipei/")
-        UIApplication.shared.open(requestUrl!, options: ["":""], completionHandler: nil)
+        UIApplication.shared.open(requestUrl!)
     }
 
     

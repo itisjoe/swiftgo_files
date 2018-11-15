@@ -48,13 +48,13 @@ class MoreViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @objc func goFB() {
-        let requestUrl = URL(string: "https://www.facebook.com/1640636382849659")
-        UIApplication.shared.open(requestUrl!, options: ["":""], completionHandler: nil)
+        let requestUrl = URL(string: "https://www.facebook.com/swiftgogogo")
+        UIApplication.shared.open(requestUrl!)
     }
     
     @objc func goSoundSource() {
-        let requestUrl = URL(string: "http://www.pacdv.com/sounds")
-        UIApplication.shared.open(requestUrl!, options: ["":""], completionHandler: nil)
+        let requestUrl = URL(string: "https://www.pacdv.com/sounds")
+        UIApplication.shared.open(requestUrl!)
     }
 
     
