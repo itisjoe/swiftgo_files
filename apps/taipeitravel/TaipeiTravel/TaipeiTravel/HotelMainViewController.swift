@@ -22,8 +22,14 @@ class HotelMainViewController: BaseMainViewController {
         // 台北住宿資料 ID
         self.strTargetID = "6f4e0b9b-8cb1-4b1d-a5c4-febd90f62469" //&limit=3&offset=0"
         
-        self.targetUrl = self.documentsPath + self.fetchType + ".json"
-        
+        self.targetUrl = {
+            do {
+                return try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent(self.fetchType + ".json")
+            } catch {
+                fatalError("Error getting file URL from document directory.")
+            }
+        }()
+
         // 取得 API 資料
         self.addData()
     }

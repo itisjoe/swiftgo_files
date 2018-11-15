@@ -22,8 +22,14 @@ class ToiletMainViewController: BaseMainViewController {
         // 台北景點資料 ID
         self.strTargetID = "008ed7cf-2340-4bc4-89b0-e258a5573be2"
         
-        self.targetUrl = self.documentsPath + self.fetchType + ".json"
-        
+        self.targetUrl = {
+            do {
+                return try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent(self.fetchType + ".json")
+            } catch {
+                fatalError("Error getting file URL from document directory.")
+            }
+        }()
+
         // 取得 API 資料
         self.addData()
     }

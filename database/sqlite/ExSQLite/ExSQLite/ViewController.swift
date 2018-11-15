@@ -13,12 +13,19 @@ class ViewController: UIViewController {
 
     var db :SQLiteConnect? = nil
 
+    let sqliteURL: URL = {
+        do {
+            return try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("db.sqlite")
+        } catch {
+            fatalError("Error getting file URL from document directory.")
+        }
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // 資料庫檔案的路徑
-        let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        let sqlitePath = urls[urls.count-1].absoluteString + "db.sqlite"
+        let sqlitePath = sqliteURL.path
         
         // 印出儲存檔案的位置
         print(sqlitePath)

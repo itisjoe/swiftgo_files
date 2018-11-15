@@ -19,8 +19,7 @@ class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITab
     var myTableView :UITableView!
     var todayDateInt :Int!
     var taipeiDataUrl :String!
-    var documentsPath :String!
-    var targetUrl :String!
+    var targetUrl :URL!
     var strTargetID :String!
     var apiDataAll :[AnyObject]!
     var apiData :[AnyObject]!
@@ -56,10 +55,6 @@ class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITab
         dateFormatter.dateFormat = "yyyyMMdd"
         self.todayDateInt = Int(dateFormatter.string(from: Date()))!
 
-        // 應用程式儲存檔案的目錄路徑
-        let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        self.documentsPath = urls[urls.count-1].absoluteString
-        
         self.taipeiDataUrl = "https://data.taipei/opendata/datalist/apiAccess?scope=resourceAquire&rid="
         
         // 載入中 環狀進度條
@@ -122,12 +117,9 @@ class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITab
         
     }
     
-    func addTable(_ file :String?) {
-        
-        if let filePath = file {
-            if let fileurl = URL(string: filePath) {
-                self.jsonParse(fileurl)
-            }
+    func addTable(_ filePath :URL?) {
+        if let path = filePath {
+            self.jsonParse(path)
         }
         
         // 建立 UITableView 並設置原點及尺寸
@@ -299,10 +291,9 @@ class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITab
     
     // 下載完成
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
-        let targetUrl = URL(string: self.targetUrl)!
         do {
             let data = try? Data(contentsOf: location)
-            try data?.write(to: targetUrl, options: .atomic)
+            try data?.write(to: self.targetUrl, options: .atomic)
             print("普通獲取遠端資訊的方式：儲存資訊成功")
 
             // 更新獲取資料的日期

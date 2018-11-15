@@ -22,8 +22,14 @@ class ParkMainViewController: BaseMainViewController {
         // 台北景點資料 ID
         self.strTargetID = "8f6fcb24-290b-461d-9d34-72ed1b3f51f0"
         
-        self.targetUrl = self.documentsPath + self.fetchType + ".json"
-        
+        self.targetUrl = {
+            do {
+                return try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent(self.fetchType + ".json")
+            } catch {
+                fatalError("Error getting file URL from document directory.")
+            }
+        }()
+
         // 取得 API 資料
         self.addData()
     }
