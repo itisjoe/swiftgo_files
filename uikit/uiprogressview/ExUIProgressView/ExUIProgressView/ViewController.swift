@@ -38,7 +38,7 @@ class ViewController: UIViewController {
         
         
         // 建立一個 UIActivityIndicatorView
-        myActivityIndicator = UIActivityIndicatorView(activityIndicatorStyle:.whiteLarge)
+        myActivityIndicator = UIActivityIndicatorView(style:.whiteLarge)
         
         // 環狀進度條的顏色
         myActivityIndicator.color = UIColor.red
@@ -85,7 +85,7 @@ class ViewController: UIViewController {
         // 進度完成時
         if count >= complete {
             // 示範 userInfo 傳入的參數
-            var info = sender.userInfo as? Dictionary<String, AnyObject>
+            let info = sender.userInfo as? Dictionary<String, AnyObject>
             print(info?["test"] ?? "")
             
             // 重設計數器及 Timer 供下次按下按鈕測試

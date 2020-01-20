@@ -71,7 +71,7 @@ class ViewController: UIViewController, UITextFieldDelegate, WKNavigationDelegat
         self.view.addSubview(myWebView)
         
         // 建立環狀進度條
-        myActivityIndicator = UIActivityIndicatorView(activityIndicatorStyle:.gray)
+        myActivityIndicator = UIActivityIndicatorView(style:.gray)
         myActivityIndicator.center = CGPoint(x: fullScreenSize.width * 0.5, y: fullScreenSize.height * 0.5)
         self.view.addSubview(myActivityIndicator);
         

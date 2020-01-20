@@ -34,7 +34,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         myTableView.separatorStyle = .singleLine
         
         // 分隔線的間距 四個數值分別代表 上、左、下、右 的間距
-        myTableView.separatorInset = UIEdgeInsetsMake(0, 20, 0, 20)
+        myTableView.separatorInset = UIEdgeInsets.init(top: 0, left: 20, bottom: 0, right: 20)
         
         // 是否可以點選 cell
         myTableView.allowsSelection = true
