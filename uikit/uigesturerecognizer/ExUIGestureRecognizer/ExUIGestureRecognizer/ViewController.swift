@@ -210,7 +210,7 @@ class ViewController: UIViewController {
         let number = recognizer.numberOfTouches
         for i in 0..<number {
             let point = recognizer.location(ofTouch: i, in: recognizer.view)
-            print("第 \(i + 1) 指的位置：\(NSStringFromCGPoint(point))")
+            print("第 \(i + 1) 指的位置：\(NSCoder.string(for: point))")
         }
     }
 
