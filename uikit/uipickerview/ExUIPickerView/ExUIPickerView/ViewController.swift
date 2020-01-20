@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         let myViewController = MyViewController()
         
         // 必須將這個 UIViewController 加入
-        self.addChildViewController(myViewController)
+        self.addChild(myViewController)
         
         // 設定 UIPickerView 的 delegate 及 dataSource
         myPickerView.delegate = myViewController
