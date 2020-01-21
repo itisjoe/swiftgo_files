@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8180C1A123D6B0970074CD3F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8180C1A023D6B0970074CD3F /* LaunchScreen.storyboard */; };
+		8180C1A323D6B1280074CD3F /* Launch.png in Resources */ = {isa = PBXBuildFile; fileRef = 8180C1A223D6B1280074CD3F /* Launch.png */; };
 		8196BEFC1D0FE7BF003F76D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8196BEFB1D0FE7BF003F76D9 /* AppDelegate.swift */; };
 		8196BEFE1D0FE7BF003F76D9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8196BEFD1D0FE7BF003F76D9 /* ViewController.swift */; };
 		8196BF041D0FE7BF003F76D9 /* ToDo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8196BF021D0FE7BF003F76D9 /* ToDo.xcdatamodeld */; };
@@ -33,6 +35,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8180C1A023D6B0970074CD3F /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8180C1A223D6B1280074CD3F /* Launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Launch.png; sourceTree = "<group>"; };
 		8196BEF81D0FE7BF003F76D9 /* ToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8196BEFB1D0FE7BF003F76D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8196BEFD1D0FE7BF003F76D9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -98,11 +102,13 @@
 				81C6E84F1D13D40300EA259C /* MoreViewController.swift */,
 				81C6E8511D13DC5400EA259C /* ChechedRecordsViewController.swift */,
 				8196BF051D0FE7BF003F76D9 /* Assets.xcassets */,
+				8180C1A223D6B1280074CD3F /* Launch.png */,
 				81FAB5F21D128E9500663237 /* icons */,
 				81FAB6051D12A78700663237 /* sounds */,
 				8196BF0A1D0FE7BF003F76D9 /* Info.plist */,
 				8196BF021D0FE7BF003F76D9 /* ToDo.xcdatamodeld */,
 				81FAB5F01D12861900663237 /* CoreDataConnect.swift */,
+				8180C1A023D6B0970074CD3F /* LaunchScreen.storyboard */,
 			);
 			path = ToDo;
 			sourceTree = "<group>";
@@ -198,10 +204,12 @@
 				81C6E8461D13B2E100EA259C /* bottle_pop_3.wav in Resources */,
 				81FAB6031D128E9500663237 /* more@2x.png in Resources */,
 				81C6E8481D13B43900EA259C /* what-2.wav in Resources */,
+				8180C1A123D6B0970074CD3F /* LaunchScreen.storyboard in Resources */,
 				81FAB6091D12A78700663237 /* woohoo.wav in Resources */,
 				81FAB5FF1D128E9500663237 /* checkbox.png in Resources */,
 				81C6E84E1D13CD2E00EA259C /* cutting-paper-2.mp3 in Resources */,
 				81FAB6041D128E9500663237 /* more@3x.png in Resources */,
+				8180C1A323D6B1280074CD3F /* Launch.png in Resources */,
 				81FAB5FE1D128E9500663237 /* check@3x.png in Resources */,
 				81FAB5FC1D128E9500663237 /* check.png in Resources */,
 				8196BF061D0FE7BF003F76D9 /* Assets.xcassets in Resources */,
@@ -344,7 +352,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				DEVELOPMENT_TEAM = 42G68NKSB6;
 				INFOPLIST_FILE = ToDo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -360,7 +368,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				DEVELOPMENT_TEAM = 42G68NKSB6;
 				INFOPLIST_FILE = ToDo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;

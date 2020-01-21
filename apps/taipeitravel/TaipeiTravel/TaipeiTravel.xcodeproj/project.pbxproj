@@ -14,6 +14,8 @@
 		810E95F91D0715E400E80E64 /* toilet@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 810E95F61D0715E400E80E64 /* toilet@3x.png */; };
 		810E95FB1D0715F300E80E64 /* ToiletMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810E95FA1D0715F300E80E64 /* ToiletMainViewController.swift */; };
 		810E95FD1D0717EE00E80E64 /* ToiletDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810E95FC1D0717EE00E80E64 /* ToiletDetailViewController.swift */; };
+		8180C1A523D6B3C70074CD3F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8180C1A423D6B3C70074CD3F /* LaunchScreen.storyboard */; };
+		8180C1A723D6B41A0074CD3F /* Launch.png in Resources */ = {isa = PBXBuildFile; fileRef = 8180C1A623D6B41A0074CD3F /* Launch.png */; };
 		81A8A4401D054795005FA15C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A8A43F1D054795005FA15C /* AppDelegate.swift */; };
 		81A8A4421D054795005FA15C /* BaseMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A8A4411D054795005FA15C /* BaseMainViewController.swift */; };
 		81A8A4471D054795005FA15C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81A8A4461D054795005FA15C /* Assets.xcassets */; };
@@ -47,6 +49,8 @@
 		810E95F61D0715E400E80E64 /* toilet@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toilet@3x.png"; sourceTree = "<group>"; };
 		810E95FA1D0715F300E80E64 /* ToiletMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToiletMainViewController.swift; sourceTree = "<group>"; };
 		810E95FC1D0717EE00E80E64 /* ToiletDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToiletDetailViewController.swift; sourceTree = "<group>"; };
+		8180C1A423D6B3C70074CD3F /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8180C1A623D6B41A0074CD3F /* Launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Launch.png; sourceTree = "<group>"; };
 		81A8A43C1D054795005FA15C /* TaipeiTravel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaipeiTravel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81A8A43F1D054795005FA15C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		81A8A4411D054795005FA15C /* BaseMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseMainViewController.swift; sourceTree = "<group>"; };
@@ -118,9 +122,11 @@
 				810E95FC1D0717EE00E80E64 /* ToiletDetailViewController.swift */,
 				81A8A4571D054D2E005FA15C /* InfoMainViewController.swift */,
 				81A8A4721D056472005FA15C /* Coordinate.swift */,
+				8180C1A623D6B41A0074CD3F /* Launch.png */,
 				81A8A4461D054795005FA15C /* Assets.xcassets */,
 				81A8A4591D054E19005FA15C /* icons */,
 				81A8A44B1D054795005FA15C /* Info.plist */,
+				8180C1A423D6B3C70074CD3F /* LaunchScreen.storyboard */,
 			);
 			path = TaipeiTravel;
 			sourceTree = "<group>";
@@ -214,10 +220,12 @@
 				81A8A4691D054E19005FA15C /* landmark.png in Resources */,
 				81A8A46B1D054E19005FA15C /* landmark@3x.png in Resources */,
 				81A8A4681D054E19005FA15C /* hotel@3x.png in Resources */,
+				8180C1A523D6B3C70074CD3F /* LaunchScreen.storyboard in Resources */,
 				81A8A46E1D054E19005FA15C /* park@3x.png in Resources */,
 				81A8A4471D054795005FA15C /* Assets.xcassets in Resources */,
 				810E95F91D0715E400E80E64 /* toilet@3x.png in Resources */,
 				81A8A46A1D054E19005FA15C /* landmark@2x.png in Resources */,
+				8180C1A723D6B41A0074CD3F /* Launch.png in Resources */,
 				81C05AD01D06B2F400426344 /* info.png in Resources */,
 				81C05AD11D06B2F400426344 /* info@2x.png in Resources */,
 				810E95F71D0715E400E80E64 /* toilet.png in Resources */,
@@ -363,7 +371,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				DEVELOPMENT_TEAM = 42G68NKSB6;
 				INFOPLIST_FILE = TaipeiTravel/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -379,7 +387,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				DEVELOPMENT_TEAM = 42G68NKSB6;
 				INFOPLIST_FILE = TaipeiTravel/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
