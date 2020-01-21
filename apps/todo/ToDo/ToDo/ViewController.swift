@@ -240,7 +240,7 @@ class ViewController: BaseViewController {
         updateAlertController.addAction(cancelAction)
         
         // 建立[更新]按鈕
-        let okAction = UIAlertAction(title: "更新", style: UIAlertActionStyle.default) {
+        let okAction = UIAlertAction(title: "更新", style: UIAlertAction.Style.default) {
             (action: UIAlertAction!) -> Void in
             let content = (updateAlertController.textFields?.first)! as UITextField
             

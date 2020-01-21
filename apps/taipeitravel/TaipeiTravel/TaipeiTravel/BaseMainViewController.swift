@@ -58,7 +58,7 @@ class BaseMainViewController: UIViewController, CLLocationManagerDelegate, UITab
         self.taipeiDataUrl = "https://data.taipei/opendata/datalist/apiAccess?scope=resourceAquire&rid="
         
         // 載入中 環狀進度條
-        myActivityIndicator = UIActivityIndicatorView(activityIndicatorStyle:.gray)
+        myActivityIndicator = UIActivityIndicatorView(style:.gray)
         myActivityIndicator.center = CGPoint(x: self.fullSize.width * 0.5, y: self.fullSize.height * 0.4)
         myActivityIndicator.startAnimating()
         myActivityIndicator.hidesWhenStopped = true

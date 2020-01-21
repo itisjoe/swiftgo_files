@@ -49,7 +49,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         // 地圖預設顯示的範圍大小 (數字越小越精確)
         let latDelta = 0.005
         let longDelta = 0.005
-        let currentLocationSpan:MKCoordinateSpan = MKCoordinateSpanMake(latDelta, longDelta)
+        let currentLocationSpan:MKCoordinateSpan = MKCoordinateSpan.init(latitudeDelta: latDelta, longitudeDelta: longDelta)
         
         // 設置地圖顯示的範圍與中心點座標
         let center:CLLocation = CLLocation(latitude: latitude, longitude: longitude)

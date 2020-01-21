@@ -50,8 +50,7 @@ class CoreDataConnect {
         } catch {
             fatalError("\(error)")
         }
-        
-        return false
+
     }
     
     // retrieve
@@ -94,8 +93,7 @@ class CoreDataConnect {
         } catch {
             fatalError("\(error)")
         }
-        
-        return nil
+
     }
     
     // update
